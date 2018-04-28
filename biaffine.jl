@@ -111,7 +111,7 @@ function (this::BiaffineDecoder)(ctx, encodings)
     return s_arcs, s_rels
 end
 
-# --------------- DEATH CODE (might be reused later) ------------------
+# --------------- DEAD CODE (might be reused later) ------------------
     #T, mlp_units, B 
     #H_arc_head_t = permutedims(to3d(H_arc_head), (3, 1, 2))
     
