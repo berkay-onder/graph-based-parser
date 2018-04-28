@@ -13,19 +13,21 @@ type BiaffineDecoder <: KnetModule
     Urel::Array{Param, 1}
     Wrel::Param
     brel::Param
+    biaffine_algo
 end
 
 # TODO: Add dropouts
 function BiaffineDecoder(nlabels;
-                 src_dim=400,
-                 mlp_units=400,
-                 label_units=100,
-                 arc_drop=.33,
-                 label_drop=.33,
-                 activation=ReLU,
-                 winit=xavier,
-                 binit=zeros,
-                 dtype=Float32)
+                         src_dim=400,
+                         mlp_units=400,
+                         label_units=100,
+                         arc_drop=.33,
+                         label_drop=.33,
+                         activation=ReLU,
+                         winit=xavier,
+                         binit=zeros,
+                         dtype=Float32,
+                         biaffine_algo=:diag)
     
     MLP(output, input, activation) = Sequential(
         Linear(output, input),
@@ -44,15 +46,18 @@ function BiaffineDecoder(nlabels;
     brel = Param(binit(dtype, nlabels, 1))
     
     return BiaffineDecoder(arc_dep, arc_head, rel_dep, rel_head,
-                   Warc, barc, Urel, Wrel, brel)
+                           Warc, barc, Urel, Wrel, brel,
+                           biaffine_algo)
 end
 
 
-# enoding (H, B, T)
+# enoding (H, B, T) __call__
 function (this::BiaffineDecoder)(ctx, encodings)
     H, B, T = size(encodings)
     to3d(x) = reshape(x, (div(length(x), B*T), B, T))
     p2(x) = reshape(x, (length(x), 1))
+    p3(x) = reshape(x, (size(x)..., 1))
+    bt(x) = reshape(x, (B, T))
     
     encodings = reshape(encodings, (H, B*T))
     # mlp_units, B* T
@@ -67,11 +72,18 @@ function (this::BiaffineDecoder)(ctx, encodings)
     y_arcs = []
     Warc = val(ctx, this.Warc)
     barc = val(ctx, this.barc)
-    H_arc_dep = to3d(H_arc_dep)
+    #H_arc_dep = to3d(H_arc_dep)
     for i = 1:T
-        hi = H_arc_dep[:, :, i]
-        si = diag3(to3d(hi' * Warc * H_arc_head)) .+ #(B,T)
-            reshape(barc' * H_arc_head, (B,T)) # Also (B, T)
+        hi = to3d(H_arc_dep)[:, :, i]
+        if this.biaffine_algo == :diag
+            #info("Diag")
+            si = diag3(to3d(hi' * Warc * H_arc_head)) .+ #(B,T)
+                bt(barc' * H_arc_head) # Also (B, T)
+        else
+            #info("Not diag")
+            si = bt(sum(p3(Warc * hi) .* to3d(H_arc_head), 1)) .+
+                bt(barc' * H_arc_head)
+        end
         push!(s_arcs, si') # Now (T, B)
         # Compute maximum arcs
         si_val = Array(getval(si))
@@ -98,7 +110,6 @@ function (this::BiaffineDecoder)(ctx, encodings)
     
     return s_arcs, s_rels
 end
-
 
 # --------------- DEATH CODE (might be reused later) ------------------
     #T, mlp_units, B 
