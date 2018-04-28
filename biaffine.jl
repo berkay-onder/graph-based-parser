@@ -39,7 +39,7 @@ function BiaffineDecoder(nlabels;
     rel_head = MLP(label_units, src_dim, activation)
     
     Warc = Param(winit(dtype, mlp_units, mlp_units))
-    barc = Param(binit(dtype, mlp_units,1))
+    barc = Param(binit(dtype, 1, mlp_units))
 
     Urel = [Param(winit(dtype, label_units, label_units)) for i = 1:nlabels]
     Wrel = Param(winit(dtype, nlabels, 2label_units))
@@ -78,11 +78,11 @@ function (this::BiaffineDecoder)(ctx, encodings)
         if this.biaffine_algo == :diag
             #info("Diag")
             si = diag3(to3d(hi' * Warc * H_arc_head)) .+ #(B,T)
-                bt(barc' * H_arc_head) # Also (B, T)
+                bt(barc * H_arc_head) # Also (B, T)
         else
             #info("Not diag")
             si = bt(sum(p3(Warc * hi) .* to3d(H_arc_head), 1)) .+
-                bt(barc' * H_arc_head)
+                bt(barc * H_arc_head)
         end
         push!(s_arcs, si') # Now (T, B)
         # Compute maximum arcs
