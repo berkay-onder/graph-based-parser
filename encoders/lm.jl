@@ -60,11 +60,20 @@ function embed_feats(this::LMEncoder, ctx, sentences)
     indices = []
     lengths = []
     for s in sentences
+        _indices = []
+        _lengths = []
         for f in s.feats
-            push!(lengths, length(f))
-            push!(indices, f...)
+            push!(_lengths, length(f))
+            push!(_indices, f)
         end
+        push!(indices, _indices)
+        push!(lengths, _lengths)
     end
+    # Convert to batch-first order
+    flatten = Base.Iterators.Flatten
+    indices = collect(flatten(flatten(zip(indices...))))
+    lengths = collect(flatten(zip(lengths...)))
+
     # Compute the embedding
     emb = this.feat(ctx, Int.(indices))
     # Stored sum versions for each word
@@ -86,5 +95,5 @@ function embed_feats(this::LMEncoder, ctx, sentences)
     # Reshape the final embedding
     H, B, T = this.feat_emb, length(sentences), length(sentences[1].word)
     wembs = reshape(hcat(wembs...), (H, T, B))
-    return permutedims(wembs, (1, 3, 2))
+    return wembs#permutedims(wembs, (1, 3, 2))
 end
