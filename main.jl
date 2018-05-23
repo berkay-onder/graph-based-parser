@@ -40,7 +40,7 @@ end
 function loss(ctx, encoder, decoder, sents)
     source = encoder(ctx, sents)
     arc_scores, rel_scores = decoder(ctx, source)
-    return soft_loss(decoder, arc_scores, rel_scores, sent)
+    return softloss(decoder, arc_scores, rel_scores, sent)
 end
 
 
