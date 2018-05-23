@@ -8,11 +8,11 @@ function concat(embs...)
 end
 
 function prep_cavecs(sentences)
-    cavecs = map(x->x.cavec, sentences)
+    cavecs = map(x->(x.wvec, x.fvec, c.bvec), sentences)
     seq = []
     # For batch first ordering
     for cavec in zip(cavecs...)
-        push!(seq, cat(2, cavec...))
+        push!(seq, cat(2, map(x->vcat(x...), cavec)...))
     end
     return cat(3, seq...)
 end

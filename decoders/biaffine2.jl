@@ -12,6 +12,7 @@ type BiaffineDecoder2 <: KnetModule
     brel::Param
     arc_summer
     rel_summer
+    input_drop::Dropout
     arc_drop::Dropout
     rel_drop::Dropout
 end
@@ -20,12 +21,13 @@ end
 orthogonal(dtype, r, c)=qr(rand(dtype, r, c))[1]
 
 
-function BiaffineDecoder2(;nlabels=17,
+function BiaffineDecoder2(;nlabels=37,
                           src_dim=400,
                           mlp_units=400,
                           label_units=100,
                           arc_drop=.33,
                           label_drop=.33,
+                          input_drop=.33,
                           Act=ReLU,
                           winit=orthogonal,
                           wrinit=xavier,
@@ -48,6 +50,7 @@ function BiaffineDecoder2(;nlabels=17,
     return BiaffineDecoder2(mlp_units, label_units, mlp,
                             Warc, barc, Urel, Wrel, brel,
                             arc_summer, label_summer,
+                            Dropout(input_drop),
                             Dropout(arc_drop), Dropout(label_drop))
 end
 
@@ -62,7 +65,7 @@ function (this::BiaffineDecoder2)(ctx, encodings; permute=false)
     H, B, T = size(encodings)
     to3d(x) = reshape(x, (div(length(x), B*T), B, T))
 
-    encodings = reshape(encodings, (H, B*T))
+    encodings = this.input_drop(reshape(encodings, (H, B*T)))
     hiddens = this.mlp(ctx, encodings)
     M, L = this.mlp_units, this.label_units
     H_arc_dep  = this.arc_drop(hiddens[1:M,       :])
@@ -103,25 +106,31 @@ end
 
 
 
-function argmax(s_arc_val)
-    _, B, T = size(s_arc_val)
-    maxes = Array{Int, 2}(B, T)
-    @inbounds begin
-        for t = 1:T
-            for b = 1:B
-                maxes[b, t] = indmax(s_arc_val[:, b, t])
-            end
-        end
-    end
-    return maxes
+#Assumes arcs are in the time first order
+function softloss(dec::BiaffineDecoder2,
+                  arc_scores, rel_scores,
+                  sents)
+    arc_gold = [sent.head for sent in sents]
+    rel_gold = [sent.deprel for sent in sents]
+    
+    H, B, T = size(scores)
+    # Switch to batch-first ordering
+    arc_gold = Int.(collect(flatten(zip(arc_gold...)))) .+ 1
+    rel_gold = Int.(collect(flatten(zip(rel_gold...))))
+    arc_pred, rel_pred = map(x->matify(cut_first(x)), (arc_scores, rel_scores))
+    
+    return (nll(arc_pred, arc_gold; average=false) + 
+            nll(rel_pred, rel_gold; average=false)) / B
 end
 
 
-"Returns and any array consists of TxT score matrices"
-function postproc(this::BiaffineDecoder2, scores, labels)
-    scores = Array(getval(scores))
-    labels = Array(getval(labels))
+"Prepares arcs for the parsing algorithm"
+function postproc(this::BiaffineDecoder2, arc_scores)
+    scores = Array(getval(arc_scores))
+    #labels = Array(getval(rels))
     scores = Any[scores[:,i,:] for i = 1:size(scores,2)]
-    labels = Any[labels[:,i,:] for i = 1:size(scores,2)]
-    return scores, labels
+    #labels = Any[labels[:,i,:] for i = 1:size(rels,2)]
+    return scores
 end
+
+

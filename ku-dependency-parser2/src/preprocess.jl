@@ -61,25 +61,36 @@ function extend_vocab!(vocab::Vocab, train_corpus)
     xpos = Dict()
     feats = Dict()
 
-    function proc_feat(feat)
-        feat == "_" && return []
-        splits = split(feat, "|")
-        stuff = []
-        for s in splits
-            push!(stuff, get!(feats, s, length(feats)+1))
-        end
-        return stuff
-    end
-
     for sent in train_corpus
-        sent.xpostag = 
-            [get!(xpos, xp, 1+length(xpos)) for xp in sent.xpostag]
-        sent.feats = [proc_feat(feat) for feat in sent.feats]
+        sent.xpostag = [proc(xp, xpos) for xp in sent.xpostag]
+            #[get!(xpos, xp, 1+length(xpos)) for xp in sent.xpostag]
+        sent.feats = [proc(feat, feats) for feat in sent.feats]
     end
 
     return ExtendedVocab(xpos, feats, vocab)
 end
- 
+
+
+function extend_corpus!(ev::ExtendedVocab, val_corpus)
+    for sent in val_corpus
+        sent.xpostag = [proc(xp, ev.xpostags, false) 
+                        for xp in sent.xpostag]
+        sent.feats = [proc(f, ev.feats, false) 
+                      for f in sent.feats]
+    end
+    return val_corpus
+end
+
+
+function proc(feat, feats, mutate=true)
+    feat == "_" && return []
+    splits = split(feat, "|")
+    stuff = []
+    for s in splits
+        push!(stuff, mutate ? get!(feats, s, length(feats)+1) : feats[s])
+    end
+    return stuff
+end 
 
 
 # After filling word, forward and backward vectors cache the concated version

@@ -1,4 +1,5 @@
 include("./util.jl")
+
 using Knet, KnetModules
 import KnetModules.convert_buffers!
 
@@ -10,17 +11,18 @@ type LMEncoder <: KnetModule
     feat::Embedding
     root::Union{Param, Void}
     feat_emb::Integer
+    xpos_emb::Integer
     use_gpu::Bool
 end
 
 function LMEncoder(ev::ExtendedVocab;
-                     remb=350, uemb=50, xemb=50, 
-                     femb=50)
+                   remb=350, uemb=50, xemb=50, 
+                   femb=50)
     upos = EmbeddingLookup(uemb, length(ev.vocab.postags))
     xpos = EmbeddingLookup(xemb, length(ev.xpostags))
     feat = EmbeddingLookup(femb, length(ev.feats))
     root = remb > 0 ? Param(rand(Float32, remb)) : nothing
-    return LMEncoder(upos, xpos, feat, root, femb, false)
+    return LMEncoder(upos, xpos, feat, root, femb, xemb, false)
 end
 
 function convert_buffers!(this::LMEncoder, atype)
@@ -36,9 +38,8 @@ function (this::LMEncoder)(ctx, sentences)
     cavecs = prep_cavecs(sentences)
     uposes = this.upos(ctx, prep_tags(
         sentences, :postag))
-    xposes = this.xpos(ctx, prep_tags(
-        sentences, :xpostag))
-    feats = embed_feats(this, ctx, sentences)
+    xposes = embed_many(this, ctx, sentences, :xpos, :xpos_emb)
+    feats = embed_many(this, ctx, sentences, :feat, :feat_emb)
     this.use_gpu && (cavecs = ka(cavecs))
     return rootify(this, ctx, concat(cavecs, uposes, xposes, feats))
 end
@@ -55,7 +56,8 @@ function rootify(this::LMEncoder, ctx, concated)
 end
 
 
-function embed_feats(this::LMEncoder, ctx, sentences)
+function embed_many(this::LMEncoder, ctx, sentences,
+                    embed::Symbol, embed_size::Symbol)
     # Note the time first representation
     indices = []
     lengths = []
@@ -75,7 +77,8 @@ function embed_feats(this::LMEncoder, ctx, sentences)
     lengths = collect(flatten(zip(lengths...)))
 
     # Compute the embedding
-    emb = this.feat(ctx, Int.(indices))
+    emb = getfield(this, embed)(ctx, Int.(indices))
+    #emb = this.feat(ctx, Int.(indices))
     # Stored sum versions for each word
     start = 1
     zero = fill!(similar(emb, size(emb, 1)), 0)
@@ -93,7 +96,9 @@ function embed_feats(this::LMEncoder, ctx, sentences)
         start = finish + 1
     end
     # Reshape the final embedding
-    H, B, T = this.feat_emb, length(sentences), length(sentences[1].word)
-    wembs = reshape(hcat(wembs...), (H, T, B))
+    H, B, T = (getfield(this, embed_size),
+               length(sentences), length(sentences[1].word))
+    #H, B, T = this.feat_emb, length(sentences), length(sentences[1].word)
+    wembs = reshape(hcat(wembs...), (H, B, T))
     return wembs#permutedims(wembs, (1, 3, 2))
 end

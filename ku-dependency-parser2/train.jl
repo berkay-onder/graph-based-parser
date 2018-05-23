@@ -8,7 +8,7 @@ const datadir = "/scratch/users/okirnap/ud-treebanks-v2.2"
 
 
 
-function main(args=ARGS; stop=true)
+function depmain(args=ARGS; stop=true)
     s = ArgParseSettings()
     s.description = "Koc University dependency parser (c) Berkay, 2018."
     s.exc_handler = ArgParse.debug_handler
@@ -31,7 +31,7 @@ function main(args=ARGS; stop=true)
     end
     isa(args, AbstractString) && (args=split(args))
     odict = parse_args(args, s; as_symbols=true)
-    println(s.description); flush(STDOUT);
+    #println(s.description); flush(STDOUT);
 
     # Set-Up
     odict[:arctype] = ArcHybridR1; odict[:posembed]=odict[:embed][1];
