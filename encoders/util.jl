@@ -7,6 +7,7 @@ function concat(embs...)
     return unmatify(vcat(map(matify, embs)...))
 end
 
+
 function prep_cavecs(sentences)
     cavecs = map(x->(x.wvec, x.fvec, c.bvec), sentences)
     seq = []
@@ -17,6 +18,7 @@ function prep_cavecs(sentences)
     return cat(3, seq...)
 end
 
+
 function prep_tags(sentences, fieldname)
     any_tags = map(x->getfield(x, fieldname), sentences)
     B, T = length(any_tags), length(any_tags[1])
@@ -26,3 +28,7 @@ function prep_tags(sentences, fieldname)
     end
     return tags
 end
+
+
+
+ifexist(val, fn) = val == nothing ? nothing : fn()

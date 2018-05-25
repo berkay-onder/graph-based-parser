@@ -6,9 +6,9 @@ import KnetModules.convert_buffers!
 
 # TODO: insert a root embedding
 type LMEncoder <: KnetModule
-    upos::Embedding
-    xpos::Embedding
-    feat::Embedding
+    upos::Union{Embedding, Void}
+    xpos::Union{Embedding, Void}
+    feat::Union{Embedding, Void}
     root::Union{Param, Void}
     feat_emb::Integer
     xpos_emb::Integer
@@ -16,11 +16,11 @@ type LMEncoder <: KnetModule
 end
 
 function LMEncoder(ev::ExtendedVocab;
-                   remb=350, uemb=50, xemb=50, 
-                   femb=50)
-    upos = EmbeddingLookup(uemb, length(ev.vocab.postags))
-    xpos = EmbeddingLookup(xemb, length(ev.xpostags))
-    feat = EmbeddingLookup(femb, length(ev.feats))
+                   remb=350, uemb=50, 
+                   xemb=50, femb=50)
+    upos = uemb > 0 ? EmbeddingLookup(uemb, length(ev.vocab.postags)) : nothing
+    xpos = xemb > 0 ? EmbeddingLookup(xemb, length(ev.xpostags)): nothing
+    feat = femb > 0 ? EmbeddingLookup(femb, length(ev.feats)) : nothing
     root = remb > 0 ? Param(rand(Float32, remb)) : nothing
     return LMEncoder(upos, xpos, feat, root, femb, xemb, false)
 end
@@ -36,12 +36,19 @@ end
 =#
 function (this::LMEncoder)(ctx, sentences)
     cavecs = prep_cavecs(sentences)
-    uposes = this.upos(ctx, prep_tags(
-        sentences, :postag))
-    xposes = embed_many(this, ctx, sentences, :xpos, :xpos_emb)
-    feats = embed_many(this, ctx, sentences, :feat, :feat_emb)
+    embs = []
+    uposes = ifexist(this.upos, ()->this.upos(
+        ctx, prep_tags(sentences, :postag)))
+    
+    xposes = ifexist(this.xpos, ()->embed_many(
+        this, ctx, sentences, :xpos, :xpos_emb))
+    
+    feats = ifexist(this.feats, ()->embed_many(
+        this, ctx, sentences, :feat, :feat_emb))
+    
     this.use_gpu && (cavecs = ka(cavecs))
-    return rootify(this, ctx, concat(cavecs, uposes, xposes, feats))
+    embs = map(e->e!=nothing, (uposes, xposes, feats))
+    return rootify(this, ctx, concat(cavecs, embs...))
 end
 
 
@@ -97,8 +104,7 @@ function embed_many(this::LMEncoder, ctx, sentences,
     end
     # Reshape the final embedding
     H, B, T = (getfield(this, embed_size),
-               length(sentences), length(sentences[1].word))
-    #H, B, T = this.feat_emb, length(sentences), length(sentences[1].word)
-    wembs = reshape(hcat(wembs...), (H, B, T))
-    return wembs#permutedims(wembs, (1, 3, 2))
+               length(sentences), length(sentences[1]))
+    
+    return reshape(hcat(wembs...), (H, B, T))
 end
