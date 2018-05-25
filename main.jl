@@ -1,3 +1,5 @@
+include("./install_deps.jl")
+
 using Knet, KnetModules
 import KnetModules.convert_buffers!
 
@@ -61,12 +63,14 @@ function main(args=ARGS)
         ("--birnn"; arg_type=Int; default=0; help="Number of extra birnn layers applied after lm embedding")
         ("--birnndrop"; arg_type=Float32; default=Float32(0); help="Input dropout for extra birnn layers")
         ("--birnncell"; arg_type=String; default="LSTM"; help="RNN Cell type for extra birnn layers")
+        ("--birnnhidden"; arg_type=Int; default=100; help="RNN hidden size for extra birnn layers")
+        
         
         ("--decdrop"; arg_type=Float32; default=Float32(0); help="Decoder dropout (to be divided into different dropouts)")
         ("--arcunits"; arg_type=Int; default=400; help="Hidden size of src computing mlp")
         ("--labelunits"; arg_type=Int; default=100; help="Hidden size of label computing mlp")
         
-        ("--algo"; arc_type=String; default="Edmonds")
+        ("--algo"; arg_type=String; default="Edmonds")
         ("--batchsize"; arg_type=Int; default=8; help="Number of sequences to train on in parallel.")
         ("--epochs"; arg_type=Int; default=100; help="Epochs of training.")
         ("--optim";  default="Adam"; help="Optimization algorithm and parameters.")
@@ -84,7 +88,7 @@ function main(args=ARGS)
     ev = extend_vocab!(v, ctrn)
     extend_corpus!(ev, cdev)
     # Initialize the model
-    encoder = LMBiRNNEncoder(ev;
+    encoder = LMBiRNNEncoder(ev, opt[:birnnhidden];
                              numLayers=opt[:birnn],
                              rnndrop=opt[:birnndrop],
                              Cell=eval(Symbol(opt[:birnncell])),
@@ -92,9 +96,11 @@ function main(args=ARGS)
                              uemb=opt[:upos],
                              xemb=opt[:xpos],
                              femb=opt[:feat])
-
+    
+    src_dim = 950+opt[:upos]+opt[:xpos]+opt[:feat]+min(opt[:birnn], 1)*opt[:birnnhidden]
+    
     decoder = BiaffineDecoder2(;
-                               src_dim=950+opt[:upos]+opt[:xpos]+opt[:feat],
+                               src_dim=src_dim,
                                mlp_units=opt[:arcunits],
                                label_units=opt[:labelunits],
                                arc_drop=opt[:decdrop],
@@ -105,26 +111,27 @@ function main(args=ARGS)
         gpu!(decoder)
     end
     
-    optims = optimizers(active_ctx(), eval(parse(opt[:optim])))
+    ctx = active_ctx()
+    optims = optimizers(ctx, eval(parse(opt[:optim])))
     
     for i = 1:opt[:epochs]
-        batches = minibatch(ctrn, 16)
-        batches = [b for b in batches if length(Set(b))==1]
+        println("Epoch $i")
+        shuffle!(ctrn)
+        batches = minibatch(ctrn, o[:batchsize])
+        batches = [b for b in batches if Set(map(length, b))==1]
+        for batch in batches
+            grads, loss = lossgrad(ctx, encoder, decoder, batch)
+            update!(ctx, grads, optims)
+        end
     end
     
     #=
-    
+    _______
+    | _ _ |
+   {| o o |}
+       |   
+     \___/
     =#
     
-    #global ctrn, cdev, ev, enc
-    #=d, v, corpora = load_data(englm, engtrn, engdev)
-    
-    
-    ctrn = prep_data(ctrn; minlength=10)
-    
-    ev  = extend_vocab!(v, ctrn)
-    enc = LMEncoder(ev)
-    gpu!(enc)
-    
-    enc(active_ctx(), ctrn[1:16])=#
+
 end
