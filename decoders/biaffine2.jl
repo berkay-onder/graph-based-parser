@@ -61,7 +61,8 @@ function KnetModules.convert_buffers!(this::BiaffineDecoder2, atype)
 end
 
 
-function (this::BiaffineDecoder2)(ctx, encodings; permute=false)
+function (this::BiaffineDecoder2)(ctx, encodings; 
+                                  permute=false)
     H, B, T = size(encodings)
     to3d(x) = reshape(x, (div(length(x), B*T), B, T))
 
@@ -117,6 +118,7 @@ function softloss(dec::BiaffineDecoder2,
     # Switch to batch-first ordering
     arc_gold = Int.(collect(flatten(zip(arc_gold...)))) .+ 1
     rel_gold = Int.(collect(flatten(zip(rel_gold...))))
+    # Reduce to 2D and remove root scores
     arc_pred, rel_pred = map(x->matify(cut_first(x)), (arc_scores, rel_scores))
     
     return (nll(arc_pred, arc_gold; average=false) + 
