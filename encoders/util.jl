@@ -9,11 +9,18 @@ end
 
 
 function prep_cavecs(sentences)
-    cavecs = map(x->(x.wvec, x.fvec, c.bvec), sentences)
+    cavecs = []
+    for s in sentences
+        _cavecs = []
+        for (w, f, b) in zip(s.wvec, s.fvec, s.bvec)
+            push!(_cavecs, vcat(w, f, b))
+        end
+        push!(cavecs, _cavecs)
+    end
     seq = []
     # For batch first ordering
     for cavec in zip(cavecs...)
-        push!(seq, cat(2, map(x->vcat(x...), cavec)...))
+        push!(seq, cat(2, cavec...))
     end
     return cat(3, seq...)
 end

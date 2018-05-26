@@ -43,11 +43,11 @@ function (this::LMEncoder)(ctx, sentences)
     xposes = ifexist(this.xpos, ()->embed_many(
         this, ctx, sentences, :xpos, :xpos_emb))
     
-    feats = ifexist(this.feats, ()->embed_many(
+    feats = ifexist(this.feat, ()->embed_many(
         this, ctx, sentences, :feat, :feat_emb))
     
     this.use_gpu && (cavecs = ka(cavecs))
-    embs = map(e->e!=nothing, (uposes, xposes, feats))
+    embs = filter(e->e!=nothing, Any[uposes, xposes, feats])
     return rootify(this, ctx, concat(cavecs, embs...))
 end
 
@@ -56,7 +56,9 @@ function rootify(this::LMEncoder, ctx, concated)
     this.root == nothing && return concated
     E, B, T = size(concated)
     root = val(ctx, this.root)
-    root = vcat(root, fill!(similar(concated, E-length(root)), 0))
+    if E-length(root) > 0
+        root = vcat(root, fill!(similar(concated, E-length(root)), 0))
+    end
     root = reshape(hcat([root for i = 1:B]...), (E*B, 1))
     concated = reshape(concated, (E*B, T))
     return reshape(hcat(root, concated), (E, B, T+1))

@@ -114,7 +114,7 @@ function softloss(dec::BiaffineDecoder2,
     arc_gold = [sent.head for sent in sents]
     rel_gold = [sent.deprel for sent in sents]
     
-    H, B, T = size(scores)
+    _, B, T = size(arc_scores)
     # Switch to batch-first ordering
     arc_gold = Int.(collect(flatten(zip(arc_gold...)))) .+ 1
     rel_gold = Int.(collect(flatten(zip(rel_gold...))))
@@ -127,12 +127,24 @@ end
 
 
 "Prepares arcs for the parsing algorithm"
-function postproc(this::BiaffineDecoder2, arc_scores)
-    scores = Array(getval(arc_scores))
-    #labels = Array(getval(rels))
-    scores = Any[scores[:,i,:] for i = 1:size(scores,2)]
-    #labels = Any[labels[:,i,:] for i = 1:size(rels,2)]
-    return scores
+function parse_scores(this::BiaffineDecoder2, parser, arc_scores, rel_scores)
+    
+    postproc(scores) = let scores = Array(getval(scores))
+        Any[scores[:,i,:] for i = 1:size(scores, 2)]
+    end
+    arc_scores, rel_scores = map(postproc, (arc_scores, rel_scores))
+    arcs = []
+    rels = []
+    for (arc, rel) in zip(arc_scores, rel_scores)
+        push!(arcs, parser(arc))
+        _rels = Array{UInt8}(size(rel, 2))
+        for i = 1:length(_rels)
+           _rels[i] = indmax(rel[:, i])
+        end
+        push!(rels, _rels[2:end])
+    end
+    return arcs, rels
 end
+
 
 

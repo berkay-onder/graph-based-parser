@@ -1,7 +1,8 @@
 using PyCall
 include("CKY.jl")
 include("Eisner.jl")
-unshift!(PyVector(pyimport("sys")["path"]), "")
+
+unshift!(PyVector(pyimport("sys")["path"]), "", "parsers")
 @pyimport mst
 
 function eisner(lambda)

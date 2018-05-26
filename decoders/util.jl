@@ -2,7 +2,7 @@ using Knet, AutoGrad
 
 
 function argmax(s_arc_val)
-    _, B, T = size(s_arc_val)
+    _, B, T = size(s_arc_val, 1, 2, 3)
     maxes = Array{Int, 2}(B, T)
     @inbounds begin
         for t = 1:T
