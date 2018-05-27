@@ -114,7 +114,7 @@ function train()
         info("Transfering to gpu.")
         # TODO: refactor
         if opt[:lmcpu] && isa(encoder, LMBiRNNEncoder)
-            map(gpu!, encoder.birnns)
+            map(gpu!, collect(Iterators.Flatten(encoder.birnns)))
             encoder.use_gpu = true
         else
             gpu!(encoder)
