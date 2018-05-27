@@ -41,7 +41,8 @@ function (this::LMEncoder)(ctx, sentences)
         ctx, prep_tags(sentences, :postag)))
     
     xposes = ifexist(this.xpos, ()->embed_many(
-        this, ctx, sentences, :xpos, :xpos_emb))
+        this, ctx, sentences, :xpos, :xpos_emb;
+        stop_early=all(x->length(x.xpostag)==1, sentences)))
     
     feats = ifexist(this.feat, ()->embed_many(
         this, ctx, sentences, :feat, :feat_emb))
@@ -66,7 +67,11 @@ end
 
 
 function embed_many(this::LMEncoder, ctx, sentences,
-                    embed::Symbol, embed_size::Symbol)
+                    embed::Symbol, embed_size::Symbol;
+                    stop_early=false)
+        # Reshape the final embedding
+    H, B, T = (getfield(this, embed_size),
+               length(sentences), length(sentences[1]))
     # Note the time first representation
     indices = []
     lengths = []
@@ -87,6 +92,7 @@ function embed_many(this::LMEncoder, ctx, sentences,
 
     # Compute the embedding
     emb = getfield(this, embed)(ctx, Int.(indices))
+    stop_early && return reshape(emb, (H, B, T)) 
     #emb = this.feat(ctx, Int.(indices))
     # Stored sum versions for each word
     start = 1
@@ -104,9 +110,6 @@ function embed_many(this::LMEncoder, ctx, sentences,
         push!(wembs, wemb)
         start = finish + 1
     end
-    # Reshape the final embedding
-    H, B, T = (getfield(this, embed_size),
-               length(sentences), length(sentences[1]))
     
     return reshape(hcat(wembs...), (H, B, T))
 end

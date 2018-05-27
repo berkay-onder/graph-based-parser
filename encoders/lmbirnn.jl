@@ -32,6 +32,9 @@ KnetModules.convert_buffers!(this::LMBiRNNEncoder, atype) =
 
 function (this::LMBiRNNEncoder)(ctx, sentences)
     x = this.lm(ctx, sentences)
+    if !this.lm.use_gpu && this.use_gpu
+        x = ka(x)
+    end
     x_ = x
     for (forw, back) in this.birnns
         x = this.rnndrop(x)
@@ -47,8 +50,8 @@ function context_vecs(x, f, b)
     T = size(x,3)
     cvecs = []
     for i = 1:T
-        fprev = (i==1) ? fill!(similar(f, size(f,1,2)), 0) : f[:, :, i-1]
-        bprev = (i==T) ? fill!(similar(b, size(b,1,2)), 0) : b[:, :, T-i]
+        fprev = (i==1) ? fill!(similar(getval(f), size(f,1,2)), 0) : f[:, :, i-1]
+        bprev = (i==T) ? fill!(similar(getval(b), size(b,1,2)), 0) : b[:, :, T-i]
         xcurr = x[:, :, i]
         push!(cvecs, vcat(xcurr, fprev, bprev))
     end
@@ -59,6 +62,6 @@ end
 
 function reverse(x)
     H, B, T = size(x)
-    return rehsape(hcat([x[:,:,t] for t = T:-1:1]...), 
+    return reshape(hcat([x[:,:,t] for t = T:-1:1]...), 
                    (H, B, T))
 end

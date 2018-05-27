@@ -21,7 +21,7 @@ end
 
 function minibatch(buckets::Dict, mbsize::Integer; 
                    remaining=false, shuffle=true, 
-                   minlength=2, maxlength=128)
+                   minlength=2, maxlength=128, use_tokens=true)
     if shuffle
         for k in keys(buckets)
             shuffle!(buckets[k])
@@ -32,8 +32,9 @@ function minibatch(buckets::Dict, mbsize::Integer;
                                    keys(buckets))
     for k in bucket_keys
         bucket = buckets[k]
-        for i = 1:mbsize:length(bucket)
-            ending = i+mbsize-1 
+        mbs = use_tokens ? div(mbsize, k) : mbsize
+        for i = 1:mbs:length(bucket)
+            ending = i+mbs-1 
             if ending>length(bucket) 
                 !remaining && break
                 ending = length(bucket)
