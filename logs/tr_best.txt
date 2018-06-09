@@ -1,0 +1,6951 @@
+bash-4.2$ 
+bash-4.2$ 
+bash-4.2$ pwd
+/scratch/users/cgumeli/Nubik
+bash-4.2$ cd ..
+bash-4.2$ source .bashrc
+[cgumeli@login03 cgumeli]$ cd Nubik
+[cgumeli@login03 Nubik]$ srg
+bash-4.2$ 
+
+bash-4.2$ pwd
+pwd
+/scratch/users/cgumeli/Nubik
+bash-4.2$ julia
+julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "?help" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.6.2 (2017-12-13 18:08 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-pc-linux-gnu
+
+WARNING: Terminal not fully functional
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+accuracy_bt
+
+julia> 
+
+
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+WARNING: redefining constant UPOSTAG
+WARNING: redefining constant UDEPREL
+WARNING: redefining constant lmdir
+WARNING: redefining constant datadir
+WARNING: redefining constant engtrn
+WARNING: redefining constant engdev
+WARNING: redefining constant englm
+accuracy_bt
+
+julia> main("--datafiles $engtrn $engdev --lmfile $englm --upos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 1")
+main("--datafiles $engtrn $engdev --lmfile $englm --upos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 1")
+Tuple{Symbol,Any}[(:feat, 0), (:birnn, 1), (:birnndrop, 0.33), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/english_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 0), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 150), (:backupdir, "Backups_2018-06-08T21:57:20.923"), (:beta1, 0.9), (:remb, 350), (:algo, "edmonds"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, true), (:tokens, 500), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+21:57:24 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/english_chmodel.jld 
+21:57:29 /scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-train.conllu 
+21:57:30 /scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-dev.conllu 
+21:58:29 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+ERROR: DimensionMismatch("((1000, 400), (800, 411), (1000, 411))")
+Stacktrace:
+ [1] gemm!(::Char, ::Char, ::Float32, ::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}, ::Float32, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/linalg.jl:37
+ [2] *(::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/linalg.jl:10
+ [3] (::KnetModules.Linear)(::Array{Any,1}, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/KnetModules/src/linear.jl:42
+ [4] (::KnetModules.Sequential)(::Array{Any,1}, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/KnetModules/src/container.jl:55
+ [5] #call#177(::Bool, ::BiaffineDecoder2, ::Array{Any,1}, ::Knet.KnetArray{Float32,3}) at /scratch/users/cgumeli/Nubik/./decoders/biaffine2.jl:70
+ [6] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:150 [inlined]
+ [7] macro expansion at ./util.jl:237 [inlined]
+ [8] train() at /scratch/users/cgumeli/Nubik/main2.jl:148
+ [9] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:83
+
+julia> main("--datafiles $engtrn $engdev --lmfile $englm --upos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 1")
+main("--datafiles $engtrn $engdev --lmfile $englm --upos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 1")
+Tuple{Symbol,Any}[(:feat, 0), (:birnn, 1), (:birnndrop, 0.33), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/english_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 0), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 150), (:backupdir, "Backups_2018-06-08T22:02:10.621"), (:beta1, 0.9), (:remb, 350), (:algo, "edmonds"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, true), (:tokens, 500), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+22:02:10 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/english_chmodel.jld 
+22:02:12 /scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-train.conllu 
+22:02:12 /scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-dev.conllu 
+22:03:29 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+ERROR: DimensionMismatch("((1000, 400), (800, 411), (1000, 411))")
+Stacktrace:
+ [1] gemm!(::Char, ::Char, ::Float32, ::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}, ::Float32, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/linalg.jl:37
+ [2] *(::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/linalg.jl:10
+ [3] (::KnetModules.Linear)(::Array{Any,1}, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/KnetModules/src/linear.jl:42
+ [4] (::KnetModules.Sequential)(::Array{Any,1}, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/KnetModules/src/container.jl:55
+ [5] #call#177(::Bool, ::BiaffineDecoder2, ::Array{Any,1}, ::Knet.KnetArray{Float32,3}) at /scratch/users/cgumeli/Nubik/./decoders/biaffine2.jl:70
+ [6] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:150 [inlined]
+ [7] macro expansion at ./util.jl:237 [inlined]
+ [8] train() at /scratch/users/cgumeli/Nubik/main2.jl:148
+ [9] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:83
+
+julia> train()
+train()
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+ERROR: DimensionMismatch("((1000, 400), (800, 411), (1000, 411))")
+Stacktrace:
+ [1] gemm!(::Char, ::Char, ::Float32, ::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}, ::Float32, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/linalg.jl:37
+ [2] *(::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/linalg.jl:10
+ [3] (::KnetModules.Linear)(::Array{Any,1}, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/KnetModules/src/linear.jl:42
+ [4] (::KnetModules.Sequential)(::Array{Any,1}, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/KnetModules/src/container.jl:55
+ [5] #call#177(::Bool, ::BiaffineDecoder2, ::Array{Any,1}, ::Knet.KnetArray{Float32,3}) at /scratch/users/cgumeli/Nubik/./decoders/biaffine2.jl:70
+ [6] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:150 [inlined]
+ [7] macro expansion at ./util.jl:237 [inlined]
+ [8] train() at /scratch/users/cgumeli/Nubik/main2.jl:148
+
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+WARNING: redefining constant UPOSTAG
+WARNING: redefining constant UDEPREL
+WARNING: redefining constant lmdir
+WARNING: redefining constant datadir
+WARNING: redefining constant engtrn
+WARNING: redefining constant engdev
+WARNING: redefining constant englm
+accuracy_bt
+
+julia> train()
+train()
+INFO: Initializing Model and Optimizers
+800
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+parsers/mst.py:24: RuntimeWarning: divide by zero encountered in divide
+  new_root = tokens[np.argmax(root_scores / head_scores)]
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 52.296210 seconds (17.52 M allocations: 1.579 GiB, 3.34% gc time)
+Validation loss: 86.44539
+Unlabeled attachment score: 3.2377834557649314
+Labeled attachment score: 0.09980836793356755
+
+Epoch 1
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+100.775964 seconds (85.84 M allocations: 10.846 GiB, 13.62% gc time)
+Training loss: 32.486755
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  7.411302 seconds (6.77 M allocations: 1.083 GiB, 5.73% gc time)
+Validation loss: 14.156363
+Unlabeled attachment score: 72.42494410731396
+Labeled attachment score: 68.54439476205685
+INFO: Backing up
+
+Epoch 2
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 72.793663 seconds (81.29 M allocations: 10.588 GiB, 12.47% gc time)
+Training loss: 22.120758
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  7.882427 seconds (6.77 M allocations: 1.083 GiB, 5.77% gc time)
+Validation loss: 12.114889
+Unlabeled attachment score: 76.85643564356435
+Labeled attachment score: 73.56275950175663
+INFO: Backing up
+
+Epoch 3
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+  C-c C-c^CERROR: InterruptException:
+Stacktrace:
+ [1] #Rec#12(::Function, ::Tuple{AutoGrad.Rec{Knet.KnetArray{Float32,2}},Colon,Int64}, ::Array{Any,1}, ::Type{T} where T, ::Knet.KnetArray{Float32,1}, ::Array{AutoGrad.Node,1}) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:332
+ [2] (::Core.#kw#Type)(::Array{Any,1}, ::Type{AutoGrad.Rec}, ::Knet.KnetArray{Float32,1}, ::Array{AutoGrad.Node,1}) at ./<missing>:0
+ [3] (::AutoGrad.##rfun#7#10{Base.#getindex})(::Array{Any,1}, ::Function, ::AutoGrad.Rec{Knet.KnetArray{Float32,2}}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:133
+ [4] getindex(::AutoGrad.Rec{Knet.KnetArray{Float32,2}}, ::Colon, ::Int64) at ./<missing>:0
+ [5] next at ./iterators.jl:724 [inlined]
+ [6] grow_to!(::Array{AutoGrad.Rec{Knet.KnetArray{Float32,1}},1}, ::Base.Iterators.Flatten{Base.Generator{UnitRange{Int64},##301#307{Int64,Array{Int64,2}}}}, ::Tuple{Int64,Base.Generator{UnitRange{Int64},##302#308{Int64,Array{Int64,2}}},Int64}) at ./array.jl:532
+ [7] grow_to!(::Array{Union{},1}, ::Base.Iterators.Flatten{Base.Generator{UnitRange{Int64},##301#307{Int64,Array{Int64,2}}}}, ::Tuple{Int64,Base.Generator{UnitRange{Int64},##302#308{Int64,Array{Int64,2}}},Int64}) at ./array.jl:540
+ [8] grow_to!(::Array{Any,1}, ::Base.Iterators.Flatten{Base.Generator{UnitRange{Int64},##301#307{Int64,Array{Int64,2}}}}) at ./array.jl:525
+ [9] #call#299(::Bool, ::BiaffineDecoder2, ::AutoGrad.Rec{Array{Any,1}}, ::AutoGrad.Rec{Knet.KnetArray{Float32,3}}) at /scratch/users/cgumeli/Nubik/./decoders/biaffine2.jl:95
+ [10] loss(::AutoGrad.Rec{Array{Any,1}}, ::FreshEncoder, ::BiaffineDecoder2, ::Array{Any,1}) at /scratch/users/cgumeli/Nubik/main2.jl:19
+ [11] forward_pass(::Function, ::Tuple{Array{Any,1},FreshEncoder,BiaffineDecoder2,Array{Any,1}}, ::Array{Any,1}, ::Int64) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:88
+ [12] (::AutoGrad.##gradfun#4#6{#loss,Int64})(::Array{Any,1}, ::Function, ::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:57
+ [13] (::AutoGrad.#gradfun#5)(::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:57
+ [14] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:193 [inlined]
+ [15] macro expansion at ./util.jl:237 [inlined]
+ [16] train() at /scratch/users/cgumeli/Nubik/main2.jl:191
+
+julia> opt[:lr]
+opt[:lr]
+0.001f0
+
+julia> opt[:lr] = 0.02
+opt[:lr] = 0.02
+0.02
+
+julia> train()
+train()
+INFO: Initializing Model and Optimizers
+800
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  8.179757 seconds (6.77 M allocations: 1.083 GiB, 5.40% gc time)
+Validation loss: 85.17098
+Unlabeled attachment score: 12.156659214308528
+Labeled attachment score: 0.30740977323538804
+
+Epoch 1
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 67.390872 seconds (81.02 M allocations: 10.583 GiB, 10.83% gc time)
+Training loss: 1010.3658
+
+
+INFO: Computing validation performance
+parsers/mst.py:55: RuntimeWarning: invalid value encountered in divide
+  new_scores = scores[cycle, new_heads] / old_scores
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 14.288205 seconds (7.05 M allocations: 1.088 GiB, 18.88% gc time)
+Validation loss: 49.91969
+Unlabeled attachment score: 20.999680613222612
+Labeled attachment score: 9.924944107313957
+INFO: Backing up
+
+Epoch 2
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 67.054057 seconds (81.07 M allocations: 10.583 GiB, 10.16% gc time)
+Training loss: 70.08045
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 13.093319 seconds (7.05 M allocations: 1.088 GiB, 14.62% gc time)
+Validation loss: 49.79768
+Unlabeled attachment score: 18.696103481315873
+Labeled attachment score: 10.807250079846694
+INFO: Backing up
+
+Epoch 3
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 70.455487 seconds (81.09 M allocations: 10.584 GiB, 16.87% gc time)
+Training loss: 70.17136
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+  C-c C-c^CERROR: InterruptException:
+Stacktrace:
+ [1] done at ./iterators.jl:244 [inlined] (repeats 11 times)
+ [2] prep_cavecs(::Array{Any,1}) at /scratch/users/cgumeli/Nubik/./encoders/./util.jl:22
+ [3] (::LMEncoder)(::Array{Any,1}, ::Array{Any,1}, ::#prep_cavecs) at /scratch/users/cgumeli/Nubik/./encoders/lm.jl:38
+ [4] (::FreshEncoder)(::Array{Any,1}, ::Array{Any,1}) at /scratch/users/cgumeli/Nubik/./encoders/fresh.jl:46
+ [5] predict at /scratch/users/cgumeli/Nubik/main2.jl:13 [inlined]
+ [6] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:150 [inlined]
+ [7] macro expansion at ./util.jl:237 [inlined]
+ [8] train() at /scratch/users/cgumeli/Nubik/main2.jl:148
+
+julia> exit()
+exit()
+bash-4.2$ julia
+julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "?help" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.6.2 (2017-12-13 18:08 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-pc-linux-gnu
+
+WARNING: Terminal not fully functional
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+accuracy_bt
+
+julia> main("--datafiles $engtrn $engdev --lmfile $englm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 1")
+main("--datafiles $engtrn $engdev --lmfile $englm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 1")
+Tuple{Symbol,Any}[(:feat, 0), (:birnn, 1), (:birnndrop, 0.33), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/english_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 0), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 50), (:backupdir, "Backups_2018-06-08T22:15:11.977"), (:beta1, 0.9), (:remb, 350), (:algo, "edmonds"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, true), (:tokens, 500), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+22:15:15 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/english_chmodel.jld 
+22:15:20 /scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-train.conllu 
+22:15:21 /scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-dev.conllu 
+22:16:18 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+parsers/mst.py:24: RuntimeWarning: divide by zero encountered in divide
+  new_root = tokens[np.argmax(root_scores / head_scores)]
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 54.958695 seconds (18.65 M allocations: 1.643 GiB, 0.62% gc time)
+Validation loss: 85.94888
+Unlabeled attachment score: 7.503578813424527
+Labeled attachment score: 0.7435979004294576
+
+Epoch 1
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+102.435386 seconds (86.09 M allocations: 10.852 GiB, 9.47% gc time)
+Training loss: 31.67426
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  7.421844 seconds (6.77 M allocations: 1.083 GiB, 5.58% gc time)
+Validation loss: 14.340142
+Unlabeled attachment score: 71.24622236360744
+Labeled attachment score: 67.57992683314777
+INFO: Backing up
+
+Epoch 2
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+  C-c C-c^CERROR: InterruptException:
+Stacktrace:
+ [1] knetgc(::Int64) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/kptr.jl:132
+ [2] Knet.KnetPtr(::Int64) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/kptr.jl:88
+ [3] broadcast#+(::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/broadcast.jl:72
+ [4] +(::AutoGrad.Broadcasted{Knet.KnetArray{Float32,2}}, ::AutoGrad.Broadcasted{Knet.KnetArray{Float32,2}}) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/unfuse.jl:49
+ [5] broadcast(::Function, ::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/unfuse.jl:9
+ [6] sum_outgrads_karray(::Knet.KnetArray{Float32,3}, ::Knet.KnetArray{Float32,2}, ::Colon, ::Colon, ::Int64, ::Vararg{Int64,N} where N) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:1043
+ [7] sum_outgrads(::Knet.KnetArray{Float32,3}, ::AutoGrad.UngetIndex) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:1036
+ [8] backward_pass(::AutoGrad.Rec{Array{Any,1}}, ::AutoGrad.Rec{Float32}, ::Array{AutoGrad.Node,1}) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:258
+ [9] (::AutoGrad.##gradfun#4#6{#loss,Int64})(::Array{Any,1}, ::Function, ::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:62
+ [10] (::AutoGrad.#gradfun#5)(::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:57
+ [11] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:194 [inlined]
+ [12] macro expansion at ./util.jl:237 [inlined]
+ [13] train() at /scratch/users/cgumeli/Nubik/main2.jl:192
+ [14] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:83
+
+julia> length(filter(x->length(x)==1, cdev))
+length(filter(x->length(x)==1, cdev))
+100
+
+julia> exit()
+exit()
+bash-4.2$ 
+
+bash-4.2$ pwd
+pwd
+/scratch/users/cgumeli/Nubik
+bash-4.2$ julia
+julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "?help" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.6.2 (2017-12-13 18:08 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-pc-linux-gnu
+
+WARNING: Terminal not fully functional
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+accuracy_bt
+
+julia> main("--datafiles $engtrn $engdev --lmfile $englm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3")
+main("--datafiles $engtrn $engdev --lmfile $englm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3")
+Tuple{Symbol,Any}[(:feat, 0), (:birnn, 3), (:birnndrop, 0.33), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/english_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 0), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 50), (:backupdir, "Backups_2018-06-08T23:14:14.2"), (:beta1, 0.9), (:remb, 350), (:algo, "edmonds"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, true), (:tokens, 500), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+23:14:18 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/english_chmodel.jld 
+23:14:22 /scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-train.conllu 
+23:14:24 /scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-dev.conllu 
+23:15:22 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+parsers/mst.py:24: RuntimeWarning: divide by zero encountered in divide
+  new_root = tokens[np.argmax(root_scores / head_scores)]
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 58.420119 seconds (18.87 M allocations: 1.647 GiB)
+Validation loss: 85.7443
+Unlabeled attachment score: 10.641005248926357
+Labeled attachment score: 0.8827739780499443
+
+Epoch 1
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+118.109186 seconds (90.89 M allocations: 11.023 GiB, 8.11% gc time)
+Training loss: 32.71349
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 13.031505 seconds (7.21 M allocations: 1.094 GiB, 12.57% gc time)
+Validation loss: 14.972946
+Unlabeled attachment score: 68.07300779386034
+Labeled attachment score: 64.52998250357881
+INFO: Backing up
+
+Epoch 2
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+  C-c C-c^CERROR: InterruptException:
+Stacktrace:
+ [1] Knet.KnetPtr(::Int64) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/kptr.jl:80
+ [2] Type at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:104 [inlined]
+ [3] Type at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:116 [inlined]
+ [4] similar at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:172 [inlined]
+ [5] similar at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:175 [inlined]
+ [6] #dropout#579(::Int64, ::Function, ::Knet.KnetArray{Float32,2}, ::Float32) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/dropout.jl:22
+ [7] (::Knet.#kw##dropout)(::Array{Any,1}, ::Knet.#dropout, ::Knet.KnetArray{Float32,2}, ::Float32) at ./<missing>:0
+ [8] (::AutoGrad.##rfun#7#10{Knet.#dropout})(::Array{Any,1}, ::Function, ::AutoGrad.Rec{Knet.KnetArray{Float32,2}}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:124
+ [9] (::AutoGrad.#kw##rfun#9)(::Array{Any,1}, ::AutoGrad.#rfun#9, ::AutoGrad.Rec{Knet.KnetArray{Float32,2}}, ::Vararg{Any,N} where N) at ./<missing>:0
+ [10] dropout(::AutoGrad.Rec{Knet.KnetArray{Float32,2}}, ::Float32) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/dropout.jl:46
+ [11] (::KnetModules.Dropout)(::AutoGrad.Rec{Knet.KnetArray{Float32,2}}) at /scratch/users/cgumeli/.julia/v0.6/KnetModules/src/func.jl:58
+ [12] #call#55(::Bool, ::BiaffineDecoder2, ::AutoGrad.Rec{Array{Any,1}}, ::AutoGrad.Rec{Knet.KnetArray{Float32,3}}) at /scratch/users/cgumeli/Nubik/./decoders/biaffine2.jl:72
+ [13] loss(::AutoGrad.Rec{Array{Any,1}}, ::FreshEncoder, ::BiaffineDecoder2, ::Array{Any,1}) at /scratch/users/cgumeli/Nubik/main2.jl:19
+ [14] forward_pass(::Function, ::Tuple{Array{Any,1},FreshEncoder,BiaffineDecoder2,Array{Any,1}}, ::Array{Any,1}, ::Int64) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:88
+ [15] (::AutoGrad.##gradfun#4#6{#loss,Int64})(::Array{Any,1}, ::Function, ::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:57
+ [16] (::AutoGrad.#gradfun#5)(::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:57
+ [17] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:194 [inlined]
+ [18] macro expansion at ./util.jl:237 [inlined]
+ [19] train() at /scratch/users/cgumeli/Nubik/main2.jl:192
+ [20] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:83
+
+julia> 
+
+
+julia> 
+
+
+julia> exit()
+exit()
+bash-4.2$ julia
+julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "?help" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.6.2 (2017-12-13 18:08 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-pc-linux-gnu
+
+WARNING: Terminal not fully functional
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+
+
+accuracy_bt
+
+julia> 
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+WARNING: redefining constant UPOSTAG
+WARNING: redefining constant UDEPREL
+WARNING: redefining constant lmdir
+WARNING: redefining constant datadir
+WARNING: redefining constant engtrn
+WARNING: redefining constant engdev
+WARNING: redefining constant englm
+accuracy_bt
+
+julia> main("--datafiles $engtrn $engdev --lmfile $englm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 2")
+main("--datafiles $engtrn $engdev --lmfile $englm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 2")
+Tuple{Symbol,Any}[(:feat, 0), (:birnn, 2), (:birnndrop, 0.33), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/english_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 0), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 50), (:backupdir, "Backups_2018-06-08T23:20:55.93"), (:beta1, 0.9), (:remb, 350), (:algo, "edmonds"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, true), (:tokens, 500), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+23:20:59 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/english_chmodel.jld 
+23:21:04 /scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-train.conllu 
+23:21:05 /scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-dev.conllu 
+23:22:03 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+parsers/mst.py:24: RuntimeWarning: divide by zero encountered in divide
+  new_root = tokens[np.argmax(root_scores / head_scores)]
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 56.363248 seconds (18.91 M allocations: 1.647 GiB, 0.61% gc time)
+Validation loss: 86.16683
+Unlabeled attachment score: 7.4677906791792585
+Labeled attachment score: 0.4533163671067282
+
+Epoch 1
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+119.727319 seconds (91.83 M allocations: 11.051 GiB, 11.04% gc time)
+Training loss: 31.345665
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  8.126909 seconds (7.01 M allocations: 1.090 GiB, 5.53% gc time)
+Validation loss: 13.5574465
+Unlabeled attachment score: 69.66359153809448
+Labeled attachment score: 66.49435342770796
+INFO: Backing up
+
+Epoch 2
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 78.453639 seconds (86.73 M allocations: 10.768 GiB, 9.69% gc time)
+Training loss: 20.688826
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 14.239806 seconds (7.27 M allocations: 1.095 GiB, 15.77% gc time)
+Validation loss: 11.665104
+Unlabeled attachment score: 76.28041991410848
+Labeled attachment score: 73.21854620645777
+INFO: Backing up
+
+Epoch 3
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 83.552976 seconds (86.76 M allocations: 10.769 GiB, 12.03% gc time)
+Training loss: 17.727293
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  8.461917 seconds (7.01 M allocations: 1.090 GiB, 4.93% gc time)
+Validation loss: 10.717261
+Unlabeled attachment score: 78.45554318434866
+Labeled attachment score: 75.72769206298712
+INFO: Backing up
+
+Epoch 4
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 83.290506 seconds (86.72 M allocations: 10.768 GiB, 15.65% gc time)
+Training loss: 16.061192
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  8.861560 seconds (7.01 M allocations: 1.090 GiB, 5.00% gc time)
+Validation loss: 10.293829
+Unlabeled attachment score: 80.92890090663273
+Labeled attachment score: 78.0618737076507
+INFO: Backing up
+
+Epoch 5
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 81.542969 seconds (86.68 M allocations: 10.767 GiB, 10.15% gc time)
+Training loss: 15.079863
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  9.625528 seconds (7.00 M allocations: 1.090 GiB, 4.45% gc time)
+Validation loss: 9.914005
+Unlabeled attachment score: 82.09400349928424
+Labeled attachment score: 79.38205821536503
+INFO: Backing up
+
+Epoch 6
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 80.231683 seconds (86.69 M allocations: 10.767 GiB, 11.72% gc time)
+Training loss: 14.229015
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  9.311036 seconds (7.00 M allocations: 1.090 GiB, 4.69% gc time)
+Validation loss: 9.571461
+Unlabeled attachment score: 82.6188961348815
+Labeled attachment score: 80.08589152218865
+INFO: Backing up
+
+Epoch 7
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 83.540253 seconds (86.71 M allocations: 10.767 GiB, 13.82% gc time)
+Training loss: 13.656209
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  9.731352 seconds (7.00 M allocations: 1.090 GiB, 4.75% gc time)
+Validation loss: 9.382714
+Unlabeled attachment score: 83.4619055193256
+Labeled attachment score: 80.90106569110864
+INFO: Backing up
+
+Epoch 8
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 80.069656 seconds (86.74 M allocations: 10.768 GiB, 10.39% gc time)
+Training loss: 13.111014
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 16.388103 seconds (7.26 M allocations: 1.095 GiB, 12.42% gc time)
+Validation loss: 9.349171
+Unlabeled attachment score: 83.88738667090823
+Labeled attachment score: 81.26689995228249
+INFO: Backing up
+
+Epoch 9
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 81.778275 seconds (86.77 M allocations: 10.769 GiB, 12.67% gc time)
+Training loss: 12.642995
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  9.508595 seconds (7.01 M allocations: 1.090 GiB, 4.37% gc time)
+Validation loss: 9.237448
+Unlabeled attachment score: 83.99475107364403
+Labeled attachment score: 81.43788770478766
+INFO: Backing up
+
+Epoch 10
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 78.772959 seconds (86.72 M allocations: 10.768 GiB, 10.61% gc time)
+Training loss: 12.355939
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 10.428274 seconds (7.01 M allocations: 1.090 GiB, 4.21% gc time)
+Validation loss: 9.328508
+Unlabeled attachment score: 84.110068395101
+Labeled attachment score: 81.54525210752347
+INFO: Backing up
+
+Epoch 11
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 86.122288 seconds (86.72 M allocations: 10.768 GiB, 18.76% gc time)
+Training loss: 11.669217
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 11.051268 seconds (7.01 M allocations: 1.090 GiB, 4.08% gc time)
+Validation loss: 9.4830885
+Unlabeled attachment score: 84.20152696039446
+Labeled attachment score: 81.7520279942739
+INFO: Backing up
+
+Epoch 12
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 79.640324 seconds (86.69 M allocations: 10.767 GiB, 10.57% gc time)
+Training loss: 11.6242
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 10.949937 seconds (7.00 M allocations: 1.090 GiB, 4.01% gc time)
+Validation loss: 9.296291
+Unlabeled attachment score: 84.5196437092413
+Labeled attachment score: 82.06219182439955
+INFO: Backing up
+
+Epoch 13
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 78.677367 seconds (86.72 M allocations: 10.767 GiB, 11.03% gc time)
+Training loss: 11.29129
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 10.954572 seconds (7.00 M allocations: 1.090 GiB, 4.29% gc time)
+Validation loss: 9.619355
+Unlabeled attachment score: 84.61110227453476
+Labeled attachment score: 82.27294417051058
+INFO: Backing up
+
+Epoch 14
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 80.766267 seconds (86.74 M allocations: 10.768 GiB, 9.94% gc time)
+Training loss: 10.969998
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 17.767720 seconds (7.25 M allocations: 1.095 GiB, 13.05% gc time)
+Validation loss: 9.518698
+Unlabeled attachment score: 84.96898361698743
+Labeled attachment score: 82.55129632575155
+INFO: Backing up
+
+Epoch 15
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 72.853529 seconds (86.48 M allocations: 10.763 GiB, 8.59% gc time)
+Training loss: 10.844118
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 17.322202 seconds (7.27 M allocations: 1.095 GiB, 16.02% gc time)
+Validation loss: 9.797674
+Unlabeled attachment score: 85.16383012565612
+Labeled attachment score: 82.68251948465087
+INFO: Backing up
+
+Epoch 16
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 85.191079 seconds (86.76 M allocations: 10.769 GiB, 11.92% gc time)
+Training loss: 10.654574
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 11.212740 seconds (7.01 M allocations: 1.090 GiB, 3.98% gc time)
+Validation loss: 9.69126
+Unlabeled attachment score: 85.04453634483856
+Labeled attachment score: 82.57913154127564
+INFO: Backing up
+
+Epoch 17
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 79.659103 seconds (86.74 M allocations: 10.768 GiB, 11.50% gc time)
+Training loss: 10.679454
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 12.479972 seconds (7.01 M allocations: 1.090 GiB, 3.79% gc time)
+Validation loss: 10.350969
+Unlabeled attachment score: 85.06441864164148
+Labeled attachment score: 82.67059010656911
+INFO: Backing up
+
+Epoch 18
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 89.938540 seconds (86.70 M allocations: 10.767 GiB, 18.59% gc time)
+Training loss: 10.525377
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 12.511393 seconds (7.01 M allocations: 1.090 GiB, 3.76% gc time)
+Validation loss: 9.937957
+Unlabeled attachment score: 85.19961825990138
+Labeled attachment score: 82.71830761889613
+INFO: Backing up
+
+Epoch 19
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 83.264386 seconds (86.70 M allocations: 10.767 GiB, 12.65% gc time)
+Training loss: 10.114357
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 12.642201 seconds (7.00 M allocations: 1.090 GiB, 3.59% gc time)
+Validation loss: 10.127015
+Unlabeled attachment score: 85.40241768729123
+Labeled attachment score: 82.92508350564657
+INFO: Backing up
+
+Epoch 20
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 80.459134 seconds (86.73 M allocations: 10.768 GiB, 10.19% gc time)
+Training loss: 10.094563
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 13.171221 seconds (7.00 M allocations: 1.090 GiB, 3.75% gc time)
+Validation loss: 9.731864
+Unlabeled attachment score: 85.82789883887386
+Labeled attachment score: 83.23524733577223
+INFO: Backing up
+
+Epoch 21
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 82.901538 seconds (86.75 M allocations: 10.768 GiB, 10.18% gc time)
+Training loss: 10.072804
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 18.916028 seconds (7.28 M allocations: 1.095 GiB, 16.07% gc time)
+Validation loss: 10.024979
+Unlabeled attachment score: 86.01876888818197
+Labeled attachment score: 83.4300938444409
+INFO: Backing up
+
+Epoch 22
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 84.846926 seconds (86.75 M allocations: 10.768 GiB, 13.91% gc time)
+Training loss: 9.818754
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 12.712686 seconds (7.01 M allocations: 1.090 GiB, 3.30% gc time)
+Validation loss: 10.268925
+Unlabeled attachment score: 86.28916812470176
+Labeled attachment score: 83.77206934945124
+INFO: Backing up
+
+Epoch 23
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 80.600775 seconds (86.73 M allocations: 10.768 GiB, 10.95% gc time)
+Training loss: 9.802257
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 14.696301 seconds (7.01 M allocations: 1.090 GiB, 3.05% gc time)
+Validation loss: 9.992619
+Unlabeled attachment score: 86.01479242882138
+Labeled attachment score: 83.58119930014315
+INFO: Backing up
+
+Epoch 24
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 81.530248 seconds (86.69 M allocations: 10.767 GiB, 12.27% gc time)
+Training loss: 9.887016
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 13.543212 seconds (7.01 M allocations: 1.090 GiB, 3.36% gc time)
+Validation loss: 10.404746
+Unlabeled attachment score: 85.77222840782566
+Labeled attachment score: 83.26308255129632
+INFO: Backing up
+
+Epoch 25
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 79.976361 seconds (86.71 M allocations: 10.767 GiB, 10.85% gc time)
+Training loss: 9.680074
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 13.954407 seconds (7.00 M allocations: 1.090 GiB, 3.24% gc time)
+Validation loss: 10.539867
+Unlabeled attachment score: 86.34086209638937
+Labeled attachment score: 83.8396691585812
+INFO: Backing up
+
+Epoch 26
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 84.635446 seconds (86.72 M allocations: 10.767 GiB, 14.62% gc time)
+Training loss: 9.441022
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 13.818500 seconds (7.00 M allocations: 1.090 GiB, 3.49% gc time)
+Validation loss: 10.436765
+Unlabeled attachment score: 86.11818037219659
+Labeled attachment score: 83.82773978049944
+INFO: Backing up
+
+Epoch 27
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 80.642061 seconds (86.75 M allocations: 10.768 GiB, 10.69% gc time)
+Training loss: 9.381312
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 20.428693 seconds (7.26 M allocations: 1.095 GiB, 9.76% gc time)
+Validation loss: 10.544398
+Unlabeled attachment score: 86.07443931923015
+Labeled attachment score: 83.72435183712423
+INFO: Backing up
+
+Epoch 28
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 83.366087 seconds (86.78 M allocations: 10.769 GiB, 12.72% gc time)
+Training loss: 9.277683
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 14.280614 seconds (7.01 M allocations: 1.090 GiB, 2.93% gc time)
+Validation loss: 10.318953
+Unlabeled attachment score: 86.12613329091776
+Labeled attachment score: 83.64482264991251
+INFO: Backing up
+
+Epoch 29
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 82.101395 seconds (86.73 M allocations: 10.768 GiB, 10.51% gc time)
+Training loss: 9.275869
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 15.098968 seconds (7.01 M allocations: 1.090 GiB, 2.93% gc time)
+Validation loss: 10.491234
+Unlabeled attachment score: 86.11022745347543
+Labeled attachment score: 83.58119930014315
+INFO: Backing up
+
+Epoch 30
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 89.747210 seconds (86.72 M allocations: 10.768 GiB, 18.94% gc time)
+Training loss: 9.306845
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 15.452989 seconds (7.01 M allocations: 1.090 GiB, 3.02% gc time)
+Validation loss: 10.5722
+Unlabeled attachment score: 86.49992047081278
+Labeled attachment score: 83.94305710195641
+INFO: Backing up
+
+Epoch 31
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 81.185704 seconds (86.70 M allocations: 10.767 GiB, 10.60% gc time)
+Training loss: 9.389328
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 15.423600 seconds (7.00 M allocations: 1.090 GiB, 2.90% gc time)
+Validation loss: 10.691219
+Unlabeled attachment score: 86.61921425163035
+Labeled attachment score: 84.12597423254334
+INFO: Backing up
+
+Epoch 32
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 82.415027 seconds (86.72 M allocations: 10.767 GiB, 10.91% gc time)
+Training loss: 9.169305
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 15.551880 seconds (7.00 M allocations: 1.090 GiB, 3.16% gc time)
+Validation loss: 10.797345
+Unlabeled attachment score: 86.08636869731191
+Labeled attachment score: 83.6766343247972
+INFO: Backing up
+
+Epoch 33
+10 / 380
+  C-c C-c^CERROR: InterruptException:
+Stacktrace:
+ [1] Knet.KnetPtr(::Int64) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/kptr.jl:75
+ [2] Type at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:104 [inlined]
+ [3] Type at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:116 [inlined]
+ [4] similar at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:172 [inlined]
+ [5] similar at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:175 [inlined]
+ [6] #rnnback#495(::Ptr{Void}, ::Void, ::Array{Any,1}, ::Function, ::Knet.RNN, ::Knet.KnetArray{Float32,3}, ::Knet.KnetArray{Float32,3}, ::Knet.KnetArray{Float32,3}, ::Knet.KnetArray{Float32,3}, ::Void, ::Void, ::Void, ::Void, ::Knet.KnetArray{UInt8,1}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/rnn.jl:580
+ [7] (::Knet.#kw##rnnback)(::Array{Any,1}, ::Knet.#rnnback, ::Knet.RNN, ::Knet.KnetArray{Float32,3}, ::Knet.KnetArray{Float32,3}, ::Knet.KnetArray{Float32,3}, ::Knet.KnetArray{Float32,3}, ::Void, ::Void, ::Void, ::Void, ::Knet.KnetArray{UInt8,1}) at ./<missing>:0
+ [8] #rnnforw#491(::Array{Any,1}, ::Function, ::Type{AutoGrad.Grad{2}}, ::Tuple{Knet.KnetArray{Float32,3},Void,Void,Void}, ::Tuple{Knet.KnetArray{Float32,3},Void,Void,Knet.KnetArray{UInt8,1}}, ::Knet.RNN, ::AutoGrad.Rec{Knet.KnetArray{Float32,3}}, ::AutoGrad.Rec{Knet.KnetArray{Float32,3}}, ::Void, ::Void) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/rnn.jl:557
+ [9] (::Knet.#kw##rnnforw)(::Array{Any,1}, ::Knet.#rnnforw, ::Type{AutoGrad.Grad{2}}, ::Tuple{Knet.KnetArray{Float32,3},Void,Void,Void}, ::Tuple{Knet.KnetArray{Float32,3},Void,Void,Knet.KnetArray{UInt8,1}}, ::Knet.RNN, ::AutoGrad.Rec{Knet.KnetArray{Float32,3}}, ::AutoGrad.Rec{Knet.KnetArray{Float32,3}}, ::Void, ::Void) at ./<missing>:0
+ [10] backward_pass(::AutoGrad.Rec{Array{Any,1}}, ::AutoGrad.Rec{Float32}, ::Array{AutoGrad.Node,1}) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:256
+ [11] (::AutoGrad.##gradfun#4#6{#loss,Int64})(::Array{Any,1}, ::Function, ::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:62
+ [12] (::AutoGrad.#gradfun#5)(::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:57
+ [13] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:194 [inlined]
+ [14] macro expansion at ./util.jl:237 [inlined]
+ [15] train() at /scratch/users/cgumeli/Nubik/main2.jl:192
+ [16] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:83
+
+julia> 
+
+
+julia> exit()
+exit()
+bash-4.2$ julıa
+julıa
+bash: $'jul\304\261a': command not found
+bash-4.2$ julia
+julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "?help" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.6.2 (2017-12-13 18:08 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-pc-linux-gnu
+
+WARNING: Terminal not fully functional
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+accuracy_bt
+
+julia> main("--datafiles $engtrn $engdev --lmfile $englm --upos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3")
+main("--datafiles $engtrn $engdev --lmfile $englm --upos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3")
+Tuple{Symbol,Any}[(:feat, 0), (:birnn, 3), (:birnndrop, 0.33), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/english_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 0), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 150), (:backupdir, "Backups_2018-06-09T00:22:49.002"), (:beta1, 0.9), (:remb, 350), (:algo, "edmonds"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, true), (:tokens, 500), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+00:22:52 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/english_chmodel.jld 
+00:22:57 /scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-train.conllu 
+00:22:58 /scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-dev.conllu 
+00:23:53 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+parsers/mst.py:24: RuntimeWarning: divide by zero encountered in divide
+  new_root = tokens[np.argmax(root_scores / head_scores)]
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 59.059197 seconds (19.06 M allocations: 1.652 GiB, 1.32% gc time)
+Validation loss: 86.330574
+Unlabeled attachment score: 4.827421663750597
+Labeled attachment score: 0.47319866390965487
+
+Epoch 1
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+125.873075 seconds (94.81 M allocations: 11.147 GiB, 12.34% gc time)
+Training loss: 32.177124
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  7.878543 seconds (7.13 M allocations: 1.094 GiB, 5.04% gc time)
+Validation loss: 14.175103
+Unlabeled attachment score: 72.75727692062988
+Labeled attachment score: 68.88420550341975
+INFO: Backing up
+
+Epoch 2
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 81.649982 seconds (89.49 M allocations: 10.860 GiB, 9.92% gc time)
+Training loss: 21.596365
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  9.185188 seconds (7.13 M allocations: 1.094 GiB, 4.88% gc time)
+Validation loss: 11.983575
+Unlabeled attachment score: 75.82312708764117
+Labeled attachment score: 73.00779386034675
+INFO: Backing up
+
+Epoch 3
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 87.276227 seconds (89.51 M allocations: 10.861 GiB, 11.16% gc time)
+Training loss: 18.271704
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  9.272291 seconds (7.12 M allocations: 1.093 GiB, 4.95% gc time)
+Validation loss: 11.024537
+Unlabeled attachment score: 78.1175441386989
+Labeled attachment score: 75.3777636392556
+INFO: Backing up
+
+Epoch 4
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 91.401747 seconds (89.77 M allocations: 10.866 GiB, 12.64% gc time)
+Training loss: 16.619514
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  9.287487 seconds (7.13 M allocations: 1.094 GiB, 4.66% gc time)
+Validation loss: 10.428971
+Unlabeled attachment score: 79.81549228566884
+Labeled attachment score: 77.10354700174965
+INFO: Backing up
+
+Epoch 5
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 93.917969 seconds (89.50 M allocations: 10.861 GiB, 15.07% gc time)
+Training loss: 15.314742
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+  9.829813 seconds (7.12 M allocations: 1.094 GiB, 4.49% gc time)
+Validation loss: 10.101311
+Unlabeled attachment score: 82.38428503260697
+Labeled attachment score: 79.54111658978846
+INFO: Backing up
+
+Epoch 6
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 87.694333 seconds (89.52 M allocations: 10.861 GiB, 10.32% gc time)
+Training loss: 14.388576
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 15.850215 seconds (7.37 M allocations: 1.098 GiB, 13.43% gc time)
+Validation loss: 9.6613655
+Unlabeled attachment score: 83.75218705264832
+Labeled attachment score: 80.9408302847145
+INFO: Backing up
+
+Epoch 7
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 91.541572 seconds (89.53 M allocations: 10.862 GiB, 12.97% gc time)
+Training loss: 13.837504
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 10.178386 seconds (7.13 M allocations: 1.094 GiB, 4.49% gc time)
+Validation loss: 9.670208
+Unlabeled attachment score: 82.32861460155877
+Labeled attachment score: 79.84332750119293
+INFO: Backing up
+
+Epoch 8
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 96.049834 seconds (89.49 M allocations: 10.860 GiB, 17.48% gc time)
+Training loss: 13.00039
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 10.251934 seconds (7.12 M allocations: 1.094 GiB, 4.51% gc time)
+Validation loss: 9.586719
+Unlabeled attachment score: 83.80388102433594
+Labeled attachment score: 81.06012406553205
+INFO: Backing up
+
+Epoch 9
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 88.598595 seconds (89.52 M allocations: 10.861 GiB, 9.97% gc time)
+Training loss: 12.615894
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 16.560260 seconds (7.37 M allocations: 1.098 GiB, 11.68% gc time)
+Validation loss: 9.57908
+Unlabeled attachment score: 84.8974073484969
+Labeled attachment score: 82.33656752027994
+INFO: Backing up
+
+Epoch 10
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 91.164397 seconds (89.54 M allocations: 10.862 GiB, 10.09% gc time)
+Training loss: 11.949273
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 10.774672 seconds (7.13 M allocations: 1.094 GiB, 4.14% gc time)
+Validation loss: 9.65854
+Unlabeled attachment score: 85.12804199141085
+Labeled attachment score: 82.54334340703038
+INFO: Backing up
+
+Epoch 11
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 89.862084 seconds (89.53 M allocations: 10.861 GiB, 11.79% gc time)
+Training loss: 11.743795
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 10.849222 seconds (7.12 M allocations: 1.093 GiB, 4.22% gc time)
+Validation loss: 9.886817
+Unlabeled attachment score: 84.762207730237
+Labeled attachment score: 82.18148560521712
+INFO: Backing up
+
+Epoch 12
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+100.115113 seconds (89.78 M allocations: 10.866 GiB, 12.71% gc time)
+Training loss: 11.430249
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 11.347017 seconds (7.13 M allocations: 1.094 GiB, 3.95% gc time)
+Validation loss: 9.581217
+Unlabeled attachment score: 85.47001749642119
+Labeled attachment score: 82.96087163989183
+INFO: Backing up
+
+Epoch 13
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 96.571091 seconds (89.51 M allocations: 10.861 GiB, 15.42% gc time)
+Training loss: 11.154542
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 11.732351 seconds (7.12 M allocations: 1.094 GiB, 4.14% gc time)
+Validation loss: 9.6270075
+Unlabeled attachment score: 84.88547797041514
+Labeled attachment score: 82.40814378877047
+INFO: Backing up
+
+Epoch 14
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 91.323369 seconds (89.52 M allocations: 10.861 GiB, 10.42% gc time)
+Training loss: 10.8849745
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 20.241476 seconds (7.37 M allocations: 1.098 GiB, 10.16% gc time)
+Validation loss: 9.704395
+Unlabeled attachment score: 85.6569110863687
+Labeled attachment score: 83.19945920152696
+INFO: Backing up
+
+Epoch 15
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+100 / 380
+110 / 380
+120 / 380
+130 / 380
+140 / 380
+150 / 380
+160 / 380
+170 / 380
+180 / 380
+190 / 380
+200 / 380
+210 / 380
+220 / 380
+230 / 380
+240 / 380
+250 / 380
+260 / 380
+270 / 380
+280 / 380
+290 / 380
+300 / 380
+310 / 380
+320 / 380
+330 / 380
+340 / 380
+350 / 380
+360 / 380
+370 / 380
+380 / 380
+ 96.781976 seconds (89.54 M allocations: 10.862 GiB, 12.89% gc time)
+Training loss: 10.57744
+
+
+INFO: Computing validation performance
+10 / 83
+20 / 83
+30 / 83
+40 / 83
+50 / 83
+60 / 83
+70 / 83
+80 / 83
+ 12.395787 seconds (7.13 M allocations: 1.094 GiB, 3.80% gc time)
+Validation loss: 9.885432
+Unlabeled attachment score: 85.47001749642119
+Labeled attachment score: 82.8892953714013
+INFO: Backing up
+
+Epoch 16
+10 / 380
+20 / 380
+30 / 380
+40 / 380
+50 / 380
+60 / 380
+70 / 380
+80 / 380
+90 / 380
+  C-c C-c^CERROR: InterruptException:
+Stacktrace:
+ [1] Knet.KnetPtr(::Int64) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/kptr.jl:84
+ [2] Type at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:104 [inlined]
+ [3] Knet.KnetArray(::Type{Float32}, ::NTuple{4,Int64}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:116
+ [4] broadcast#*(::Knet.KnetArray{Float32,4}, ::Knet.KnetArray{Float32,4}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/broadcast.jl:76
+ [5] (::AutoGrad.##rfun#7#10{AutoGrad.#broadcast#*})(::Array{Any,1}, ::Function, ::Knet.KnetArray{Float32,4}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:124
+ [6] *(::AutoGrad.Broadcasted{Knet.KnetArray{Float32,4}}, ::AutoGrad.Broadcasted{AutoGrad.Rec{Knet.KnetArray{Float32,4}}}) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/unfuse.jl:49
+ [7] broadcast(::Function, ::Knet.KnetArray{Float32,4}, ::AutoGrad.Rec{Knet.KnetArray{Float32,4}}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/unfuse.jl:9
+ [8] broadcast#*(::Type{AutoGrad.Grad{2}}, ::Knet.KnetArray{Float32,4}, ::Knet.KnetArray{Float32,4}, ::AutoGrad.Rec{Knet.KnetArray{Float32,4}}, ::AutoGrad.Rec{Knet.KnetArray{Float32,4}}) at ./<missing>:0
+ [9] backward_pass(::AutoGrad.Rec{Array{Any,1}}, ::AutoGrad.Rec{Float32}, ::Array{AutoGrad.Node,1}) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:256
+ [10] (::AutoGrad.##gradfun#4#6{#loss,Int64})(::Array{Any,1}, ::Function, ::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:62
+ [11] (::AutoGrad.#gradfun#5)(::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:57
+ [12] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:194 [inlined]
+ [13] macro expansion at ./util.jl:237 [inlined]
+ [14] train() at /scratch/users/cgumeli/Nubik/main2.jl:192
+ [15] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:83
+
+julia> exit()
+exit()
+bash-4.2$ julia
+julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "?help" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.6.2 (2017-12-13 18:08 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-pc-linux-gnu
+
+WARNING: Terminal not fully functional
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+accuracy_bt
+
+julia> main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3")
+main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3")
+Tuple{Symbol,Any}[(:feat, 0), (:birnn, 3), (:birnndrop, 0.33), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 0), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 50), (:backupdir, "Backups_2018-06-09T01:53:52.972"), (:beta1, 0.9), (:remb, 350), (:algo, "edmonds"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, true), (:arcweight, 1.0), (:tokens, 500), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+01:53:56 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld 
+01:54:02 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu 
+01:54:03 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu 
+01:54:38 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+ERROR: UndefVarError: arcweight not defined
+Stacktrace:
+ [1] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:151 [inlined]
+ [2] macro expansion at ./util.jl:237 [inlined]
+ [3] train() at /scratch/users/cgumeli/Nubik/main2.jl:148
+ [4] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:84
+
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+WARNING: redefining constant UPOSTAG
+WARNING: redefining constant UDEPREL
+WARNING: redefining constant lmdir
+WARNING: redefining constant datadir
+WARNING: redefining constant engtrn
+WARNING: redefining constant engdev
+WARNING: redefining constant englm
+WARNING: redefining constant trtrn
+WARNING: redefining constant trdev
+WARNING: redefining constant trlm
+accuracy_bt
+
+julia> train()
+train()
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+ERROR: MethodError: no method matching softloss(::BiaffineDecoder2, ::Knet.KnetArray{Float32,3}, ::Knet.KnetArray{Float32,3}, ::Array{Any,1}; arc_weight=1.0f0)
+Closest candidates are:
+  softloss(::BiaffineDecoder2, ::Any, ::Any, ::Any; arc_weigth) at /scratch/users/cgumeli/Nubik/./decoders/biaffine2.jl:114 got unsupported keyword argument "arc_weight"
+Stacktrace:
+ [1] (::#kw##softloss)(::Array{Any,1}, ::#softloss, ::BiaffineDecoder2, ::Knet.KnetArray{Float32,3}, ::Knet.KnetArray{Float32,3}, ::Array{Any,1}) at ./<missing>:0
+ [2] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:151 [inlined]
+ [3] macro expansion at ./util.jl:237 [inlined]
+ [4] train() at /scratch/users/cgumeli/Nubik/main2.jl:148
+
+julia> methods(softloss)
+methods(softloss)
+# 1 method for generic function "softloss":
+softloss(dec::BiaffineDecoder2, arc_scores, rel_scores, sents; arc_weigth) in Main at /scratch/users/cgumeli/Nubik/./decoders/biaffine2.jl:114
+
+julia> main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3")  C-c C-c^C
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+WARNING: redefining constant UPOSTAG
+WARNING: redefining constant UDEPREL
+WARNING: redefining constant lmdir
+WARNING: redefining constant datadir
+WARNING: redefining constant engtrn
+WARNING: redefining constant engdev
+WARNING: redefining constant englm
+WARNING: redefining constant trtrn
+WARNING: redefining constant trdev
+WARNING: redefining constant trlm
+accuracy_bt
+
+julia> main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3")
+main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3")
+Tuple{Symbol,Any}[(:feat, 0), (:birnn, 3), (:birnndrop, 0.33), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 0), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 50), (:backupdir, "Backups_2018-06-09T01:58:01.623"), (:beta1, 0.9), (:remb, 350), (:algo, "edmonds"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, true), (:arcweight, 1.0), (:tokens, 500), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+01:58:02 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld 
+01:58:04 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu 
+01:58:04 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu 
+01:58:23 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+ERROR: cudnn.cudnnSetDropoutDescriptor error 8
+Stacktrace:
+ [1] macro expansion at /scratch/users/cgumeli/.julia/v0.6/Knet/src/gpu.jl:18 [inlined]
+ [2] #DD#469(::Ptr{Void}, ::Float64, ::Int64, ::Array{Any,1}, ::Type{T} where T) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/rnn.jl:28
+ [3] (::Core.#kw#Type)(::Array{Any,1}, ::Type{Knet.DD}) at ./<missing>:0
+ [4] #rnninit#486(::Ptr{Void}, ::Int64, ::Float64, ::Bool, ::Bool, ::Symbol, ::Type{T} where T, ::Int64, ::Int64, ::Knet.#xavier, ::Base.#zeros, ::Bool, ::Knet.#rnninit, ::Int32, ::Int32) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/rnn.jl:367
+ [5] (::Knet.#kw##rnninit)(::Array{Any,1}, ::Knet.#rnninit, ::Int32, ::Int32) at ./<missing>:0
+ [6] convert_params!(::KnetModules.LSTM, ::Type{T} where T) at /scratch/users/cgumeli/.julia/v0.6/KnetModules/src/rnn.jl:68
+ [7] gpu!(::FreshEncoder) at /scratch/users/cgumeli/.julia/v0.6/KnetModules/src/core.jl:238
+ [8] train() at /scratch/users/cgumeli/Nubik/main2.jl:118
+ [9] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:84
+
+julia> exit()
+exit()
+bash-4.2$ julia
+julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "?help" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.6.2 (2017-12-13 18:08 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-pc-linux-gnu
+
+WARNING: Terminal not fully functional
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+accuracy_bt
+
+julia> main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3")
+main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3")
+Tuple{Symbol,Any}[(:feat, 0), (:birnn, 3), (:birnndrop, 0.33), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 0), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 50), (:backupdir, "Backups_2018-06-09T01:59:49.83"), (:beta1, 0.9), (:remb, 350), (:algo, "edmonds"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, true), (:arcweight, 1.0), (:tokens, 500), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+01:59:53 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld 
+01:59:59 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu 
+02:00:00 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu 
+02:00:38 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+ERROR: MethodError: no method matching softloss(::BiaffineDecoder2, ::Knet.KnetArray{Float32,3}, ::Knet.KnetArray{Float32,3}, ::Array{Any,1}; arc_weight=1.0f0)
+Closest candidates are:
+  softloss(::BiaffineDecoder2, ::Any, ::Any, ::Any; arc_weigth) at /scratch/users/cgumeli/Nubik/./decoders/biaffine2.jl:114 got unsupported keyword argument "arc_weight"
+Stacktrace:
+ [1] (::#kw##softloss)(::Array{Any,1}, ::#softloss, ::BiaffineDecoder2, ::Knet.KnetArray{Float32,3}, ::Knet.KnetArray{Float32,3}, ::Array{Any,1}) at ./<missing>:0
+ [2] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:151 [inlined]
+ [3] macro expansion at ./util.jl:237 [inlined]
+ [4] train() at /scratch/users/cgumeli/Nubik/main2.jl:148
+ [5] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:84
+
+jul  C-c C-c^C
+julia>  arc_weight
+ arc_weight
+ERROR: UndefVarError: arc_weight not defined
+
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+WARNING: redefining constant UPOSTAG
+WARNING: redefining constant UDEPREL
+WARNING: redefining constant lmdir
+WARNING: redefining constant datadir
+WARNING: redefining constant engtrn
+WARNING: redefining constant engdev
+WARNING: redefining constant englm
+WARNING: redefining constant trtrn
+WARNING: redefining constant trdev
+WARNING: redefining constant trlm
+accuracy_bt
+
+julia> train()
+train()
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+parsers/mst.py:24: RuntimeWarning: divide by zero encountered in divide
+  new_root = tokens[np.argmax(root_scores / head_scores)]
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+ 34.582357 seconds (10.46 M allocations: 860.310 MiB, 0.87% gc time)
+Validation loss: 64.36096
+Unlabeled attachment score: 6.622715013485166
+Labeled attachment score: 0.09989012086704625
+
+Epoch 1
+ERROR: function loss does not accept keyword arguments
+Stacktrace:
+ [1] kwfunc(::Any) at ./boot.jl:237
+ [2] forward_pass(::Function, ::Tuple{Array{Any,1},FreshEncoder,BiaffineDecoder2,Array{Any,1}}, ::Array{Any,1}, ::Int64) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:88
+ [3] (::AutoGrad.##gradfun#4#6{#loss,Int64})(::Array{Any,1}, ::Function, ::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:57
+ [4] (::AutoGrad.#kw##gradfun#5)(::Array{Any,1}, ::AutoGrad.#gradfun#5, ::Array{Any,1}, ::Vararg{Any,N} where N) at ./<missing>:0
+ [5] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:196 [inlined]
+ [6] macro expansion at ./util.jl:237 [inlined]
+ [7] train() at /scratch/users/cgumeli/Nubik/main2.jl:194
+
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+WARNING: redefining constant UPOSTAG
+WARNING: redefining constant UDEPREL
+WARNING: redefining constant lmdir
+WARNING: redefining constant datadir
+WARNING: redefining constant engtrn
+WARNING: redefining constant engdev
+WARNING: redefining constant englm
+WARNING: redefining constant trtrn
+WARNING: redefining constant trdev
+WARNING: redefining constant trlm
+accuracy_bt
+
+julia> train()
+train()
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.615618 seconds (3.60 M allocations: 530.546 MiB, 3.71% gc time)
+Validation loss: 64.27811
+Unlabeled attachment score: 9.54949555488962
+Labeled attachment score: 0.159824193387274
+
+Epoch 1
+
+
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+ 43.120360 seconds (20.65 M allocations: 2.683 GiB, 3.52% gc time)
+Training loss: 33.668694
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.066656 seconds (3.17 M allocations: 508.740 MiB, 5.91% gc time)
+Validation loss: 28.325369
+Unlabeled attachment score: 47.12815902507242
+Labeled attachment score: 37.808410748177
+INFO: Backing up
+
+Epoch 2
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.217892 seconds (15.08 M allocations: 2.394 GiB, 11.79% gc time)
+Training loss: 24.899424
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.819253 seconds (3.17 M allocations: 508.750 MiB, 5.88% gc time)
+Validation loss: 25.188932
+Unlabeled attachment score: 52.37239037059235
+Labeled attachment score: 43.39226850464489
+INFO: Backing up
+
+Epoch 3
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.048188 seconds (15.10 M allocations: 2.394 GiB, 12.35% gc time)
+Training loss: 22.22428
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.845308 seconds (3.17 M allocations: 508.729 MiB, 5.54% gc time)
+Validation loss: 23.604359
+Unlabeled attachment score: 50.634302267505745
+Labeled attachment score: 43.73189491559285
+INFO: Backing up
+
+Epoch 4
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+ 10.461425 seconds (15.13 M allocations: 2.395 GiB, 10.58% gc time)
+Training loss: 20.582848
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.840450 seconds (3.17 M allocations: 508.727 MiB, 5.36% gc time)
+Validation loss: 21.938421
+Unlabeled attachment score: 56.19818199980022
+Labeled attachment score: 48.43671960843073
+INFO: Backing up
+
+Epoch 5
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.799999 seconds (15.08 M allocations: 2.393 GiB, 13.58% gc time)
+Training loss: 19.50384
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.874589 seconds (3.17 M allocations: 508.717 MiB, 5.76% gc time)
+Validation loss: 21.36518
+Unlabeled attachment score: 56.957346918389774
+Labeled attachment score: 50.06492857856358
+INFO: Backing up
+
+Epoch 6
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.896991 seconds (15.09 M allocations: 2.394 GiB, 13.00% gc time)
+Training loss: 18.616732
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.013354 seconds (3.17 M allocations: 508.722 MiB, 5.88% gc time)
+Validation loss: 21.23052
+Unlabeled attachment score: 51.66317051243632
+Labeled attachment score: 46.15922485266207
+INFO: Backing up
+
+Epoch 7
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.804137 seconds (15.09 M allocations: 2.393 GiB, 13.18% gc time)
+Training loss: 18.002798
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.916987 seconds (3.17 M allocations: 508.719 MiB, 5.49% gc time)
+Validation loss: 21.163225
+Unlabeled attachment score: 54.96953351313555
+Labeled attachment score: 48.34681849965038
+INFO: Backing up
+
+Epoch 8
+10 / 55
+20 / 55
+30 / 55
+  C-c C-c^CERROR: InterruptException:
+Stacktrace:
+ [1] _cat(::Array{Float32,2}, ::Tuple{Int64,Int64}, ::Tuple{Bool,Bool}, ::Array{Float32,1}, ::Vararg{Array{Float32,1},N} where N) at ./abstractarray.jl:1224
+ [2] cat_t(::Int64, ::Type{T} where T, ::Array{Float32,1}, ::Vararg{Array{Float32,1},N} where N) at ./abstractarray.jl:1208
+ [3] cat(::Int64, ::Array{Float32,1}, ::Array{Float32,1}, ::Array{Float32,1}, ::Array{Float32,1}, ::Vararg{Array{Float32,1},N} where N) at ./sparse/sparsevector.jl:995
+ [4] prep_cavecs(::Array{Any,1}) at /scratch/users/cgumeli/Nubik/./encoders/./util.jl:23
+ [5] (::LMEncoder)(::AutoGrad.Rec{Array{Any,1}}, ::Array{Any,1}, ::#prep_cavecs) at /scratch/users/cgumeli/Nubik/./encoders/lm.jl:38
+ [6] (::FreshEncoder)(::AutoGrad.Rec{Array{Any,1}}, ::Array{Any,1}) at /scratch/users/cgumeli/Nubik/./encoders/fresh.jl:88
+ [7] predict at /scratch/users/cgumeli/Nubik/main2.jl:13 [inlined]
+ [8] #loss#359(::Array{Any,1}, ::Function, ::AutoGrad.Rec{Array{Any,1}}, ::FreshEncoder, ::BiaffineDecoder2, ::Array{Any,1}) at /scratch/users/cgumeli/Nubik/main2.jl:19
+ [9] (::#kw##loss)(::Array{Any,1}, ::#loss, ::AutoGrad.Rec{Array{Any,1}}, ::FreshEncoder, ::BiaffineDecoder2, ::Array{Any,1}) at ./<missing>:0
+ [10] forward_pass(::Function, ::Tuple{Array{Any,1},FreshEncoder,BiaffineDecoder2,Array{Any,1}}, ::Array{Any,1}, ::Int64) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:88
+ [11] (::AutoGrad.##gradfun#4#6{#loss,Int64})(::Array{Any,1}, ::Function, ::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:57
+ [12] (::AutoGrad.#kw##gradfun#5)(::Array{Any,1}, ::AutoGrad.#gradfun#5, ::Array{Any,1}, ::Vararg{Any,N} where N) at ./<missing>:0
+ [13] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:196 [inlined]
+ [14] macro expansion at ./util.jl:237 [inlined]
+ [15] train() at /scratch/users/cgumeli/Nubik/main2.jl:194
+
+julia> main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --arcweight 0.5")
+main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --arcweight 0.5")
+Tuple{Symbol,Any}[(:feat, 0), (:birnn, 3), (:birnndrop, 0.33), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 0), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 50), (:backupdir, "Backups_2018-06-09T02:06:58.588"), (:beta1, 0.9), (:remb, 350), (:algo, "edmonds"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, true), (:arcweight, 0.5), (:tokens, 500), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+02:06:59 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld 
+02:07:01 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu 
+02:07:01 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu 
+  C-c C-c^CERROR: InterruptException:
+Stacktrace:
+ [1] Knet.KnetPtr(::Int64) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/kptr.jl:84
+ [2] Type at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:104 [inlined]
+ [3] Knet.KnetArray(::Type{Float32}, ::Tuple{Int64,Int64}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:116
+ [4] broadcast#+(::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/broadcast.jl:76
+ [5] + at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/unfuse.jl:49 [inlined]
+ [6] broadcast at /scratch/users/cgumeli/.julia/v0.6/Knet/src/unfuse.jl:9 [inlined]
+ [7] #_lstm#261(::Knet.KnetArray{Float32,1}, ::Function, ::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/Nubik/./ku-dependency-parser2/src/lm_utils.jl:147
+ [8] (::#kw##_lstm)(::Array{Any,1}, ::#_lstm, ::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}) at ./<missing>:0
+ [9] charlstm(::Array{Knet.KnetArray{Float32,2},1}, ::Array{Array{Int64,1},1}, ::Array{Array{Float32,1},1}) at /scratch/users/cgumeli/Nubik/./ku-dependency-parser2/src/lm_utils.jl:180
+ [10] #fillvecs!#268(::Int64, ::Function, ::Array{Knet.KnetArray{Float32,2},1}, ::Array{Any,1}, ::Vocab) at /scratch/users/cgumeli/Nubik/./ku-dependency-parser2/src/lm_utils.jl:308
+ [11] #depmain#298(::Bool, ::Function, ::String) at /scratch/users/cgumeli/Nubik/./ku-dependency-parser2/train.jl:55
+ [12] load_data(::SubString{String}, ::SubString{String}, ::SubString{String}) at /scratch/users/cgumeli/Nubik/./data.jl:14
+ [13] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:74
+
+julia> exit()
+exit()
+bash-4.2$ julia
+julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "?help" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.6.2 (2017-12-13 18:08 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-pc-linux-gnu
+
+WARNING: Terminal not fully functional
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+accuracy_bt
+
+julia> main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --arcweight 0.5")
+main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --arcweight 0.5")
+Tuple{Symbol,Any}[(:feat, 0), (:birnn, 3), (:birnndrop, 0.33), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 0), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 50), (:backupdir, "Backups_2018-06-09T02:11:33.429"), (:beta1, 0.9), (:remb, 350), (:algo, "edmonds"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, true), (:arcweight, 0.5), (:tokens, 500), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+02:11:37 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld 
+02:11:43 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu 
+02:11:43 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu 
+02:12:19 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+parsers/mst.py:24: RuntimeWarning: divide by zero encountered in divide
+  new_root = tokens[np.argmax(root_scores / head_scores)]
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+ 38.059931 seconds (11.80 M allocations: 931.502 MiB, 1.77% gc time)
+Validation loss: 69.370094
+Unlabeled attachment score: 9.58945160323644
+Labeled attachment score: 0.1997802417340925
+
+Epoch 1
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+ 43.870516 seconds (20.68 M allocations: 2.685 GiB, 2.54% gc time)
+Training loss: 32.73793
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.932850 seconds (3.17 M allocations: 508.746 MiB, 4.99% gc time)
+Validation loss: 26.531641
+Unlabeled attachment score: 41.56427929277795
+Labeled attachment score: 34.29227849365698
+INFO: Backing up
+
+Epoch 2
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.983469 seconds (15.08 M allocations: 2.393 GiB, 11.59% gc time)
+Training loss: 23.054377
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.890683 seconds (3.17 M allocations: 508.729 MiB, 5.14% gc time)
+Validation loss: 22.16308
+Unlabeled attachment score: 47.76745579862152
+Labeled attachment score: 40.78513635001498
+INFO: Backing up
+
+Epoch 3
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.828851 seconds (15.09 M allocations: 2.394 GiB, 12.14% gc time)
+Training loss: 20.49102
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.931983 seconds (3.17 M allocations: 508.725 MiB, 5.36% gc time)
+Validation loss: 20.211721
+Unlabeled attachment score: 50.86404954549995
+Labeled attachment score: 44.4910598341824
+INFO: Backing up
+
+Epoch 4
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+ 10.578700 seconds (15.13 M allocations: 2.395 GiB, 10.41% gc time)
+Training loss: 18.836731
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.819267 seconds (3.17 M allocations: 508.733 MiB, 5.29% gc time)
+Validation loss: 19.433819
+Unlabeled attachment score: 53.48117071221656
+Labeled attachment score: 46.728598541604235
+INFO: Backing up
+
+Epoch 5
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.806649 seconds (15.08 M allocations: 2.393 GiB, 12.53% gc time)
+Training loss: 17.79131
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.898031 seconds (3.17 M allocations: 508.729 MiB, 5.42% gc time)
+Validation loss: 19.139812
+Unlabeled attachment score: 53.1415443012686
+Labeled attachment score: 46.57876336030367
+INFO: Backing up
+
+Epoch 6
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.906622 seconds (15.09 M allocations: 2.394 GiB, 13.91% gc time)
+Training loss: 17.147884
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.970720 seconds (3.17 M allocations: 508.735 MiB, 5.49% gc time)
+Validation loss: 18.944445
+Unlabeled attachment score: 51.553291379482566
+Labeled attachment score: 45.759664369193885
+INFO: Backing up
+
+Epoch 7
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.792630 seconds (15.09 M allocations: 2.394 GiB, 13.28% gc time)
+Training loss: 16.655893
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.975714 seconds (3.17 M allocations: 508.725 MiB, 5.21% gc time)
+Validation loss: 18.855005
+Unlabeled attachment score: 55.05943462191589
+Labeled attachment score: 48.70642293477175
+INFO: Backing up
+
+Epoch 8
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.836363 seconds (15.09 M allocations: 2.394 GiB, 13.11% gc time)
+Training loss: 16.093546
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.019409 seconds (3.17 M allocations: 508.728 MiB, 5.67% gc time)
+Validation loss: 18.674353
+Unlabeled attachment score: 56.96733593047647
+Labeled attachment score: 50.304664868644494
+INFO: Backing up
+
+Epoch 9
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.718271 seconds (15.09 M allocations: 2.394 GiB, 12.69% gc time)
+Training loss: 15.628769
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.982002 seconds (3.17 M allocations: 508.722 MiB, 5.24% gc time)
+Validation loss: 18.148767
+Unlabeled attachment score: 56.817500749175906
+Labeled attachment score: 50.244730796124266
+INFO: Backing up
+
+Epoch 10
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.843585 seconds (15.10 M allocations: 2.394 GiB, 13.17% gc time)
+Training loss: 15.012423
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.079729 seconds (3.17 M allocations: 508.727 MiB, 5.85% gc time)
+Validation loss: 18.751999
+Unlabeled attachment score: 54.20037958245929
+Labeled attachment score: 48.07711517330936
+INFO: Backing up
+
+Epoch 11
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.136598 seconds (15.11 M allocations: 2.394 GiB, 15.17% gc time)
+Training loss: 14.905304
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.996258 seconds (3.17 M allocations: 508.722 MiB, 4.94% gc time)
+Validation loss: 18.501282
+Unlabeled attachment score: 55.13934671860953
+Labeled attachment score: 48.96613724902607
+INFO: Backing up
+
+Epoch 12
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.873454 seconds (15.10 M allocations: 2.394 GiB, 13.30% gc time)
+Training loss: 14.397213
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.977135 seconds (3.17 M allocations: 508.727 MiB, 4.73% gc time)
+Validation loss: 18.811829
+Unlabeled attachment score: 57.846368994106484
+Labeled attachment score: 51.12376385975427
+INFO: Backing up
+
+Epoch 13
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.949969 seconds (15.10 M allocations: 2.394 GiB, 14.46% gc time)
+Training loss: 14.160115
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.058444 seconds (3.17 M allocations: 508.725 MiB, 4.72% gc time)
+Validation loss: 18.8651
+Unlabeled attachment score: 54.460093896713616
+Labeled attachment score: 48.57656577764459
+INFO: Backing up
+
+Epoch 14
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.807795 seconds (15.10 M allocations: 2.394 GiB, 12.77% gc time)
+Training loss: 13.672628
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.032920 seconds (3.17 M allocations: 508.729 MiB, 4.84% gc time)
+Validation loss: 18.771969
+Unlabeled attachment score: 59.174907601638196
+Labeled attachment score: 52.302467285985415
+INFO: Backing up
+
+Epoch 15
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.027176 seconds (15.10 M allocations: 2.394 GiB, 15.21% gc time)
+Training loss: 13.135369
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.046733 seconds (3.17 M allocations: 508.726 MiB, 4.75% gc time)
+Validation loss: 18.629562
+Unlabeled attachment score: 59.85416042353411
+Labeled attachment score: 53.40125861552293
+INFO: Backing up
+
+Epoch 16
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.871995 seconds (15.10 M allocations: 2.394 GiB, 12.65% gc time)
+Training loss: 12.591002
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.084811 seconds (3.17 M allocations: 508.730 MiB, 5.12% gc time)
+Validation loss: 18.999723
+Unlabeled attachment score: 57.067226051343525
+Labeled attachment score: 50.963939666367
+INFO: Backing up
+
+Epoch 17
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.954637 seconds (15.10 M allocations: 2.394 GiB, 15.63% gc time)
+Training loss: 12.713643
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.109320 seconds (3.17 M allocations: 508.722 MiB, 4.85% gc time)
+Validation loss: 19.200521
+Unlabeled attachment score: 59.02507242033763
+Labeled attachment score: 52.881829987014285
+INFO: Backing up
+
+Epoch 18
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.923008 seconds (15.10 M allocations: 2.394 GiB, 12.96% gc time)
+Training loss: 12.410038
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.102397 seconds (3.17 M allocations: 508.722 MiB, 4.88% gc time)
+Validation loss: 19.786564
+Unlabeled attachment score: 58.33583058635501
+Labeled attachment score: 52.212566177205076
+INFO: Backing up
+
+Epoch 19
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.820484 seconds (15.10 M allocations: 2.394 GiB, 14.32% gc time)
+Training loss: 12.150724
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.135198 seconds (3.17 M allocations: 508.724 MiB, 4.63% gc time)
+Validation loss: 19.196394
+Unlabeled attachment score: 58.535610828089105
+Labeled attachment score: 52.50224752771951
+INFO: Backing up
+
+Epoch 20
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+  C-c C-c^CERROR: InterruptException:
+Stacktrace:
+ [1] AutoGrad.Broadcasted(::Knet.KnetArray{Float32,1}) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/unfuse.jl:28
+ [2] sum_outgrads_karray(::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,1}, ::Colon, ::Int64) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:1043
+ [3] sum_outgrads(::Knet.KnetArray{Float32,2}, ::AutoGrad.UngetIndex) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:1036
+ [4] sum_outgrads(::Void, ::AutoGrad.UngetIndex) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/interfaces.jl:73
+ [5] backward_pass(::AutoGrad.Rec{Array{Any,1}}, ::AutoGrad.Rec{Float32}, ::Array{AutoGrad.Node,1}) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:258
+ [6] (::AutoGrad.##gradfun#4#6{#loss,Int64})(::Array{Any,1}, ::Function, ::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:62
+ [7] (::AutoGrad.#kw##gradfun#5)(::Array{Any,1}, ::AutoGrad.#gradfun#5, ::Array{Any,1}, ::Vararg{Any,N} where N) at ./<missing>:0
+ [8] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:196 [inlined]
+ [9] macro expansion at ./util.jl:237 [inlined]
+ [10] train() at /scratch/users/cgumeli/Nubik/main2.jl:194
+ [11] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:84
+
+julia> main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --arcweight 1")  C-c C-c^C
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+WARNING: redefining constant UPOSTAG
+WARNING: redefining constant UDEPREL
+WARNING: redefining constant lmdir
+WARNING: redefining constant datadir
+WARNING: redefining constant engtrn
+WARNING: redefining constant engdev
+WARNING: redefining constant englm
+WARNING: redefining constant trtrn
+WARNING: redefining constant trdev
+WARNING: redefining constant trlm
+accuracy_bt
+
+julia> main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --arcweight .1")
+main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --arcweight .1")
+Tuple{Symbol,Any}[(:feat, 0), (:birnn, 3), (:birnndrop, 0.33), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 0), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 50), (:backupdir, "Backups_2018-06-09T02:20:19.264"), (:beta1, 0.9), (:remb, 350), (:algo, "edmonds"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, true), (:arcweight, 0.1), (:tokens, 500), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+02:20:19 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld 
+02:20:22 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu 
+02:20:22 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu 
+02:21:02 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  5.684072 seconds (3.62 M allocations: 531.218 MiB, 6.45% gc time)
+Validation loss: 63.507946
+Unlabeled attachment score: 7.961242633103586
+Labeled attachment score: 0.18979122964738787
+
+Epoch 1
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+ 17.744970 seconds (15.41 M allocations: 2.408 GiB, 5.54% gc time)
+Training loss: 33.96457
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.510583 seconds (3.17 M allocations: 508.767 MiB, 4.79% gc time)
+Validation loss: 29.810627
+Unlabeled attachment score: 42.293477175107384
+Labeled attachment score: 33.9027070222755
+INFO: Backing up
+
+Epoch 2
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+ 12.549593 seconds (15.16 M allocations: 2.395 GiB, 11.86% gc time)
+Training loss: 25.63661
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.265115 seconds (3.17 M allocations: 508.722 MiB, 4.49% gc time)
+Validation loss: 25.634176
+Unlabeled attachment score: 50.92398361802018
+Labeled attachment score: 42.81290580361602
+INFO: Backing up
+
+Epoch 3
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.239874 seconds (15.09 M allocations: 2.394 GiB, 16.39% gc time)
+Training loss: 22.82995
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.457928 seconds (3.17 M allocations: 508.731 MiB, 10.52% gc time)
+Validation loss: 23.097622
+Unlabeled attachment score: 53.73089601438418
+Labeled attachment score: 46.339027070222755
+INFO: Backing up
+
+Epoch 4
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.249435 seconds (15.09 M allocations: 2.394 GiB, 15.77% gc time)
+Training loss: 20.952429
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.540591 seconds (3.17 M allocations: 508.730 MiB, 11.19% gc time)
+Validation loss: 22.257004
+Unlabeled attachment score: 57.05723703925682
+Labeled attachment score: 49.62541204674858
+INFO: Backing up
+
+Epoch 5
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.216335 seconds (15.10 M allocations: 2.394 GiB, 15.62% gc time)
+Training loss: 19.905188
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.626286 seconds (3.17 M allocations: 508.734 MiB, 10.47% gc time)
+Validation loss: 22.751844
+Unlabeled attachment score: 53.17151133752872
+Labeled attachment score: 46.398961142742984
+INFO: Backing up
+
+Epoch 6
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.196842 seconds (15.10 M allocations: 2.394 GiB, 15.51% gc time)
+Training loss: 19.56579
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.599178 seconds (3.17 M allocations: 508.732 MiB, 10.56% gc time)
+Validation loss: 21.929054
+Unlabeled attachment score: 56.33802816901409
+Labeled attachment score: 48.776346019378686
+INFO: Backing up
+
+Epoch 7
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.256206 seconds (15.10 M allocations: 2.394 GiB, 15.77% gc time)
+Training loss: 18.689625
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.574939 seconds (3.17 M allocations: 508.735 MiB, 10.48% gc time)
+Validation loss: 21.4489
+Unlabeled attachment score: 55.10937968234941
+Labeled attachment score: 48.157027270003
+INFO: Backing up
+
+Epoch 8
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.223743 seconds (15.09 M allocations: 2.394 GiB, 16.50% gc time)
+Training loss: 17.788933
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.627174 seconds (3.17 M allocations: 508.724 MiB, 10.33% gc time)
+Validation loss: 21.217724
+Unlabeled attachment score: 55.11936869443612
+Labeled attachment score: 48.29687343921686
+INFO: Backing up
+
+Epoch 9
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.256806 seconds (15.10 M allocations: 2.394 GiB, 16.35% gc time)
+Training loss: 17.047625
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.608033 seconds (3.17 M allocations: 508.728 MiB, 10.93% gc time)
+Validation loss: 20.995373
+Unlabeled attachment score: 55.988412745979424
+Labeled attachment score: 49.78523624013585
+INFO: Backing up
+
+Epoch 10
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.275041 seconds (15.10 M allocations: 2.394 GiB, 15.66% gc time)
+Training loss: 16.534286
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.653156 seconds (3.17 M allocations: 508.731 MiB, 10.50% gc time)
+Validation loss: 20.98339
+Unlabeled attachment score: 57.47677554689841
+Labeled attachment score: 50.943961642193585
+INFO: Backing up
+
+Epoch 11
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.278164 seconds (15.10 M allocations: 2.394 GiB, 15.37% gc time)
+Training loss: 16.34188
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.737103 seconds (3.17 M allocations: 508.754 MiB, 10.03% gc time)
+Validation loss: 21.033352
+Unlabeled attachment score: 55.209269803216465
+Labeled attachment score: 49.06602736989312
+INFO: Backing up
+
+Epoch 12
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.296926 seconds (15.10 M allocations: 2.394 GiB, 15.79% gc time)
+Training loss: 15.779781
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.671775 seconds (3.17 M allocations: 508.715 MiB, 10.32% gc time)
+Validation loss: 21.421091
+Unlabeled attachment score: 54.739786235141345
+Labeled attachment score: 48.61652182599141
+INFO: Backing up
+
+Epoch 13
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.292055 seconds (15.10 M allocations: 2.394 GiB, 16.28% gc time)
+Training loss: 15.500514
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.675703 seconds (3.17 M allocations: 508.737 MiB, 10.17% gc time)
+Validation loss: 21.553963
+Unlabeled attachment score: 54.31025871541305
+Labeled attachment score: 48.31685146339027
+INFO: Backing up
+
+Epoch 14
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.311623 seconds (15.10 M allocations: 2.394 GiB, 16.41% gc time)
+Training loss: 15.050002
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.756364 seconds (3.17 M allocations: 508.729 MiB, 10.27% gc time)
+Validation loss: 21.2579
+Unlabeled attachment score: 56.60773149535511
+Labeled attachment score: 50.19478573569074
+INFO: Backing up
+
+Epoch 15
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.184057 seconds (15.10 M allocations: 2.394 GiB, 15.64% gc time)
+Training loss: 14.554678
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.794293 seconds (3.17 M allocations: 508.727 MiB, 10.29% gc time)
+Validation loss: 22.039566
+Unlabeled attachment score: 55.019478573569074
+Labeled attachment score: 49.13595045450005
+INFO: Backing up
+
+Epoch 16
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.222095 seconds (15.10 M allocations: 2.394 GiB, 15.53% gc time)
+Training loss: 14.182648
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.791642 seconds (3.17 M allocations: 508.736 MiB, 10.47% gc time)
+Validation loss: 21.94461
+Unlabeled attachment score: 57.19708320847068
+Labeled attachment score: 50.84407152132654
+INFO: Backing up
+
+Epoch 17
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.342385 seconds (15.10 M allocations: 2.394 GiB, 15.70% gc time)
+Training loss: 13.781799
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.842275 seconds (3.17 M allocations: 508.733 MiB, 9.96% gc time)
+Validation loss: 21.859795
+Unlabeled attachment score: 55.86854460093897
+Labeled attachment score: 50.04495055439017
+INFO: Backing up
+
+Epoch 18
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.273404 seconds (15.10 M allocations: 2.394 GiB, 16.30% gc time)
+Training loss: 13.29285
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.754166 seconds (3.17 M allocations: 508.729 MiB, 9.70% gc time)
+Validation loss: 22.947197
+Unlabeled attachment score: 57.38687443811807
+Labeled attachment score: 51.26361002896814
+INFO: Backing up
+
+Epoch 19
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.264536 seconds (15.10 M allocations: 2.394 GiB, 16.06% gc time)
+Training loss: 13.3665905
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.847291 seconds (3.17 M allocations: 508.754 MiB, 9.87% gc time)
+Validation loss: 22.582655
+Unlabeled attachment score: 57.77644590949955
+Labeled attachment score: 51.413445210268705
+INFO: Backing up
+
+Epoch 20
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.155726 seconds (15.10 M allocations: 2.394 GiB, 15.61% gc time)
+Training loss: 12.794648
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.760195 seconds (3.17 M allocations: 508.708 MiB, 9.95% gc time)
+Validation loss: 23.912127
+Unlabeled attachment score: 58.485665767655576
+Labeled attachment score: 52.67206073319349
+INFO: Backing up
+
+Epoch 21
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.127463 seconds (15.10 M allocations: 2.394 GiB, 15.57% gc time)
+Training loss: 12.718124
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.849949 seconds (3.17 M allocations: 508.727 MiB, 10.19% gc time)
+Validation loss: 23.194944
+Unlabeled attachment score: 58.40575367096194
+Labeled attachment score: 52.472280491459394
+INFO: Backing up
+
+Epoch 22
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.308842 seconds (15.10 M allocations: 2.394 GiB, 15.90% gc time)
+Training loss: 12.338771
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  4.058098 seconds (3.17 M allocations: 508.736 MiB, 11.36% gc time)
+Validation loss: 23.512945
+Unlabeled attachment score: 57.96623713914694
+Labeled attachment score: 51.803016681650185
+INFO: Backing up
+
+Epoch 23
+10 / 55
+  C-c C-c^CERROR: InterruptException:
+Stacktrace:
+ [1] sub2ind(::Tuple{Int64,Int64}, ::Int64, ::Int64, ::Vararg{Int64,N} where N) at ./abstractarray.jl:1582
+ [2] indexparams(::Knet.KnetArray{Float32,2}, ::Colon, ::Vararg{Union{AbstractUnitRange, Colon, Real},N} where N) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:1014
+ [3] getindex2(::Knet.KnetArray{Float32,2}, ::Colon, ::Int64) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:923
+ [4] sum_outgrads_karray(::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,1}, ::Colon, ::Int64) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:1043
+ [5] sum_outgrads(::Knet.KnetArray{Float32,2}, ::AutoGrad.UngetIndex) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:1036
+ [6] sum_outgrads(::Void, ::AutoGrad.UngetIndex) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/interfaces.jl:73
+ [7] backward_pass(::AutoGrad.Rec{Array{Any,1}}, ::AutoGrad.Rec{Float32}, ::Array{AutoGrad.Node,1}) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:258
+ [8] (::AutoGrad.##gradfun#4#6{#loss,Int64})(::Array{Any,1}, ::Function, ::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:62
+ [9] (::AutoGrad.#kw##gradfun#5)(::Array{Any,1}, ::AutoGrad.#gradfun#5, ::Array{Any,1}, ::Vararg{Any,N} where N) at ./<missing>:0
+ [10] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:196 [inlined]
+ [11] macro expansion at ./util.jl:237 [inlined]
+ [12] train() at /scratch/users/cgumeli/Nubik/main2.jl:194
+ [13] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:84
+
+julia> main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --arcweight .1")  C-c C-c^C
+julia> opt[:arcweight] = 0
+opt[:arcweight] = 0
+0
+
+julia> main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --arcweight .1")  C-c C-c^C
+julia> train()
+train()
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+ERROR: cudnn.cudnnSetDropoutDescriptor error 8
+Stacktrace:
+ [1] macro expansion at /scratch/users/cgumeli/.julia/v0.6/Knet/src/gpu.jl:18 [inlined]
+ [2] #DD#469(::Ptr{Void}, ::Float64, ::Int64, ::Array{Any,1}, ::Type{T} where T) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/rnn.jl:28
+ [3] (::Core.#kw#Type)(::Array{Any,1}, ::Type{Knet.DD}) at ./<missing>:0
+ [4] #rnninit#486(::Ptr{Void}, ::Int64, ::Float64, ::Bool, ::Bool, ::Symbol, ::Type{T} where T, ::Int64, ::Int64, ::Knet.#xavier, ::Base.#zeros, ::Bool, ::Knet.#rnninit, ::Int32, ::Int32) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/rnn.jl:367
+ [5] (::Knet.#kw##rnninit)(::Array{Any,1}, ::Knet.#rnninit, ::Int32, ::Int32) at ./<missing>:0
+ [6] convert_params!(::KnetModules.LSTM, ::Type{T} where T) at /scratch/users/cgumeli/.julia/v0.6/KnetModules/src/rnn.jl:68
+ [7] gpu!(::FreshEncoder) at /scratch/users/cgumeli/.julia/v0.6/KnetModules/src/core.jl:238
+ [8] train() at /scratch/users/cgumeli/Nubik/main2.jl:118
+
+julia> exiT()
+exiT()
+ERROR: UndefVarError: exiT not defined
+
+julia> exit()
+exit()
+bash-4.2$ julia
+julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "?help" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.6.2 (2017-12-13 18:08 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-pc-linux-gnu
+
+WARNING: Terminal not fully functional
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+accuracy_bt
+
+julia> main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3")
+main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3")
+Tuple{Symbol,Any}[(:feat, 0), (:birnn, 3), (:birnndrop, 0.33), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 0), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 50), (:backupdir, "Backups_2018-06-09T02:27:38.444"), (:beta1, 0.9), (:remb, 350), (:algo, "edmonds"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, true), (:arcweight, 0.0), (:tokens, 500), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+02:27:42 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld 
+02:27:48 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu 
+02:27:48 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu 
+02:28:26 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+parsers/mst.py:24: RuntimeWarning: divide by zero encountered in divide
+  new_root = tokens[np.argmax(root_scores / head_scores)]
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+ 38.516743 seconds (11.80 M allocations: 931.465 MiB, 1.81% gc time)
+Validation loss: 64.13374
+Unlabeled attachment score: 12.186594745779642
+Labeled attachment score: 0.6592747977225052
+
+Epoch 1
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+ 44.490403 seconds (20.70 M allocations: 2.686 GiB, 2.57% gc time)
+Training loss: 33.67774
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.989643 seconds (3.17 M allocations: 508.788 MiB, 4.92% gc time)
+Validation loss: 28.584427
+Unlabeled attachment score: 42.732993706922386
+Labeled attachment score: 34.62191589251823
+INFO: Backing up
+
+Epoch 2
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.349044 seconds (15.08 M allocations: 2.394 GiB, 11.72% gc time)
+Training loss: 25.070858
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.973455 seconds (3.17 M allocations: 508.718 MiB, 6.04% gc time)
+Validation loss: 25.579777
+Unlabeled attachment score: 49.60543402257517
+Labeled attachment score: 41.53431225651783
+INFO: Backing up
+
+Epoch 3
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.202673 seconds (15.09 M allocations: 2.394 GiB, 11.87% gc time)
+Training loss: 22.741243
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.848273 seconds (3.17 M allocations: 508.723 MiB, 5.40% gc time)
+Validation loss: 22.819176
+Unlabeled attachment score: 53.101588252921786
+Labeled attachment score: 45.48996104285286
+INFO: Backing up
+
+Epoch 4
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+ 11.048594 seconds (15.15 M allocations: 2.395 GiB, 11.83% gc time)
+Training loss: 20.631094
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.861170 seconds (3.17 M allocations: 508.727 MiB, 4.47% gc time)
+Validation loss: 21.829926
+Unlabeled attachment score: 56.83747877334932
+Labeled attachment score: 48.806313055638796
+INFO: Backing up
+
+Epoch 5
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.839342 seconds (15.09 M allocations: 2.394 GiB, 13.44% gc time)
+Training loss: 19.633198
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.957094 seconds (3.17 M allocations: 508.728 MiB, 4.64% gc time)
+Validation loss: 21.3527
+Unlabeled attachment score: 53.271401458395765
+Labeled attachment score: 47.008290880031964
+INFO: Backing up
+
+Epoch 6
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.958624 seconds (15.08 M allocations: 2.393 GiB, 14.39% gc time)
+Training loss: 18.710936
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.925635 seconds (3.17 M allocations: 508.717 MiB, 5.23% gc time)
+Validation loss: 21.277828
+Unlabeled attachment score: 51.86295075417041
+Labeled attachment score: 45.88952152632105
+INFO: Backing up
+
+Epoch 7
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.182474 seconds (15.11 M allocations: 2.394 GiB, 15.50% gc time)
+Training loss: 18.14681
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.993038 seconds (3.17 M allocations: 508.722 MiB, 4.57% gc time)
+Validation loss: 20.89
+Unlabeled attachment score: 52.0527419838178
+Labeled attachment score: 45.91948856258116
+INFO: Backing up
+
+Epoch 8
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.773503 seconds (15.09 M allocations: 2.394 GiB, 12.71% gc time)
+Training loss: 17.64884
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.939632 seconds (3.17 M allocations: 508.721 MiB, 4.48% gc time)
+Validation loss: 21.216463
+Unlabeled attachment score: 48.06712616122265
+Labeled attachment score: 42.732993706922386
+INFO: Backing up
+
+Epoch 9
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.948412 seconds (15.08 M allocations: 2.393 GiB, 14.44% gc time)
+Training loss: 16.851389
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.957887 seconds (3.17 M allocations: 508.709 MiB, 4.95% gc time)
+Validation loss: 20.522812
+Unlabeled attachment score: 53.50114873638997
+Labeled attachment score: 47.23803815802617
+INFO: Backing up
+
+Epoch 10
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.148986 seconds (15.11 M allocations: 2.394 GiB, 15.62% gc time)
+Training loss: 16.513489
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.026615 seconds (3.17 M allocations: 508.715 MiB, 4.55% gc time)
+Validation loss: 21.027079
+Unlabeled attachment score: 53.181500349615426
+Labeled attachment score: 47.12815902507242
+INFO: Backing up
+
+Epoch 11
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.943875 seconds (15.10 M allocations: 2.394 GiB, 12.76% gc time)
+Training loss: 16.244823
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.976994 seconds (3.17 M allocations: 508.727 MiB, 4.66% gc time)
+Validation loss: 20.510677
+Unlabeled attachment score: 57.0272700029967
+Labeled attachment score: 50.304664868644494
+INFO: Backing up
+
+Epoch 12
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.091372 seconds (15.09 M allocations: 2.394 GiB, 15.21% gc time)
+Training loss: 15.470194
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.001821 seconds (3.17 M allocations: 508.714 MiB, 5.04% gc time)
+Validation loss: 20.722826
+Unlabeled attachment score: 54.28029167915293
+Labeled attachment score: 48.32684047547698
+INFO: Backing up
+
+Epoch 13
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.080305 seconds (15.12 M allocations: 2.394 GiB, 15.19% gc time)
+Training loss: 14.9182625
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.049739 seconds (3.17 M allocations: 508.715 MiB, 4.54% gc time)
+Validation loss: 20.624144
+Unlabeled attachment score: 55.628808310858055
+Labeled attachment score: 49.43562081710119
+INFO: Backing up
+
+Epoch 14
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.767487 seconds (15.10 M allocations: 2.394 GiB, 12.76% gc time)
+Training loss: 14.645098
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.055371 seconds (3.17 M allocations: 508.713 MiB, 4.43% gc time)
+Validation loss: 21.148016
+Unlabeled attachment score: 57.267006293077614
+Labeled attachment score: 50.92398361802018
+INFO: Backing up
+
+Epoch 15
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.819970 seconds (15.08 M allocations: 2.393 GiB, 14.30% gc time)
+Training loss: 14.548621
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.107081 seconds (3.17 M allocations: 508.720 MiB, 5.38% gc time)
+Validation loss: 21.130423
+Unlabeled attachment score: 57.177105184297275
+Labeled attachment score: 50.614324243332334
+INFO: Backing up
+
+Epoch 16
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.143067 seconds (15.11 M allocations: 2.394 GiB, 15.55% gc time)
+Training loss: 14.014403
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.088197 seconds (3.17 M allocations: 508.723 MiB, 4.31% gc time)
+Validation loss: 21.11174
+Unlabeled attachment score: 55.908500649285784
+Labeled attachment score: 50.07491759065029
+INFO: Backing up
+
+Epoch 17
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.979101 seconds (15.10 M allocations: 2.394 GiB, 13.01% gc time)
+Training loss: 13.429985
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.091597 seconds (3.17 M allocations: 508.724 MiB, 4.85% gc time)
+Validation loss: 21.873087
+Unlabeled attachment score: 56.28808310858056
+Labeled attachment score: 50.26470882029767
+INFO: Backing up
+
+Epoch 18
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.019017 seconds (15.09 M allocations: 2.394 GiB, 14.42% gc time)
+Training loss: 13.118573
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.136615 seconds (3.17 M allocations: 508.719 MiB, 4.70% gc time)
+Validation loss: 21.740864
+Unlabeled attachment score: 58.365797622615126
+Labeled attachment score: 52.212566177205076
+INFO: Backing up
+
+Epoch 19
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.068612 seconds (15.11 M allocations: 2.394 GiB, 15.15% gc time)
+Training loss: 12.765498
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.163126 seconds (3.17 M allocations: 508.715 MiB, 4.40% gc time)
+Validation loss: 22.162283
+Unlabeled attachment score: 56.93736889421636
+Labeled attachment score: 50.90400559384677
+INFO: Backing up
+
+Epoch 20
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.751411 seconds (15.10 M allocations: 2.394 GiB, 12.54% gc time)
+Training loss: 12.81
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.147575 seconds (3.17 M allocations: 508.726 MiB, 4.49% gc time)
+Validation loss: 22.350159
+Unlabeled attachment score: 57.83637998201978
+Labeled attachment score: 51.8229947058236
+INFO: Backing up
+
+Epoch 21
+  C-c C-c^CERROR: InterruptException:
+Stacktrace:
+ [1] typeinf_ext(::Core.MethodInstance, ::UInt64) at ./inference.jl:2629
+ [2] permutedims(::Knet.KnetArray{Float32,3}, ::Tuple{Int64,Int64,Int64}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/linalg.jl:163
+ [3] (::AutoGrad.##rfun#7#10{Base.#permutedims})(::Array{Any,1}, ::Function, ::AutoGrad.Rec{Knet.KnetArray{Float32,3}}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:124
+ [4] permutedims(::AutoGrad.Rec{Knet.KnetArray{Float32,3}}, ::Tuple{Int64,Int64,Int64}) at ./<missing>:0
+ [5] #call#55(::Bool, ::BiaffineDecoder2, ::AutoGrad.Rec{Array{Any,1}}, ::AutoGrad.Rec{Knet.KnetArray{Float32,3}}) at /scratch/users/cgumeli/Nubik/./decoders/biaffine2.jl:83
+ [6] #loss#107(::Array{Any,1}, ::Function, ::AutoGrad.Rec{Array{Any,1}}, ::FreshEncoder, ::BiaffineDecoder2, ::Array{Any,1}) at /scratch/users/cgumeli/Nubik/main2.jl:19
+ [7] (::#kw##loss)(::Array{Any,1}, ::#loss, ::AutoGrad.Rec{Array{Any,1}}, ::FreshEncoder, ::BiaffineDecoder2, ::Array{Any,1}) at ./<missing>:0
+ [8] forward_pass(::Function, ::Tuple{Array{Any,1},FreshEncoder,BiaffineDecoder2,Array{Any,1}}, ::Array{Any,1}, ::Int64) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:88
+ [9] (::AutoGrad.##gradfun#4#6{#loss,Int64})(::Array{Any,1}, ::Function, ::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:57
+ [10] (::AutoGrad.#kw##gradfun#5)(::Array{Any,1}, ::AutoGrad.#gradfun#5, ::Array{Any,1}, ::Vararg{Any,N} where N) at ./<missing>:0
+ [11] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:196 [inlined]
+ [12] macro expansion at ./util.jl:237 [inlined]
+ [13] train() at /scratch/users/cgumeli/Nubik/main2.jl:194
+ [14] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:84
+
+julia> main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner")
+main("--datafiles $trtrn $trdev --lmfile $trlm --upos 50 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner")
+Tuple{Symbol,Any}[(:feat, 0), (:birnn, 3), (:birnndrop, 0.33), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 0), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 50), (:backupdir, "Backups_2018-06-09T02:34:25.669"), (:beta1, 0.9), (:remb, 350), (:algo, "eisner"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, true), (:arcweight, 0.0), (:tokens, 500), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+02:34:25 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld 
+02:34:28 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu 
+02:34:28 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu 
+02:35:08 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  5.290796 seconds (18.66 M allocations: 1.123 GiB, 11.57% gc time)
+Validation loss: 64.312225
+Unlabeled attachment score: 14.873638997103187
+Labeled attachment score: 0.319648386774548
+
+Epoch 1
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+ 17.276604 seconds (15.22 M allocations: 2.399 GiB, 5.81% gc time)
+Training loss: 34.38654
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.151769 seconds (16.18 M allocations: 1015.266 MiB, 11.94% gc time)
+Validation loss: 28.908157
+Unlabeled attachment score: 51.67315952452302
+Labeled attachment score: 42.19358705424033
+INFO: Backing up
+
+Epoch 2
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.743131 seconds (15.11 M allocations: 2.394 GiB, 12.14% gc time)
+Training loss: 25.215689
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.004300 seconds (15.37 M allocations: 979.182 MiB, 12.89% gc time)
+Validation loss: 25.26255
+Unlabeled attachment score: 55.86854460093897
+Labeled attachment score: 47.48776346019379
+INFO: Backing up
+
+Epoch 3
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.022263 seconds (15.09 M allocations: 2.394 GiB, 13.03% gc time)
+Training loss: 22.446558
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.954470 seconds (14.50 M allocations: 942.413 MiB, 12.93% gc time)
+Validation loss: 22.496986
+Unlabeled attachment score: 59.35470981919888
+Labeled attachment score: 50.84407152132654
+INFO: Backing up
+
+Epoch 4
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+ 11.416007 seconds (15.15 M allocations: 2.395 GiB, 12.19% gc time)
+Training loss: 20.538473
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.824116 seconds (14.80 M allocations: 952.049 MiB, 12.17% gc time)
+Validation loss: 22.369907
+Unlabeled attachment score: 60.563380281690144
+Labeled attachment score: 52.382379382679055
+INFO: Backing up
+
+Epoch 5
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.206070 seconds (15.09 M allocations: 2.394 GiB, 15.79% gc time)
+Training loss: 19.595022
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.003259 seconds (14.13 M allocations: 925.633 MiB, 18.99% gc time)
+Validation loss: 21.240967
+Unlabeled attachment score: 62.281490360603335
+Labeled attachment score: 53.72090700229747
+INFO: Backing up
+
+Epoch 6
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.801770 seconds (15.08 M allocations: 2.394 GiB, 12.88% gc time)
+Training loss: 18.628647
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.970950 seconds (13.73 M allocations: 905.308 MiB, 18.88% gc time)
+Validation loss: 20.89796
+Unlabeled attachment score: 61.24263310358606
+Labeled attachment score: 53.54110478473679
+INFO: Backing up
+
+Epoch 7
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.784497 seconds (15.09 M allocations: 2.394 GiB, 13.19% gc time)
+Training loss: 17.99431
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.048873 seconds (14.25 M allocations: 929.708 MiB, 18.96% gc time)
+Validation loss: 21.643816
+Unlabeled attachment score: 59.13495155329138
+Labeled attachment score: 50.60433523124563
+INFO: Backing up
+
+Epoch 8
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.029425 seconds (15.09 M allocations: 2.394 GiB, 13.13% gc time)
+Training loss: 17.65245
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.719161 seconds (13.45 M allocations: 893.107 MiB, 12.37% gc time)
+Validation loss: 21.325636
+Unlabeled attachment score: 60.71321546299071
+Labeled attachment score: 52.22255518929178
+INFO: Backing up
+
+Epoch 9
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.023433 seconds (15.09 M allocations: 2.394 GiB, 13.31% gc time)
+Training loss: 17.17169
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.003010 seconds (14.18 M allocations: 926.706 MiB, 19.15% gc time)
+Validation loss: 20.98989
+Unlabeled attachment score: 60.86305064429128
+Labeled attachment score: 53.09159924083508
+INFO: Backing up
+
+Epoch 10
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.934521 seconds (15.09 M allocations: 2.394 GiB, 13.41% gc time)
+Training loss: 16.512953
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.812068 seconds (14.19 M allocations: 926.144 MiB, 12.63% gc time)
+Validation loss: 20.553118
+Unlabeled attachment score: 62.671061831984815
+Labeled attachment score: 54.77974228348816
+INFO: Backing up
+
+Epoch 11
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.237611 seconds (15.11 M allocations: 2.394 GiB, 15.47% gc time)
+Training loss: 15.715866
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.694796 seconds (13.61 M allocations: 898.961 MiB, 11.80% gc time)
+Validation loss: 20.591553
+Unlabeled attachment score: 61.812006792528216
+Labeled attachment score: 53.82079712316452
+INFO: Backing up
+
+Epoch 12
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.172389 seconds (15.10 M allocations: 2.394 GiB, 15.06% gc time)
+Training loss: 15.677502
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.831801 seconds (14.33 M allocations: 932.970 MiB, 11.99% gc time)
+Validation loss: 20.922062
+Unlabeled attachment score: 62.061732094695834
+Labeled attachment score: 54.25032464289282
+INFO: Backing up
+
+Epoch 13
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.031833 seconds (15.09 M allocations: 2.394 GiB, 13.73% gc time)
+Training loss: 14.932543
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.643342 seconds (12.92 M allocations: 869.596 MiB, 12.01% gc time)
+Validation loss: 20.869501
+Unlabeled attachment score: 61.04285286185196
+Labeled attachment score: 53.3413245430027
+INFO: Backing up
+
+Epoch 14
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.004509 seconds (15.09 M allocations: 2.394 GiB, 13.84% gc time)
+Training loss: 14.62172
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.975474 seconds (13.79 M allocations: 906.714 MiB, 19.96% gc time)
+Validation loss: 21.180069
+Unlabeled attachment score: 61.5522924782739
+Labeled attachment score: 53.75087403855758
+INFO: Backing up
+
+Epoch 15
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.919945 seconds (15.07 M allocations: 2.393 GiB, 13.12% gc time)
+Training loss: 14.099205
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.031056 seconds (13.43 M allocations: 891.543 MiB, 19.69% gc time)
+Validation loss: 21.237053
+Unlabeled attachment score: 61.422435321146736
+Labeled attachment score: 53.990610328638496
+INFO: Backing up
+
+Epoch 16
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.819278 seconds (15.07 M allocations: 2.393 GiB, 13.17% gc time)
+Training loss: 14.116665
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.681298 seconds (13.15 M allocations: 878.401 MiB, 12.60% gc time)
+Validation loss: 21.362339
+Unlabeled attachment score: 60.08390770152832
+Labeled attachment score: 53.301368494655875
+INFO: Backing up
+
+Epoch 17
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.130878 seconds (15.12 M allocations: 2.394 GiB, 15.67% gc time)
+Training loss: 13.900911
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.745546 seconds (13.90 M allocations: 913.616 MiB, 12.24% gc time)
+Validation loss: 21.601505
+Unlabeled attachment score: 61.72210568374788
+Labeled attachment score: 54.80970931974828
+INFO: Backing up
+
+Epoch 18
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.052240 seconds (15.10 M allocations: 2.394 GiB, 13.80% gc time)
+Training loss: 13.2637415
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.739178 seconds (13.48 M allocations: 894.024 MiB, 11.99% gc time)
+Validation loss: 22.543371
+Unlabeled attachment score: 60.233742882828885
+Labeled attachment score: 53.51113774847668
+INFO: Backing up
+
+Epoch 19
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.219704 seconds (15.10 M allocations: 2.394 GiB, 13.97% gc time)
+Training loss: 12.856812
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.790596 seconds (13.99 M allocations: 917.555 MiB, 11.71% gc time)
+Validation loss: 21.984037
+Unlabeled attachment score: 62.07172110678254
+Labeled attachment score: 54.94955548896214
+INFO: Backing up
+
+Epoch 20
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.045924 seconds (15.10 M allocations: 2.394 GiB, 13.68% gc time)
+Training loss: 12.399262
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.747483 seconds (13.54 M allocations: 896.777 MiB, 12.03% gc time)
+Validation loss: 21.563757
+Unlabeled attachment score: 62.27150134851663
+Labeled attachment score: 55.30915992408351
+INFO: Backing up
+
+Epoch 21
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.269191 seconds (15.10 M allocations: 2.394 GiB, 16.02% gc time)
+Training loss: 12.159859
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.913551 seconds (13.16 M allocations: 878.796 MiB, 18.27% gc time)
+Validation loss: 22.98216
+Unlabeled attachment score: 61.84197382878833
+Labeled attachment score: 54.97952252522226
+INFO: Backing up
+
+Epoch 22
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.886630 seconds (15.07 M allocations: 2.393 GiB, 13.02% gc time)
+Training loss: 12.133273
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.021535 seconds (13.55 M allocations: 894.229 MiB, 19.47% gc time)
+Validation loss: 23.11819
+Unlabeled attachment score: 60.73319348716412
+Labeled attachment score: 54.240335630806115
+INFO: Backing up
+
+Epoch 23
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.909270 seconds (15.07 M allocations: 2.393 GiB, 13.16% gc time)
+Training loss: 11.56956
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.012251 seconds (13.40 M allocations: 888.468 MiB, 19.66% gc time)
+Validation loss: 24.662464
+Unlabeled attachment score: 62.421336529817204
+Labeled attachment score: 55.818599540505446
+INFO: Backing up
+
+Epoch 24
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.898097 seconds (15.07 M allocations: 2.393 GiB, 12.91% gc time)
+Training loss: 11.55651
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.803065 seconds (13.66 M allocations: 900.798 MiB, 13.01% gc time)
+Validation loss: 23.653347
+Unlabeled attachment score: 62.62111677155129
+Labeled attachment score: 55.518929177904305
+INFO: Backing up
+
+Epoch 25
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.304503 seconds (15.12 M allocations: 2.394 GiB, 15.86% gc time)
+Training loss: 11.022625
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.891047 seconds (13.25 M allocations: 882.173 MiB, 18.81% gc time)
+Validation loss: 24.414642
+Unlabeled attachment score: 61.692138647487766
+Labeled attachment score: 54.97952252522226
+INFO: Backing up
+
+Epoch 26
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.940251 seconds (15.07 M allocations: 2.393 GiB, 13.10% gc time)
+Training loss: 10.649257
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.855357 seconds (13.62 M allocations: 898.858 MiB, 12.83% gc time)
+Validation loss: 24.752659
+Unlabeled attachment score: 62.72100689241834
+Labeled attachment score: 55.798621516332034
+INFO: Backing up
+
+Epoch 27
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.839187 seconds (15.11 M allocations: 2.394 GiB, 13.46% gc time)
+Training loss: 10.511693
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.657168 seconds (13.38 M allocations: 887.683 MiB, 12.01% gc time)
+Validation loss: 24.781921
+Unlabeled attachment score: 62.32144640895015
+Labeled attachment score: 55.56887423833783
+INFO: Backing up
+
+Epoch 28
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.825202 seconds (15.08 M allocations: 2.394 GiB, 13.15% gc time)
+Training loss: 10.234472
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.061485 seconds (13.55 M allocations: 894.193 MiB, 19.20% gc time)
+Validation loss: 25.8907
+Unlabeled attachment score: 61.80201778044152
+Labeled attachment score: 55.409050044950554
+INFO: Backing up
+
+Epoch 29
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.892690 seconds (15.09 M allocations: 2.394 GiB, 13.18% gc time)
+Training loss: 9.951349
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.931300 seconds (13.37 M allocations: 887.128 MiB, 19.53% gc time)
+Validation loss: 25.520454
+Unlabeled attachment score: 62.671061831984815
+Labeled attachment score: 55.68874238337828
+INFO: Backing up
+
+Epoch 30
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.858954 seconds (15.07 M allocations: 2.393 GiB, 12.95% gc time)
+Training loss: 9.734004
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.011052 seconds (13.64 M allocations: 898.194 MiB, 19.63% gc time)
+Validation loss: 25.5761
+Unlabeled attachment score: 63.230446508840274
+Labeled attachment score: 56.24812706023374
+INFO: Backing up
+
+Epoch 31
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.980295 seconds (15.09 M allocations: 2.394 GiB, 13.86% gc time)
+Training loss: 9.501941
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.667603 seconds (13.68 M allocations: 901.073 MiB, 11.77% gc time)
+Validation loss: 27.134151
+Unlabeled attachment score: 62.50124862651084
+Labeled attachment score: 56.13824792727999
+INFO: Backing up
+
+Epoch 32
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.102003 seconds (15.11 M allocations: 2.394 GiB, 15.60% gc time)
+Training loss: 9.334937
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.703744 seconds (13.45 M allocations: 890.646 MiB, 12.05% gc time)
+Validation loss: 25.311726
+Unlabeled attachment score: 62.451303566077314
+Labeled attachment score: 55.75866546798522
+INFO: Backing up
+
+Epoch 33
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.928193 seconds (15.09 M allocations: 2.394 GiB, 13.12% gc time)
+Training loss: 8.896132
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.997592 seconds (13.74 M allocations: 903.806 MiB, 18.52% gc time)
+Validation loss: 24.348667
+Unlabeled attachment score: 63.65997402856858
+Labeled attachment score: 56.96733593047647
+INFO: Backing up
+
+Epoch 34
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.840359 seconds (15.08 M allocations: 2.393 GiB, 13.29% gc time)
+Training loss: 8.719706
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.086333 seconds (13.94 M allocations: 912.662 MiB, 19.67% gc time)
+Validation loss: 26.072775
+Unlabeled attachment score: 63.749875137348916
+Labeled attachment score: 56.97732494256318
+INFO: Backing up
+
+Epoch 35
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.930485 seconds (15.09 M allocations: 2.394 GiB, 13.55% gc time)
+Training loss: 8.76773
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.845580 seconds (14.20 M allocations: 924.992 MiB, 12.24% gc time)
+Validation loss: 26.443779
+Unlabeled attachment score: 63.81979822195585
+Labeled attachment score: 57.04724802717011
+INFO: Backing up
+
+Epoch 36
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.233534 seconds (15.11 M allocations: 2.394 GiB, 15.86% gc time)
+Training loss: 8.519702
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.669176 seconds (13.66 M allocations: 899.868 MiB, 12.12% gc time)
+Validation loss: 27.764488
+Unlabeled attachment score: 63.59005094396164
+Labeled attachment score: 57.07721506343022
+INFO: Backing up
+
+Epoch 37
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.372518 seconds (15.10 M allocations: 2.394 GiB, 15.96% gc time)
+Training loss: 8.237364
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.751716 seconds (14.09 M allocations: 920.188 MiB, 11.94% gc time)
+Validation loss: 25.594378
+Unlabeled attachment score: 64.21935870542403
+Labeled attachment score: 57.40685246229148
+INFO: Backing up
+
+Epoch 38
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.002969 seconds (15.10 M allocations: 2.394 GiB, 13.57% gc time)
+Training loss: 8.2344475
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.920175 seconds (13.70 M allocations: 902.112 MiB, 18.50% gc time)
+Validation loss: 27.735424
+Unlabeled attachment score: 63.999600439516534
+Labeled attachment score: 57.316951353511136
+INFO: Backing up
+
+Epoch 39
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.838673 seconds (15.07 M allocations: 2.393 GiB, 13.00% gc time)
+Training loss: 8.10575
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.926069 seconds (14.23 M allocations: 925.821 MiB, 13.22% gc time)
+Validation loss: 27.910467
+Unlabeled attachment score: 65.4579962041754
+Labeled attachment score: 58.44570971930876
+INFO: Backing up
+
+Epoch 40
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.193093 seconds (15.12 M allocations: 2.394 GiB, 15.54% gc time)
+Training loss: 7.7982974
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.934733 seconds (13.77 M allocations: 904.590 MiB, 18.88% gc time)
+Validation loss: 29.019718
+Unlabeled attachment score: 64.1494356208171
+Labeled attachment score: 57.346918389771254
+INFO: Backing up
+
+Epoch 41
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.980976 seconds (15.08 M allocations: 2.393 GiB, 12.94% gc time)
+Training loss: 7.79016
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.132122 seconds (14.11 M allocations: 918.927 MiB, 20.57% gc time)
+Validation loss: 30.142292
+Unlabeled attachment score: 65.0184796723604
+Labeled attachment score: 58.425731695135354
+INFO: Backing up
+
+Epoch 42
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.015378 seconds (15.09 M allocations: 2.394 GiB, 13.56% gc time)
+Training loss: 7.737801
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.775579 seconds (14.10 M allocations: 919.950 MiB, 12.65% gc time)
+Validation loss: 29.286627
+Unlabeled attachment score: 64.39916092298472
+Labeled attachment score: 57.97622615123365
+INFO: Backing up
+
+Epoch 43
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.169157 seconds (15.11 M allocations: 2.394 GiB, 15.78% gc time)
+Training loss: 7.411761
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.793433 seconds (13.98 M allocations: 913.458 MiB, 11.84% gc time)
+Validation loss: 29.8006
+Unlabeled attachment score: 64.90860053940665
+Labeled attachment score: 58.43572070722205
+INFO: Backing up
+
+Epoch 44
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.842551 seconds (15.09 M allocations: 2.394 GiB, 13.07% gc time)
+Training loss: 7.4111085
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.815863 seconds (14.23 M allocations: 925.329 MiB, 12.66% gc time)
+Validation loss: 29.194279
+Unlabeled attachment score: 65.2482269503546
+Labeled attachment score: 58.43572070722205
+INFO: Backing up
+
+Epoch 45
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.203320 seconds (15.12 M allocations: 2.394 GiB, 15.23% gc time)
+Training loss: 7.3262935
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.745786 seconds (14.03 M allocations: 917.346 MiB, 11.89% gc time)
+Validation loss: 31.685017
+Unlabeled attachment score: 64.90860053940665
+Labeled attachment score: 58.40575367096194
+INFO: Backing up
+
+Epoch 46
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.272422 seconds (15.10 M allocations: 2.394 GiB, 14.21% gc time)
+Training loss: 7.304604
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.750157 seconds (13.93 M allocations: 912.246 MiB, 11.75% gc time)
+Validation loss: 29.736809
+Unlabeled attachment score: 65.52791928878234
+Labeled attachment score: 58.80531415443013
+INFO: Backing up
+
+Epoch 47
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.035337 seconds (15.09 M allocations: 2.394 GiB, 13.59% gc time)
+Training loss: 6.892593
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.037451 seconds (13.79 M allocations: 905.763 MiB, 20.62% gc time)
+Validation loss: 30.35801
+Unlabeled attachment score: 64.71880930975927
+Labeled attachment score: 57.97622615123365
+INFO: Backing up
+
+Epoch 48
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.960779 seconds (15.08 M allocations: 2.393 GiB, 13.03% gc time)
+Training loss: 7.027017
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.135532 seconds (13.95 M allocations: 911.933 MiB, 20.79% gc time)
+Validation loss: 31.321898
+Unlabeled attachment score: 65.19828188992109
+Labeled attachment score: 58.255918489661376
+INFO: Backing up
+
+Epoch 49
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.002519 seconds (15.10 M allocations: 2.394 GiB, 12.90% gc time)
+Training loss: 6.7056746
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.061264 seconds (14.38 M allocations: 932.078 MiB, 19.42% gc time)
+Validation loss: 31.98777
+Unlabeled attachment score: 65.79762261512336
+Labeled attachment score: 59.144940565378086
+INFO: Backing up
+
+Epoch 50
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.905803 seconds (15.10 M allocations: 2.394 GiB, 13.02% gc time)
+Training loss: 6.5445914
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.001471 seconds (13.78 M allocations: 905.485 MiB, 18.60% gc time)
+Validation loss: 32.559483
+Unlabeled attachment score: 65.0284686844471
+Labeled attachment score: 58.57556687643592
+INFO: Backing up
+
+Epoch 51
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.029675 seconds (15.08 M allocations: 2.393 GiB, 12.95% gc time)
+Training loss: 6.323062
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.825687 seconds (13.76 M allocations: 904.005 MiB, 13.12% gc time)
+Validation loss: 32.039394
+Unlabeled attachment score: 65.03845769653381
+Labeled attachment score: 58.44570971930876
+INFO: Backing up
+
+Epoch 52
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.186725 seconds (15.12 M allocations: 2.394 GiB, 15.86% gc time)
+Training loss: 6.427634
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.755821 seconds (14.00 M allocations: 914.176 MiB, 12.79% gc time)
+Validation loss: 34.404655
+Unlabeled attachment score: 64.87863350314655
+Labeled attachment score: 58.38577564678853
+INFO: Backing up
+
+Epoch 53
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.075440 seconds (15.09 M allocations: 2.394 GiB, 13.55% gc time)
+Training loss: 6.2072716
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.767066 seconds (14.04 M allocations: 916.201 MiB, 12.42% gc time)
+Validation loss: 32.58865
+Unlabeled attachment score: 64.51902906802518
+Labeled attachment score: 58.04614923584057
+INFO: Backing up
+
+Epoch 54
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.088481 seconds (15.10 M allocations: 2.394 GiB, 14.04% gc time)
+Training loss: 6.1217227
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.802177 seconds (14.13 M allocations: 920.288 MiB, 12.21% gc time)
+Validation loss: 36.037
+Unlabeled attachment score: 64.78873239436619
+Labeled attachment score: 58.18599540505444
+INFO: Backing up
+
+Epoch 55
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.990265 seconds (15.10 M allocations: 2.394 GiB, 13.29% gc time)
+Training loss: 6.17033
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.036405 seconds (14.32 M allocations: 927.637 MiB, 19.79% gc time)
+Validation loss: 33.014164
+Unlabeled attachment score: 65.2082709020078
+Labeled attachment score: 58.43572070722205
+INFO: Backing up
+
+Epoch 56
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.960511 seconds (15.09 M allocations: 2.394 GiB, 13.22% gc time)
+Training loss: 6.196121
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.746215 seconds (13.97 M allocations: 912.896 MiB, 12.42% gc time)
+Validation loss: 32.751106
+Unlabeled attachment score: 64.62890820097893
+Labeled attachment score: 58.096094296274096
+INFO: Backing up
+
+Epoch 57
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.312453 seconds (15.11 M allocations: 2.394 GiB, 15.64% gc time)
+Training loss: 5.9027276
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.918050 seconds (14.34 M allocations: 929.990 MiB, 11.36% gc time)
+Validation loss: 31.268959
+Unlabeled attachment score: 65.62780940964939
+Labeled attachment score: 58.98511637199081
+INFO: Backing up
+
+Epoch 58
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.355978 seconds (15.10 M allocations: 2.394 GiB, 15.75% gc time)
+Training loss: 5.9740486
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.775336 seconds (13.97 M allocations: 913.880 MiB, 12.26% gc time)
+Validation loss: 35.83844
+Unlabeled attachment score: 64.78873239436619
+Labeled attachment score: 58.285885525921486
+INFO: Backing up
+
+Epoch 59
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.058388 seconds (15.09 M allocations: 2.394 GiB, 13.76% gc time)
+Training loss: 5.8474727
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.006868 seconds (13.87 M allocations: 908.594 MiB, 19.15% gc time)
+Validation loss: 34.46604
+Unlabeled attachment score: 64.07951253621017
+Labeled attachment score: 57.53670961941864
+INFO: Backing up
+
+Epoch 60
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.981429 seconds (15.10 M allocations: 2.394 GiB, 13.23% gc time)
+Training loss: 5.7297397
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.017997 seconds (13.87 M allocations: 909.122 MiB, 18.84% gc time)
+Validation loss: 36.080864
+Unlabeled attachment score: 64.24932574168415
+Labeled attachment score: 58.00619318749376
+INFO: Backing up
+
+Epoch 61
+10 / 55
+20 / 55
+  C-c C-c^CERROR: InterruptException:
+Stacktrace:
+ [1] backward_pass(::AutoGrad.Rec{Array{Any,1}}, ::AutoGrad.Rec{Float32}, ::Array{AutoGrad.Node,1}) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:256
+ [2] (::AutoGrad.##gradfun#4#6{#loss,Int64})(::Array{Any,1}, ::Function, ::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:62
+ [3] (::AutoGrad.#kw##gradfun#5)(::Array{Any,1}, ::AutoGrad.#gradfun#5, ::Array{Any,1}, ::Vararg{Any,N} where N) at ./<missing>:0
+ [4] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:196 [inlined]
+ [5] macro expansion at ./util.jl:237 [inlined]
+ [6] train() at /scratch/users/cgumeli/Nubik/main2.jl:194
+ [7] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:84
+
+julia> exit()
+exit()
+bash-4.2$ exit
+exit
+exit
+[cgumeli@login03 Nubik]$ 

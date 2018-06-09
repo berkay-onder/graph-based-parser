@@ -60,10 +60,11 @@ end
 function extend_vocab!(vocab::Vocab, train_corpus)
     xpos = Dict()
     feats = Dict()
-
+    xpos["<unk>"] = 1
+    feats["<unk>"] = 1
     for sent in train_corpus
-        sent.xpostag = [proc(xp, xpos) for xp in sent.xpostag]
-            #[get!(xpos, xp, 1+length(xpos)) for xp in sent.xpostag]
+        sent.xpostag = #[proc(xp, xpos) for xp in sent.xpostag]
+            [get!(xpos, xp, 1+length(xpos)) for xp in sent.xpostag]
         sent.feats = [proc(feat, feats) for feat in sent.feats]
     end
 
@@ -73,9 +74,9 @@ end
 
 function extend_corpus!(ev::ExtendedVocab, val_corpus)
     for sent in val_corpus
-        sent.xpostag = [proc(xp, ev.xpostags, false) 
+        sent.xpostag = [get(ev.xpostags, xp, ev.xpostags["<unk>"]) 
                         for xp in sent.xpostag]
-        sent.feats = [proc(f, ev.feats, false) 
+        sent.feats = [proc(f, ev.feats, false)
                       for f in sent.feats]
     end
     return val_corpus
@@ -87,7 +88,7 @@ function proc(feat, feats, mutate=true)
     splits = split(feat, "|")
     stuff = []
     for s in splits
-        push!(stuff, mutate ? get!(feats, s, length(feats)+1) : feats[s])
+        push!(stuff, mutate ? get!(feats, s, length(feats)+1) : get(feats, s, feats["<unk>"]))
     end
     return stuff
 end 

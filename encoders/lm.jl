@@ -34,20 +34,22 @@ end
 - Flatten feats for each word
 - Take the final embedding by summing the relevant parts
 =#
-function (this::LMEncoder)(ctx, sentences)
-    cavecs = prep_cavecs(sentences)
-    embs = []
+function (this::LMEncoder)(ctx, sentences, extra=nothing; 
+                           proc_sents=prep_cavecs)
+    cavecs = proc_sents(sentences)
+    this.use_gpu && (cavecs = ka(cavecs))
+    if extra != nothing
+        cavecs = cavecs .+ extra
+    end
     uposes = ifexist(this.upos, ()->this.upos(
         ctx, prep_tags(sentences, :postag)))
     
-    xposes = ifexist(this.xpos, ()->embed_many(
-        this, ctx, sentences, :xpos, :xpos_emb;
-        stop_early=all(x->length(x.xpostag)==1, sentences)))
+    xposes = ifexist(this.xpos, ()->this.xpos(
+        ctx, prep_tags(sentences, :xpostag)))
     
     feats = ifexist(this.feat, ()->embed_many(
-        this, ctx, sentences, :feat, :feat_emb))
+        this, ctx, sentences, :feats, :feat, :feat_emb))
     
-    this.use_gpu && (cavecs = ka(cavecs))
     embs = filter(e->e!=nothing, Any[uposes, xposes, feats])
     return rootify(this, ctx, concat(cavecs, embs...))
 end
@@ -66,14 +68,37 @@ function rootify(this::LMEncoder, ctx, concated)
 end
 
 
-function embed_many(this::LMEncoder, ctx, sentences,
-                    embed::Symbol, embed_size::Symbol;
-                    stop_early=false)
-        # Reshape the final embedding
+function embed_many(this::LMEncoder, ctx, sentences, 
+                    sembed::Symbol, embed::Symbol, embed_size::Symbol)
+    # Reshape the final embedding
     H, B, T = (getfield(this, embed_size),
                length(sentences), length(sentences[1]))
+    
+    M = maximum([length(getfield(sentences[b], sembed)[t]) 
+                 for b = 1:B for t = 1:T])
+    inds = Array{Int, 3}(M, B, T)
+    mask = ones(Float32, 1, M, B, T)
+    for t = 1:T
+        for b = 1:B
+            tag = getfield(sentences[b], sembed)[t]
+            for m = 1:M
+                if m > length(tag)
+                    mask[1, m, b, t] = 0
+                    inds[m, b, t] = 1 #dummy
+                else
+                    inds[m, b, t] = tag[m]
+                end
+            end
+        end
+    end
+    # Three kernels + one memory transfer for the whole thing
+    this.use_gpu && (mask = ka(mask))
+    emb = getfield(this, embed)(ctx, vec(inds))
+    emb = reshape(emb, (H, M, B, T)) .* mask
+    return reshape(sum(emb, 2), (H, B, T))
+    
     # Note the time first representation
-    indices = []
+    #=indices = []
     lengths = []
     for s in sentences
         _indices = []
@@ -111,5 +136,5 @@ function embed_many(this::LMEncoder, ctx, sentences,
         start = finish + 1
     end
     
-    return reshape(hcat(wembs...), (H, B, T))
+    return reshape(hcat(wembs...), (H, B, T))=#
 end

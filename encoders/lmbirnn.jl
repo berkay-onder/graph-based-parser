@@ -30,12 +30,12 @@ KnetModules.convert_buffers!(this::LMBiRNNEncoder, atype) =
     this.use_gpu = atype == KnetArray
 
 
-function (this::LMBiRNNEncoder)(ctx, sentences)
+function (this::LMBiRNNEncoder)(ctx, sentences, local_enc=x->x)
     x = this.lm(ctx, sentences)
     if !this.lm.use_gpu && this.use_gpu
         x = ka(x)
     end
-    x_ = x
+    x_ = local_enc(x)
     for (forw, back) in this.birnns
         x = this.rnndrop(x)
         f = forw(ctx, x)
@@ -43,25 +43,4 @@ function (this::LMBiRNNEncoder)(ctx, sentences)
         x = context_vecs(x_, f, b)
     end
     return x
-end
-
-
-function context_vecs(x, f, b)
-    T = size(x,3)
-    cvecs = []
-    for i = 1:T
-        fprev = (i==1) ? fill!(similar(getval(f), size(f,1,2)), 0) : f[:, :, i-1]
-        bprev = (i==T) ? fill!(similar(getval(b), size(b,1,2)), 0) : b[:, :, T-i]
-        xcurr = x[:, :, i]
-        push!(cvecs, vcat(xcurr, fprev, bprev))
-    end
-    return reshape(hcat(cvecs...), (size(x, 1) + size(f, 1) + size(b, 1),
-                                    size(x, 2), size(x, 3)))
-end
-
-
-function reverse(x)
-    H, B, T = size(x)
-    return reshape(hcat([x[:,:,t] for t = T:-1:1]...), 
-                   (H, B, T))
 end

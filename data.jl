@@ -2,6 +2,14 @@ const engtrn = "/scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-u
 const engdev = "/scratch/users/okirnap/ud-treebanks-v2.2/UD_English-EWT/en_ewt-ud-dev.conllu"
 const englm = "$lmdir/english_chmodel.jld"
 
+const trtrn = "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu"
+const trdev = "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu"
+const trlm  = "$lmdir/turkish_chmodel.jld"
+
+
+
+
+
 
 # TODO: refactor Omer's code
 function load_data(lm, trnfile, devfile)

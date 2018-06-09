@@ -1,0 +1,4398 @@
+bash-4.2$ 
+bash-4.2$ 
+bash-4.2$ 
+bash-4.2$ pwd
+/scratch/users/cgumeli/Nubik/encoders
+bash-4.2$ cd ..
+bash-4.2$ source ../.bashrc
+[cgumeli@login03 Nubik]$ srg
+srun: job 145204 queued and waiting for resources
+srun: job 145204 has been allocated resources
+bash-4.2$ julia
+julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "?help" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.6.2 (2017-12-13 18:08 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-pc-linux-gnu
+
+WARNING: Terminal not fully functional
+julia> include("main.jl")
+include("main.jl")
+INFO: Checking dependencies
+  C-c C-c^CERROR: LoadError: LoadError: InterruptException:
+Stacktrace:
+ [1] #cd#1(::Array{Any,1}, ::Function, ::Function, ::String, ::Vararg{String,N} where N) at ./pkg/dir.jl:32
+ [2] installed(::String) at ./pkg/pkg.jl:147
+ [3] include_from_node1(::String) at ./loading.jl:576
+ [4] include(::String) at ./sysimg.jl:14
+ [5] include_from_node1(::String) at ./loading.jl:576
+ [6] include(::String) at ./sysimg.jl:14
+while loading /scratch/users/cgumeli/Nubik/./install_deps.jl, in expression starting on line 3
+while loading /scratch/users/cgumeli/Nubik/main.jl, in expression starting on line 1
+
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+accuracy_bt
+
+julia>  main("--datafiles $trtrn $trdev --lmfile $trlm --upos 150 --xpos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner --proj false --proj_cat false --freqtop 0")
+ main("--datafiles $trtrn $trdev --lmfile $trlm --upos 150 --xpos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner --proj false --proj_cat false --freqtop 0")
+Tuple{Symbol,Any}[(:feat, 0), (:birnn, 3), (:birnndrop, 0.33), (:freqtop, 0), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 150), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 150), (:freqlim, 2), (:backupdir, "Backups_2018-06-09T06:50:08.271"), (:beta1, 0.9), (:remb, 350), (:algo, "eisner"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, false), (:arcweight, 0.0), (:tokens, 500), (:proj_cat, false), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+06:50:12 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld 
+06:50:18 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu 
+06:50:18 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu 
+06:50:50 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+ 34.065619 seconds (25.92 M allocations: 1.362 GiB, 2.62% gc time)
+Validation loss: 64.28064
+Unlabeled attachment score: 9.090000998901209
+Labeled attachment score: 0.08990110878034162
+
+Epoch 1
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+ 40.052552 seconds (19.18 M allocations: 2.323 GiB, 2.55% gc time)
+Training loss: 45.88963
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.997700 seconds (17.06 M allocations: 949.680 MiB, 11.14% gc time)
+Validation loss: 39.86147
+Unlabeled attachment score: 32.783937668564576
+Labeled attachment score: 18.569573469183897
+INFO: Backing up
+
+Epoch 2
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.650394 seconds (13.64 M allocations: 2.037 GiB, 11.38% gc time)
+Training loss: 32.651577
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.033135 seconds (16.02 M allocations: 898.762 MiB, 12.54% gc time)
+Validation loss: 31.165205
+Unlabeled attachment score: 48.96613724902607
+Labeled attachment score: 34.66187194086505
+INFO: Backing up
+
+Epoch 3
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.494198 seconds (13.65 M allocations: 2.037 GiB, 11.95% gc time)
+Training loss: 27.131786
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.836125 seconds (15.03 M allocations: 852.897 MiB, 12.53% gc time)
+Validation loss: 26.751831
+Unlabeled attachment score: 54.54000599340725
+Labeled attachment score: 40.655279192887825
+INFO: Backing up
+
+Epoch 4
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.316474 seconds (13.65 M allocations: 2.037 GiB, 11.82% gc time)
+Training loss: 24.519527
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.504098 seconds (13.07 M allocations: 763.544 MiB, 11.80% gc time)
+Validation loss: 24.5332
+Unlabeled attachment score: 57.18709419638398
+Labeled attachment score: 44.401158725402055
+INFO: Backing up
+
+Epoch 5
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+ 10.452007 seconds (13.71 M allocations: 2.038 GiB, 9.47% gc time)
+Training loss: 22.972864
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.350653 seconds (12.12 M allocations: 724.077 MiB, 10.12% gc time)
+Validation loss: 23.586393
+Unlabeled attachment score: 55.95844570971931
+Labeled attachment score: 44.11147737488762
+INFO: Backing up
+
+Epoch 6
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.290766 seconds (13.62 M allocations: 2.036 GiB, 12.64% gc time)
+Training loss: 21.783316
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.530670 seconds (13.13 M allocations: 767.667 MiB, 11.89% gc time)
+Validation loss: 22.707554
+Unlabeled attachment score: 60.07391868944161
+Labeled attachment score: 47.82738987114175
+INFO: Backing up
+
+Epoch 7
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.321419 seconds (13.64 M allocations: 2.037 GiB, 12.04% gc time)
+Training loss: 20.802061
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.600168 seconds (13.20 M allocations: 771.200 MiB, 11.86% gc time)
+Validation loss: 21.970825
+Unlabeled attachment score: 62.49125961442413
+Labeled attachment score: 50.724203376286084
+INFO: Backing up
+
+Epoch 8
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.803602 seconds (13.66 M allocations: 2.037 GiB, 16.85% gc time)
+Training loss: 19.828817
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.490410 seconds (13.30 M allocations: 775.563 MiB, 10.71% gc time)
+Validation loss: 21.764046
+Unlabeled attachment score: 62.2015782639097
+Labeled attachment score: 51.832983717910295
+INFO: Backing up
+
+Epoch 9
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.784898 seconds (13.65 M allocations: 2.037 GiB, 15.87% gc time)
+Training loss: 18.98444
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.539560 seconds (13.77 M allocations: 794.179 MiB, 10.38% gc time)
+Validation loss: 21.130404
+Unlabeled attachment score: 64.41913894715813
+Labeled attachment score: 53.990610328638496
+INFO: Backing up
+
+Epoch 10
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.199226 seconds (13.64 M allocations: 2.037 GiB, 11.68% gc time)
+Training loss: 18.42396
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.597001 seconds (13.34 M allocations: 776.969 MiB, 11.69% gc time)
+Validation loss: 20.75234
+Unlabeled attachment score: 63.18050144840675
+Labeled attachment score: 53.960643292378386
+INFO: Backing up
+
+Epoch 11
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.540603 seconds (13.67 M allocations: 2.037 GiB, 14.11% gc time)
+Training loss: 17.864862
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.665462 seconds (14.10 M allocations: 809.451 MiB, 11.38% gc time)
+Validation loss: 20.448719
+Unlabeled attachment score: 66.28708420737189
+Labeled attachment score: 56.72759964039557
+INFO: Backing up
+
+Epoch 12
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.477153 seconds (13.65 M allocations: 2.037 GiB, 12.73% gc time)
+Training loss: 17.319998
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.555055 seconds (13.88 M allocations: 801.074 MiB, 10.63% gc time)
+Validation loss: 20.711971
+Unlabeled attachment score: 66.0773149535511
+Labeled attachment score: 57.10718209969034
+INFO: Backing up
+
+Epoch 13
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.655744 seconds (13.66 M allocations: 2.037 GiB, 14.62% gc time)
+Training loss: 16.637882
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.486324 seconds (13.50 M allocations: 784.539 MiB, 11.54% gc time)
+Validation loss: 20.232351
+Unlabeled attachment score: 64.7687543701928
+Labeled attachment score: 56.188192987713514
+INFO: Backing up
+
+Epoch 14
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.488837 seconds (13.66 M allocations: 2.037 GiB, 12.56% gc time)
+Training loss: 16.015732
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.478791 seconds (13.41 M allocations: 777.535 MiB, 10.50% gc time)
+Validation loss: 20.588707
+Unlabeled attachment score: 64.84866646688643
+Labeled attachment score: 56.907401857956245
+INFO: Backing up
+
+Epoch 15
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.558963 seconds (13.66 M allocations: 2.037 GiB, 13.95% gc time)
+Training loss: 15.649956
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.527528 seconds (13.66 M allocations: 789.377 MiB, 10.20% gc time)
+Validation loss: 20.04211
+Unlabeled attachment score: 66.22715013485167
+Labeled attachment score: 58.38577564678853
+INFO: Backing up
+
+Epoch 16
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.372487 seconds (13.66 M allocations: 2.037 GiB, 12.07% gc time)
+Training loss: 14.78263
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.418671 seconds (13.18 M allocations: 767.207 MiB, 10.45% gc time)
+Validation loss: 20.327738
+Unlabeled attachment score: 65.36809509539506
+Labeled attachment score: 57.61662171611228
+INFO: Backing up
+
+Epoch 17
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.168271 seconds (13.64 M allocations: 2.037 GiB, 11.66% gc time)
+Training loss: 14.735635
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.610237 seconds (13.28 M allocations: 773.283 MiB, 11.93% gc time)
+Validation loss: 20.548464
+Unlabeled attachment score: 66.34701827989213
+Labeled attachment score: 58.7453800819099
+INFO: Backing up
+
+Epoch 18
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.838968 seconds (13.67 M allocations: 2.037 GiB, 16.55% gc time)
+Training loss: 14.068474
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.443427 seconds (13.39 M allocations: 777.966 MiB, 10.60% gc time)
+Validation loss: 20.62051
+Unlabeled attachment score: 65.82758965138348
+Labeled attachment score: 58.255918489661376
+INFO: Backing up
+
+Epoch 19
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.043542 seconds (13.66 M allocations: 2.037 GiB, 18.90% gc time)
+Training loss: 13.716641
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.496991 seconds (13.67 M allocations: 789.516 MiB, 10.90% gc time)
+Validation loss: 21.659523
+Unlabeled attachment score: 65.40805114374189
+Labeled attachment score: 57.47677554689841
+INFO: Backing up
+
+Epoch 20
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.522410 seconds (13.66 M allocations: 2.037 GiB, 12.28% gc time)
+Training loss: 13.983299
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.507515 seconds (13.55 M allocations: 784.812 MiB, 10.66% gc time)
+Validation loss: 20.624037
+Unlabeled attachment score: 65.98741384477076
+Labeled attachment score: 58.176006392967736
+INFO: Backing up
+
+Epoch 21
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.411029 seconds (13.66 M allocations: 2.037 GiB, 12.04% gc time)
+Training loss: 13.100611
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.565231 seconds (13.48 M allocations: 780.091 MiB, 11.13% gc time)
+Validation loss: 22.227606
+Unlabeled attachment score: 66.57676555788632
+Labeled attachment score: 58.98511637199081
+INFO: Backing up
+
+Epoch 22
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.505676 seconds (13.66 M allocations: 2.037 GiB, 14.01% gc time)
+Training loss: 12.734057
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.488363 seconds (13.47 M allocations: 780.753 MiB, 10.69% gc time)
+Validation loss: 21.484894
+Unlabeled attachment score: 67.21606233143542
+Labeled attachment score: 59.824193387274
+INFO: Backing up
+
+Epoch 23
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.641080 seconds (13.66 M allocations: 2.037 GiB, 14.39% gc time)
+Training loss: 12.147625
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.546769 seconds (13.75 M allocations: 792.680 MiB, 10.72% gc time)
+Validation loss: 22.37449
+Unlabeled attachment score: 67.21606233143542
+Labeled attachment score: 59.78423733892718
+INFO: Backing up
+
+Epoch 24
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.210674 seconds (13.64 M allocations: 2.037 GiB, 11.81% gc time)
+Training loss: 11.765941
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.642644 seconds (13.59 M allocations: 785.432 MiB, 12.06% gc time)
+Validation loss: 23.238798
+Unlabeled attachment score: 67.20607331934872
+Labeled attachment score: 59.824193387274
+INFO: Backing up
+
+Epoch 25
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.416353 seconds (13.66 M allocations: 2.037 GiB, 12.58% gc time)
+Training loss: 11.3523655
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.696546 seconds (13.77 M allocations: 794.414 MiB, 12.09% gc time)
+Validation loss: 22.67116
+Unlabeled attachment score: 67.22605134352213
+Labeled attachment score: 60.08390770152832
+INFO: Backing up
+
+Epoch 26
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.771637 seconds (13.67 M allocations: 2.037 GiB, 16.33% gc time)
+Training loss: 11.110378
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.489391 seconds (13.48 M allocations: 781.365 MiB, 10.96% gc time)
+Validation loss: 22.71759
+Unlabeled attachment score: 67.06622715013485
+Labeled attachment score: 60.003995604834685
+INFO: Backing up
+
+Epoch 27
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.518870 seconds (13.66 M allocations: 2.037 GiB, 13.95% gc time)
+Training loss: 10.569355
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.483763 seconds (13.59 M allocations: 784.341 MiB, 10.78% gc time)
+Validation loss: 24.432938
+Unlabeled attachment score: 67.49575466986315
+Labeled attachment score: 60.43352312456298
+INFO: Backing up
+
+Epoch 28
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.396759 seconds (13.66 M allocations: 2.037 GiB, 11.99% gc time)
+Training loss: 10.254537
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.459004 seconds (13.16 M allocations: 765.435 MiB, 10.79% gc time)
+Validation loss: 24.054028
+Unlabeled attachment score: 66.76655678753372
+Labeled attachment score: 60.05394066526821
+INFO: Backing up
+
+Epoch 29
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.590029 seconds (13.66 M allocations: 2.037 GiB, 12.65% gc time)
+Training loss: 10.24104
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.559070 seconds (13.44 M allocations: 776.914 MiB, 11.44% gc time)
+Validation loss: 24.585314
+Unlabeled attachment score: 67.04624912596144
+Labeled attachment score: 60.05394066526821
+INFO: Backing up
+
+Epoch 30
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.037209 seconds (13.66 M allocations: 2.037 GiB, 18.21% gc time)
+Training loss: 9.980886
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.360161 seconds (13.04 M allocations: 760.010 MiB, 10.54% gc time)
+Validation loss: 24.94216
+Unlabeled attachment score: 67.01628208970133
+Labeled attachment score: 60.283687943262414
+INFO: Backing up
+
+Epoch 31
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.501373 seconds (13.66 M allocations: 2.037 GiB, 13.98% gc time)
+Training loss: 9.466432
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.514402 seconds (13.58 M allocations: 784.034 MiB, 11.29% gc time)
+Validation loss: 25.179235
+Unlabeled attachment score: 67.52572170612326
+Labeled attachment score: 60.45350114873639
+INFO: Backing up
+
+Epoch 32
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.469327 seconds (13.66 M allocations: 2.037 GiB, 12.55% gc time)
+Training loss: 9.549726
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.543348 seconds (13.83 M allocations: 795.227 MiB, 10.84% gc time)
+Validation loss: 24.803507
+Unlabeled attachment score: 67.99520527419838
+Labeled attachment score: 60.97292977724503
+INFO: Backing up
+
+Epoch 33
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.802871 seconds (13.66 M allocations: 2.037 GiB, 15.87% gc time)
+Training loss: 9.299717
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.527712 seconds (13.42 M allocations: 777.682 MiB, 10.72% gc time)
+Validation loss: 25.84756
+Unlabeled attachment score: 66.9663370292678
+Labeled attachment score: 59.99400659274798
+INFO: Backing up
+
+Epoch 34
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.915202 seconds (13.66 M allocations: 2.037 GiB, 16.77% gc time)
+Training loss: 8.840936
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.463763 seconds (13.49 M allocations: 780.458 MiB, 10.72% gc time)
+Validation loss: 26.207916
+Unlabeled attachment score: 67.96523823793827
+Labeled attachment score: 60.82309459594446
+INFO: Backing up
+
+Epoch 35
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.049486 seconds (13.66 M allocations: 2.037 GiB, 18.08% gc time)
+Training loss: 8.653384
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.495309 seconds (13.56 M allocations: 783.965 MiB, 10.50% gc time)
+Validation loss: 25.836939
+Unlabeled attachment score: 68.21496354010588
+Labeled attachment score: 61.49235840575367
+INFO: Backing up
+
+Epoch 36
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.634966 seconds (13.66 M allocations: 2.037 GiB, 14.23% gc time)
+Training loss: 8.3251295
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.576296 seconds (13.65 M allocations: 787.164 MiB, 11.30% gc time)
+Validation loss: 26.746277
+Unlabeled attachment score: 66.9463590050944
+Labeled attachment score: 60.21376485865548
+INFO: Backing up
+
+Epoch 37
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.390951 seconds (13.66 M allocations: 2.037 GiB, 12.49% gc time)
+Training loss: 8.36279
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.513847 seconds (14.01 M allocations: 804.434 MiB, 10.68% gc time)
+Validation loss: 26.636782
+Unlabeled attachment score: 67.92528218959146
+Labeled attachment score: 61.1227649585456
+INFO: Backing up
+
+Epoch 38
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.497689 seconds (13.66 M allocations: 2.037 GiB, 13.98% gc time)
+Training loss: 8.175529
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.435591 seconds (13.36 M allocations: 773.704 MiB, 11.08% gc time)
+Validation loss: 27.278006
+Unlabeled attachment score: 66.48686444910598
+Labeled attachment score: 59.77424832684048
+INFO: Backing up
+
+Epoch 39
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.833072 seconds (13.66 M allocations: 2.037 GiB, 16.48% gc time)
+Training loss: 7.7609034
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.474188 seconds (13.46 M allocations: 778.186 MiB, 10.52% gc time)
+Validation loss: 29.411411
+Unlabeled attachment score: 67.51573269403656
+Labeled attachment score: 60.673259414643894
+INFO: Backing up
+
+Epoch 40
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  9.021442 seconds (13.66 M allocations: 2.037 GiB, 16.58% gc time)
+Training loss: 7.5473833
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.450096 seconds (13.34 M allocations: 772.311 MiB, 10.64% gc time)
+Validation loss: 27.120687
+Unlabeled attachment score: 67.52572170612326
+Labeled attachment score: 61.062830886025374
+INFO: Backing up
+
+Epoch 41
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.390655 seconds (13.65 M allocations: 2.037 GiB, 11.78% gc time)
+Training loss: 7.4094963
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.640751 seconds (13.60 M allocations: 784.940 MiB, 12.30% gc time)
+Validation loss: 28.284695
+Unlabeled attachment score: 67.97522725002497
+Labeled attachment score: 61.29257816401958
+INFO: Backing up
+
+Epoch 42
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.606598 seconds (13.68 M allocations: 2.037 GiB, 14.28% gc time)
+Training loss: 7.2492805
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.495802 seconds (13.73 M allocations: 789.541 MiB, 10.71% gc time)
+Validation loss: 27.894176
+Unlabeled attachment score: 67.5856557786435
+Labeled attachment score: 60.73319348716412
+INFO: Backing up
+
+Epoch 43
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.341234 seconds (13.65 M allocations: 2.037 GiB, 11.69% gc time)
+Training loss: 6.934807
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.639582 seconds (13.64 M allocations: 785.568 MiB, 11.96% gc time)
+Validation loss: 28.25036
+Unlabeled attachment score: 67.76545799620418
+Labeled attachment score: 60.87303965637798
+INFO: Backing up
+
+Epoch 44
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.530619 seconds (13.68 M allocations: 2.037 GiB, 14.65% gc time)
+Training loss: 6.7731094
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.493210 seconds (13.92 M allocations: 798.467 MiB, 10.68% gc time)
+Validation loss: 28.552004
+Unlabeled attachment score: 68.10508440715213
+Labeled attachment score: 61.25262211567276
+INFO: Backing up
+
+Epoch 45
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.722188 seconds (13.66 M allocations: 2.037 GiB, 15.69% gc time)
+Training loss: 6.749946
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.499041 seconds (13.61 M allocations: 783.988 MiB, 10.56% gc time)
+Validation loss: 28.427244
+Unlabeled attachment score: 66.9663370292678
+Labeled attachment score: 60.313654979522525
+INFO: Backing up
+
+Epoch 46
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.688039 seconds (13.66 M allocations: 2.037 GiB, 14.58% gc time)
+Training loss: 7.053234
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.476122 seconds (13.53 M allocations: 780.442 MiB, 10.49% gc time)
+Validation loss: 27.918476
+Unlabeled attachment score: 66.66666666666667
+Labeled attachment score: 60.29367695534911
+INFO: Backing up
+
+Epoch 47
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.522327 seconds (13.66 M allocations: 2.037 GiB, 14.60% gc time)
+Training loss: 6.74666
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.451231 seconds (13.36 M allocations: 772.759 MiB, 10.62% gc time)
+Validation loss: 29.526127
+Unlabeled attachment score: 67.54569973029668
+Labeled attachment score: 60.82309459594446
+INFO: Backing up
+
+Epoch 48
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.723116 seconds (13.66 M allocations: 2.037 GiB, 15.95% gc time)
+Training loss: 6.2961583
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.541205 seconds (13.52 M allocations: 779.937 MiB, 10.62% gc time)
+Validation loss: 28.87612
+Unlabeled attachment score: 67.09619418639497
+Labeled attachment score: 60.16381979822196
+INFO: Backing up
+
+Epoch 49
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.902057 seconds (13.66 M allocations: 2.037 GiB, 18.20% gc time)
+Training loss: 6.4754663
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.479872 seconds (13.48 M allocations: 778.411 MiB, 11.06% gc time)
+Validation loss: 30.097504
+Unlabeled attachment score: 67.36589751273598
+Labeled attachment score: 60.65328139047048
+INFO: Backing up
+
+Epoch 50
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.734188 seconds (13.66 M allocations: 2.037 GiB, 15.54% gc time)
+Training loss: 5.909004
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.565823 seconds (13.84 M allocations: 795.025 MiB, 10.40% gc time)
+Validation loss: 29.833996
+Unlabeled attachment score: 68.28488662471281
+Labeled attachment score: 61.66217161122765
+INFO: Backing up
+
+Epoch 51
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.432340 seconds (13.64 M allocations: 2.037 GiB, 12.16% gc time)
+Training loss: 6.281484
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.600510 seconds (13.62 M allocations: 785.309 MiB, 12.28% gc time)
+Validation loss: 29.676533
+Unlabeled attachment score: 67.89531515333134
+Labeled attachment score: 61.312556188192985
+INFO: Backing up
+
+Epoch 52
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.458188 seconds (13.67 M allocations: 2.037 GiB, 12.35% gc time)
+Training loss: 6.022273
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.643885 seconds (13.80 M allocations: 792.608 MiB, 11.97% gc time)
+Validation loss: 31.02794
+Unlabeled attachment score: 68.0251723104585
+Labeled attachment score: 61.32254520027969
+INFO: Backing up
+
+Epoch 53
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.754468 seconds (13.68 M allocations: 2.037 GiB, 16.38% gc time)
+Training loss: 5.8917036
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.488081 seconds (13.74 M allocations: 790.513 MiB, 10.65% gc time)
+Validation loss: 32.361656
+Unlabeled attachment score: 68.09509539506543
+Labeled attachment score: 61.312556188192985
+INFO: Backing up
+
+Epoch 54
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.514186 seconds (13.67 M allocations: 2.037 GiB, 12.96% gc time)
+Training loss: 5.826612
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.516380 seconds (13.51 M allocations: 780.104 MiB, 10.84% gc time)
+Validation loss: 31.703754
+Unlabeled attachment score: 67.84537009289781
+Labeled attachment score: 61.062830886025374
+INFO: Backing up
+
+Epoch 55
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.801168 seconds (13.66 M allocations: 2.037 GiB, 17.64% gc time)
+Training loss: 5.554242
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.541712 seconds (13.89 M allocations: 797.036 MiB, 10.51% gc time)
+Validation loss: 33.170654
+Unlabeled attachment score: 68.0351613225452
+Labeled attachment score: 61.38247927279992
+INFO: Backing up
+
+Epoch 56
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.857157 seconds (13.66 M allocations: 2.037 GiB, 16.78% gc time)
+Training loss: 5.361685
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.507498 seconds (13.79 M allocations: 791.959 MiB, 10.79% gc time)
+Validation loss: 31.470654
+Unlabeled attachment score: 68.36479872140646
+Labeled attachment score: 61.53231445410049
+INFO: Backing up
+
+Epoch 57
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.472337 seconds (13.67 M allocations: 2.037 GiB, 12.67% gc time)
+Training loss: 5.297218
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.506457 seconds (13.73 M allocations: 788.955 MiB, 10.33% gc time)
+Validation loss: 31.571917
+Unlabeled attachment score: 68.78433722904805
+Labeled attachment score: 61.92188592548197
+INFO: Backing up
+
+Epoch 58
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.426376 seconds (13.66 M allocations: 2.037 GiB, 12.25% gc time)
+Training loss: 5.2412906
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.523108 seconds (13.96 M allocations: 800.009 MiB, 10.78% gc time)
+Validation loss: 32.923317
+Unlabeled attachment score: 68.66446908400759
+Labeled attachment score: 61.92188592548197
+INFO: Backing up
+
+Epoch 59
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.572271 seconds (13.66 M allocations: 2.037 GiB, 14.04% gc time)
+Training loss: 5.113421
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.464514 seconds (13.58 M allocations: 783.640 MiB, 10.93% gc time)
+Validation loss: 33.676117
+Unlabeled attachment score: 67.47577664568973
+Labeled attachment score: 60.71321546299071
+INFO: Backing up
+
+Epoch 60
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.516180 seconds (13.66 M allocations: 2.037 GiB, 12.86% gc time)
+Training loss: 5.3568883
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.520459 seconds (13.74 M allocations: 790.325 MiB, 10.50% gc time)
+Validation loss: 33.153053
+Unlabeled attachment score: 68.07511737089202
+Labeled attachment score: 61.01288582559185
+INFO: Backing up
+
+Epoch 61
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.408076 seconds (13.65 M allocations: 2.037 GiB, 11.77% gc time)
+Training loss: 5.1411133
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.626330 seconds (13.54 M allocations: 781.662 MiB, 12.20% gc time)
+Validation loss: 33.65952
+Unlabeled attachment score: 67.71551293577065
+Labeled attachment score: 61.172710018979124
+INFO: Backing up
+
+Epoch 62
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.454928 seconds (13.66 M allocations: 2.037 GiB, 11.90% gc time)
+Training loss: 5.08563
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.648940 seconds (13.94 M allocations: 799.195 MiB, 11.98% gc time)
+Validation loss: 33.018097
+Unlabeled attachment score: 68.58455698731396
+Labeled attachment score: 61.91189691339527
+INFO: Backing up
+
+Epoch 63
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.755556 seconds (13.68 M allocations: 2.037 GiB, 16.71% gc time)
+Training loss: 4.7856684
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.493035 seconds (13.64 M allocations: 785.752 MiB, 10.77% gc time)
+Validation loss: 34.378986
+Unlabeled attachment score: 68.11507341923884
+Labeled attachment score: 61.482369393666964
+INFO: Backing up
+
+Epoch 64
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.388636 seconds (13.66 M allocations: 2.037 GiB, 12.25% gc time)
+Training loss: 4.8577657
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.434816 seconds (13.70 M allocations: 789.743 MiB, 10.58% gc time)
+Validation loss: 34.42591
+Unlabeled attachment score: 68.06512835880531
+Labeled attachment score: 61.582259514534016
+INFO: Backing up
+
+Epoch 65
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.329950 seconds (13.65 M allocations: 2.037 GiB, 11.72% gc time)
+Training loss: 4.6216054
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.646281 seconds (13.81 M allocations: 793.963 MiB, 11.81% gc time)
+Validation loss: 34.431156
+Unlabeled attachment score: 67.6156228149036
+Labeled attachment score: 61.1227649585456
+INFO: Backing up
+
+Epoch 66
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.864944 seconds (13.68 M allocations: 2.037 GiB, 16.58% gc time)
+Training loss: 4.89625
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.528152 seconds (13.92 M allocations: 798.781 MiB, 10.41% gc time)
+Validation loss: 35.046345
+Unlabeled attachment score: 67.70552392368394
+Labeled attachment score: 61.10278693437219
+INFO: Backing up
+
+Epoch 67
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.795358 seconds (13.66 M allocations: 2.037 GiB, 15.81% gc time)
+Training loss: 4.7886558
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.551041 seconds (13.93 M allocations: 799.343 MiB, 11.20% gc time)
+Validation loss: 34.029312
+Unlabeled attachment score: 68.0551393467186
+Labeled attachment score: 61.66217161122765
+INFO: Backing up
+
+Epoch 68
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.869645 seconds (13.66 M allocations: 2.037 GiB, 17.27% gc time)
+Training loss: 4.5933805
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.498233 seconds (13.56 M allocations: 782.211 MiB, 10.66% gc time)
+Validation loss: 35.137638
+Unlabeled attachment score: 67.49575466986315
+Labeled attachment score: 61.1227649585456
+INFO: Backing up
+
+Epoch 69
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.609166 seconds (13.66 M allocations: 2.037 GiB, 14.05% gc time)
+Training loss: 4.457949
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.445191 seconds (13.88 M allocations: 796.629 MiB, 11.21% gc time)
+Validation loss: 35.704872
+Unlabeled attachment score: 67.69553491159725
+Labeled attachment score: 61.23264409149935
+INFO: Backing up
+
+Epoch 70
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.846711 seconds (13.66 M allocations: 2.037 GiB, 16.11% gc time)
+Training loss: 4.3966103
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.518436 seconds (14.09 M allocations: 806.138 MiB, 10.89% gc time)
+Validation loss: 36.584244
+Unlabeled attachment score: 67.98521626211168
+Labeled attachment score: 61.23264409149935
+INFO: Backing up
+
+Epoch 71
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.625298 seconds (13.66 M allocations: 2.037 GiB, 13.91% gc time)
+Training loss: 4.2436976
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.539071 seconds (13.94 M allocations: 800.179 MiB, 10.46% gc time)
+Validation loss: 37.048927
+Unlabeled attachment score: 67.89531515333134
+Labeled attachment score: 61.19268804315253
+INFO: Backing up
+
+Epoch 72
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.680715 seconds (13.66 M allocations: 2.037 GiB, 14.58% gc time)
+Training loss: 4.247278
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.535710 seconds (13.85 M allocations: 795.659 MiB, 10.98% gc time)
+Validation loss: 36.16057
+Unlabeled attachment score: 67.84537009289781
+Labeled attachment score: 61.22265507941265
+INFO: Backing up
+
+Epoch 73
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.818965 seconds (13.66 M allocations: 2.037 GiB, 16.73% gc time)
+Training loss: 4.3346963
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.445201 seconds (13.71 M allocations: 789.427 MiB, 10.64% gc time)
+Validation loss: 36.476257
+Unlabeled attachment score: 67.37588652482269
+Labeled attachment score: 60.63330336629707
+INFO: Backing up
+
+Epoch 74
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.404538 seconds (13.66 M allocations: 2.037 GiB, 12.24% gc time)
+Training loss: 4.3330398
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.512276 seconds (13.66 M allocations: 786.762 MiB, 10.91% gc time)
+Validation loss: 35.145504
+Unlabeled attachment score: 67.73549095994406
+Labeled attachment score: 61.10278693437219
+INFO: Backing up
+
+Epoch 75
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.399982 seconds (13.67 M allocations: 2.037 GiB, 12.47% gc time)
+Training loss: 4.309429
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.515376 seconds (13.83 M allocations: 795.332 MiB, 10.63% gc time)
+Validation loss: 36.46552
+Unlabeled attachment score: 67.91529317750475
+Labeled attachment score: 61.27260013984617
+INFO: Backing up
+
+Epoch 76
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.246530 seconds (13.64 M allocations: 2.037 GiB, 12.01% gc time)
+Training loss: 4.551272
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.680331 seconds (14.01 M allocations: 803.594 MiB, 12.03% gc time)
+Validation loss: 34.410347
+Unlabeled attachment score: 68.34482069723305
+Labeled attachment score: 61.452402357406854
+INFO: Backing up
+
+Epoch 77
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.548977 seconds (13.68 M allocations: 2.037 GiB, 14.68% gc time)
+Training loss: 4.2236457
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.584556 seconds (13.98 M allocations: 800.276 MiB, 10.68% gc time)
+Validation loss: 36.478756
+Unlabeled attachment score: 68.72440315652781
+Labeled attachment score: 61.7720507441814
+INFO: Backing up
+
+Epoch 78
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.673826 seconds (13.66 M allocations: 2.037 GiB, 14.11% gc time)
+Training loss: 4.041691
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.517742 seconds (13.88 M allocations: 795.983 MiB, 10.66% gc time)
+Validation loss: 37.179302
+Unlabeled attachment score: 68.42473279392668
+Labeled attachment score: 61.592248526620715
+INFO: Backing up
+
+Epoch 79
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.870589 seconds (13.67 M allocations: 2.037 GiB, 16.52% gc time)
+Training loss: 4.095701
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.566758 seconds (14.09 M allocations: 805.697 MiB, 10.85% gc time)
+Validation loss: 36.372864
+Unlabeled attachment score: 68.57456797522725
+Labeled attachment score: 61.62221556288083
+INFO: Backing up
+
+Epoch 80
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.628945 seconds (13.66 M allocations: 2.037 GiB, 14.49% gc time)
+Training loss: 4.0287004
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.540710 seconds (14.04 M allocations: 804.031 MiB, 10.49% gc time)
+Validation loss: 37.95429
+Unlabeled attachment score: 68.17500749175906
+Labeled attachment score: 61.30256717610628
+INFO: Backing up
+
+Epoch 81
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.500528 seconds (13.66 M allocations: 2.037 GiB, 13.88% gc time)
+Training loss: 3.9353688
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.501819 seconds (13.77 M allocations: 791.414 MiB, 10.64% gc time)
+Validation loss: 36.740776
+Unlabeled attachment score: 68.0451503346319
+Labeled attachment score: 61.16272100689242
+INFO: Backing up
+
+Epoch 82
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.180157 seconds (13.65 M allocations: 2.037 GiB, 11.82% gc time)
+Training loss: 3.7524257
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.656782 seconds (13.98 M allocations: 800.647 MiB, 12.30% gc time)
+Validation loss: 36.48281
+Unlabeled attachment score: 67.89531515333134
+Labeled attachment score: 61.1227649585456
+INFO: Backing up
+
+Epoch 83
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.664694 seconds (13.68 M allocations: 2.037 GiB, 14.43% gc time)
+Training loss: 3.5921476
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.538621 seconds (13.97 M allocations: 800.653 MiB, 10.67% gc time)
+Validation loss: 39.085484
+Unlabeled attachment score: 68.51463390270702
+Labeled attachment score: 61.80201778044152
+INFO: Backing up
+
+Epoch 84
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.638579 seconds (13.66 M allocations: 2.037 GiB, 14.86% gc time)
+Training loss: 3.6023877
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.553156 seconds (13.90 M allocations: 797.509 MiB, 10.88% gc time)
+Validation loss: 40.274952
+Unlabeled attachment score: 67.36589751273598
+Labeled attachment score: 60.95295175307162
+INFO: Backing up
+
+Epoch 85
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.785239 seconds (13.66 M allocations: 2.037 GiB, 15.93% gc time)
+Training loss: 3.872258
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.526204 seconds (14.01 M allocations: 802.901 MiB, 10.90% gc time)
+Validation loss: 36.522522
+Unlabeled attachment score: 67.69553491159725
+Labeled attachment score: 61.18269903106583
+INFO: Backing up
+
+Epoch 86
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.436322 seconds (13.66 M allocations: 2.037 GiB, 14.29% gc time)
+Training loss: 3.5690305
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.548368 seconds (13.91 M allocations: 798.275 MiB, 10.71% gc time)
+Validation loss: 38.13163
+Unlabeled attachment score: 67.84537009289781
+Labeled attachment score: 61.172710018979124
+INFO: Backing up
+
+Epoch 87
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.551712 seconds (13.66 M allocations: 2.037 GiB, 15.71% gc time)
+Training loss: 3.6277776
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.501796 seconds (13.94 M allocations: 800.287 MiB, 11.12% gc time)
+Validation loss: 37.317497
+Unlabeled attachment score: 68.22495255219259
+Labeled attachment score: 61.54230346618719
+INFO: Backing up
+
+Epoch 88
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.744154 seconds (13.66 M allocations: 2.037 GiB, 16.40% gc time)
+Training loss: 3.5963652
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.522214 seconds (14.07 M allocations: 805.781 MiB, 10.61% gc time)
+Validation loss: 38.74694
+Unlabeled attachment score: 68.08510638297872
+Labeled attachment score: 61.27260013984617
+INFO: Backing up
+
+Epoch 89
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.554980 seconds (13.66 M allocations: 2.037 GiB, 13.91% gc time)
+Training loss: 3.478615
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.489559 seconds (14.12 M allocations: 808.222 MiB, 10.90% gc time)
+Validation loss: 38.37561
+Unlabeled attachment score: 68.28488662471281
+Labeled attachment score: 61.40245729697333
+INFO: Backing up
+
+Epoch 90
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.550616 seconds (13.67 M allocations: 2.037 GiB, 12.97% gc time)
+Training loss: 3.4236183
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.534387 seconds (13.77 M allocations: 792.369 MiB, 10.94% gc time)
+Validation loss: 40.822037
+Unlabeled attachment score: 68.69443612026771
+Labeled attachment score: 61.91189691339527
+INFO: Backing up
+
+Epoch 91
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.735427 seconds (13.67 M allocations: 2.037 GiB, 14.69% gc time)
+Training loss: 3.534512
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.491542 seconds (13.94 M allocations: 799.584 MiB, 10.67% gc time)
+Validation loss: 38.00729
+Unlabeled attachment score: 68.0351613225452
+Labeled attachment score: 61.26261112775946
+INFO: Backing up
+
+Epoch 92
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.721789 seconds (13.66 M allocations: 2.037 GiB, 15.72% gc time)
+Training loss: 3.5943475
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.526907 seconds (14.00 M allocations: 802.555 MiB, 10.36% gc time)
+Validation loss: 36.62787
+Unlabeled attachment score: 68.21496354010588
+Labeled attachment score: 61.43242433323344
+INFO: Backing up
+
+Epoch 93
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.848309 seconds (13.66 M allocations: 2.037 GiB, 16.51% gc time)
+Training loss: 3.472022
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.530557 seconds (14.17 M allocations: 809.358 MiB, 10.59% gc time)
+Validation loss: 36.738613
+Unlabeled attachment score: 68.06512835880531
+Labeled attachment score: 61.18269903106583
+INFO: Backing up
+
+Epoch 94
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.429086 seconds (13.66 M allocations: 2.037 GiB, 11.92% gc time)
+Training loss: 3.3242638
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.573059 seconds (14.03 M allocations: 803.925 MiB, 10.49% gc time)
+Validation loss: 38.209045
+Unlabeled attachment score: 68.2649086005394
+Labeled attachment score: 61.29257816401958
+INFO: Backing up
+
+Epoch 95
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.684348 seconds (13.66 M allocations: 2.037 GiB, 15.04% gc time)
+Training loss: 3.3975294
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.579246 seconds (13.77 M allocations: 791.342 MiB, 11.61% gc time)
+Validation loss: 40.125885
+Unlabeled attachment score: 67.805414044551
+Labeled attachment score: 61.02287483767855
+INFO: Backing up
+
+Epoch 96
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.203409 seconds (13.65 M allocations: 2.037 GiB, 12.08% gc time)
+Training loss: 3.586654
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.560830 seconds (13.86 M allocations: 794.167 MiB, 12.01% gc time)
+Validation loss: 37.602814
+Unlabeled attachment score: 68.34482069723305
+Labeled attachment score: 61.30256717610628
+INFO: Backing up
+
+Epoch 97
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.667113 seconds (13.68 M allocations: 2.037 GiB, 15.96% gc time)
+Training loss: 3.5336256
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.531010 seconds (14.13 M allocations: 807.548 MiB, 10.69% gc time)
+Validation loss: 37.917816
+Unlabeled attachment score: 68.2649086005394
+Labeled attachment score: 61.65218259914094
+INFO: Backing up
+
+Epoch 98
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.511597 seconds (13.66 M allocations: 2.037 GiB, 12.85% gc time)
+Training loss: 3.344762
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.539856 seconds (13.99 M allocations: 800.234 MiB, 10.66% gc time)
+Validation loss: 39.961918
+Unlabeled attachment score: 68.00519428628509
+Labeled attachment score: 61.14274298271901
+INFO: Backing up
+
+Epoch 99
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.598686 seconds (13.66 M allocations: 2.037 GiB, 14.02% gc time)
+Training loss: 3.2206032
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.590521 seconds (14.00 M allocations: 801.656 MiB, 10.87% gc time)
+Validation loss: 40.394135
+Unlabeled attachment score: 68.73439216861452
+Labeled attachment score: 61.74208370792129
+INFO: Backing up
+
+Epoch 100
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.631330 seconds (13.66 M allocations: 2.037 GiB, 14.78% gc time)
+Training loss: 3.2745526
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.554980 seconds (14.15 M allocations: 808.339 MiB, 10.86% gc time)
+Validation loss: 38.350792
+Unlabeled attachment score: 68.51463390270702
+Labeled attachment score: 61.5522924782739
+INFO: Backing up
+INFO: Training is over.
+
+julia> 
+
+
+julia> 
+
+
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+WARNING: redefining constant UPOSTAG
+WARNING: redefining constant UDEPREL
+WARNING: redefining constant lmdir
+WARNING: redefining constant datadir
+WARNING: redefining constant engtrn
+WARNING: redefining constant engdev
+WARNING: redefining constant englm
+WARNING: redefining constant trtrn
+WARNING: redefining constant trdev
+WARNING: redefining constant trlm
+accuracy_bt
+
+julia>  main("--datafiles $trtrn $trdev --lmfile $trlm --upos 150 --feat 150  --xpos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner --proj false --proj_cat false --freqtop 0")
+ main("--datafiles $trtrn $trdev --lmfile $trlm --upos 150 --feat 150  --xpos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner --proj false --proj_cat false --freqtop 0")
+Tuple{Symbol,Any}[(:feat, 150), (:birnn, 3), (:birnndrop, 0.33), (:freqtop, 0), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 150), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 150), (:freqlim, 2), (:backupdir, "Backups_2018-06-09T07:11:55.323"), (:beta1, 0.9), (:remb, 350), (:algo, "eisner"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, false), (:arcweight, 0.0), (:tokens, 500), (:proj_cat, false), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+07:11:55 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld 
+07:11:58 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu 
+07:11:58 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu 
+07:12:36 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+ERROR: MethodError: no method matching Array{Int64,2}(::Int64, ::Int64, ::Int64)
+Stacktrace:
+ [1] embed_many(::LMEncoder, ::Array{Any,1}, ::Array{Any,1}, ::Symbol, ::Symbol, ::Symbol) at /scratch/users/cgumeli/Nubik/./encoders/lm.jl:79
+ [2] ifexist(::KnetModules.EmbeddingLookup, ::##223#227{LMEncoder,Array{Any,1},Array{Any,1}}) at /scratch/users/cgumeli/Nubik/./encoders/./util.jl:41
+ [3] #call#220(::#local_only, ::LMEncoder, ::Array{Any,1}, ::Array{Any,1}, ::Void) at /scratch/users/cgumeli/Nubik/./encoders/lm.jl:50
+ [4] (::#kw#LMEncoder)(::Array{Any,1}, ::LMEncoder, ::Array{Any,1}, ::Array{Any,1}, ::Void) at ./<missing>:0
+ [5] (::FreshEncoder)(::Array{Any,1}, ::Array{Any,1}, ::Void) at /scratch/users/cgumeli/Nubik/./encoders/fresh.jl:83 (repeats 2 times)
+ [6] predict at /scratch/users/cgumeli/Nubik/main2.jl:13 [inlined]
+ [7] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:166 [inlined]
+ [8] macro expansion at ./util.jl:237 [inlined]
+ [9] #train#252(::Void, ::Function) at /scratch/users/cgumeli/Nubik/main2.jl:164
+ [10] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:87
+
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+WARNING: redefining constant UPOSTAG
+WARNING: redefining constant UDEPREL
+WARNING: redefining constant lmdir
+WARNING: redefining constant datadir
+WARNING: redefining constant engtrn
+WARNING: redefining constant engdev
+WARNING: redefining constant englm
+WARNING: redefining constant trtrn
+WARNING: redefining constant trdev
+WARNING: redefining constant trlm
+accuracy_bt
+
+julia>  main("--datafiles $trtrn $trdev --lmfile $trlm --upos 150 --feat 150  --xpos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner --proj false --proj_cat false --freqtop 0")
+ main("--datafiles $trtrn $trdev --lmfile $trlm --upos 150 --feat 150  --xpos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner --proj false --proj_cat false --freqtop 0")
+Tuple{Symbol,Any}[(:feat, 150), (:birnn, 3), (:birnndrop, 0.33), (:freqtop, 0), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 150), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 150), (:freqlim, 2), (:backupdir, "Backups_2018-06-09T07:14:19.247"), (:beta1, 0.9), (:remb, 350), (:algo, "eisner"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, false), (:arcweight, 0.0), (:tokens, 500), (:proj_cat, false), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+07:14:19 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld 
+07:14:22 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu 
+07:14:22 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu 
+07:14:41 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+ERROR: cudnn.cudnnSetDropoutDescriptor error 8
+Stacktrace:
+ [1] macro expansion at /scratch/users/cgumeli/.julia/v0.6/Knet/src/gpu.jl:18 [inlined]
+ [2] #DD#469(::Ptr{Void}, ::Float64, ::Int64, ::Array{Any,1}, ::Type{T} where T) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/rnn.jl:28
+ [3] (::Core.#kw#Type)(::Array{Any,1}, ::Type{Knet.DD}) at ./<missing>:0
+ [4] #rnninit#486(::Ptr{Void}, ::Int64, ::Float64, ::Bool, ::Bool, ::Symbol, ::Type{T} where T, ::Int64, ::Int64, ::Knet.#xavier, ::Base.#zeros, ::Bool, ::Knet.#rnninit, ::Int32, ::Int32) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/rnn.jl:367
+ [5] (::Knet.#kw##rnninit)(::Array{Any,1}, ::Knet.#rnninit, ::Int32, ::Int32) at ./<missing>:0
+ [6] convert_params!(::KnetModules.LSTM, ::Type{T} where T) at /scratch/users/cgumeli/.julia/v0.6/KnetModules/src/rnn.jl:68
+ [7] gpu!(::FreshEncoder) at /scratch/users/cgumeli/.julia/v0.6/KnetModules/src/core.jl:238
+ [8] #train#387(::Void, ::Function) at /scratch/users/cgumeli/Nubik/main2.jl:133
+ [9] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:87
+
+julia> exit()
+exit()
+bash-4.2$ julia
+julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "?help" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.6.2 (2017-12-13 18:08 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-pc-linux-gnu
+
+WARNING: Terminal not fully functional
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+accuracy_bt
+
+julia>  main("--datafiles $trtrn $trdev --lmfile $trlm --upos 150 --feat 150  --xpos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner --proj false --proj_cat false --freqtop 0")
+ main("--datafiles $trtrn $trdev --lmfile $trlm --upos 150 --feat 150  --xpos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner --proj false --proj_cat false --freqtop 0")
+Tuple{Symbol,Any}[(:feat, 150), (:birnn, 3), (:birnndrop, 0.33), (:freqtop, 0), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 150), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 150), (:freqlim, 2), (:backupdir, "Backups_2018-06-09T07:15:30.677"), (:beta1, 0.9), (:remb, 350), (:algo, "eisner"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, false), (:arcweight, 0.0), (:tokens, 500), (:proj_cat, false), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+07:15:34 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/turkish_chmodel.jld 
+07:15:40 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-train.conllu 
+07:15:41 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Turkish-IMST/tr_imst-ud-dev.conllu 
+07:16:18 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+ 34.616712 seconds (26.34 M allocations: 1.379 GiB, 2.51% gc time)
+Validation loss: 64.29298
+Unlabeled attachment score: 9.779242832883828
+Labeled attachment score: 0.1198681450404555
+
+Epoch 1
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+ 41.077966 seconds (19.90 M allocations: 2.356 GiB, 2.42% gc time)
+Training loss: 44.493763
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  3.139568 seconds (17.70 M allocations: 983.698 MiB, 10.83% gc time)
+Validation loss: 38.941616
+Unlabeled attachment score: 43.092598142043755
+Labeled attachment score: 26.700629307761464
+INFO: Backing up
+
+Epoch 2
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.889289 seconds (14.44 M allocations: 2.067 GiB, 10.64% gc time)
+Training loss: 31.672237
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.931239 seconds (15.42 M allocations: 867.785 MiB, 12.26% gc time)
+Validation loss: 30.577606
+Unlabeled attachment score: 51.15373089601439
+Labeled attachment score: 36.40994905603836
+INFO: Backing up
+
+Epoch 3
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.958997 seconds (14.47 M allocations: 2.068 GiB, 10.59% gc time)
+Training loss: 26.490988
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.616077 seconds (13.57 M allocations: 780.710 MiB, 11.42% gc time)
+Validation loss: 25.327648
+Unlabeled attachment score: 54.71980821096793
+Labeled attachment score: 43.80181800019978
+INFO: Backing up
+
+Epoch 4
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.397757 seconds (14.45 M allocations: 2.067 GiB, 11.46% gc time)
+Training loss: 23.92646
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.612285 seconds (13.38 M allocations: 776.262 MiB, 11.79% gc time)
+Validation loss: 23.638933
+Unlabeled attachment score: 58.3058635500949
+Labeled attachment score: 48.99610428528619
+INFO: Backing up
+
+Epoch 5
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.464068 seconds (14.45 M allocations: 2.067 GiB, 11.35% gc time)
+Training loss: 21.81638
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.640785 seconds (13.34 M allocations: 774.449 MiB, 11.34% gc time)
+Validation loss: 21.81714
+Unlabeled attachment score: 60.563380281690144
+Labeled attachment score: 52.56218160023974
+INFO: Backing up
+
+Epoch 6
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.659276 seconds (14.45 M allocations: 2.067 GiB, 12.06% gc time)
+Training loss: 20.116747
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.606936 seconds (13.29 M allocations: 772.827 MiB, 11.34% gc time)
+Validation loss: 20.829048
+Unlabeled attachment score: 61.72210568374788
+Labeled attachment score: 54.55998401758066
+INFO: Backing up
+
+Epoch 7
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.504706 seconds (14.45 M allocations: 2.067 GiB, 11.49% gc time)
+Training loss: 19.222721
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.732324 seconds (14.09 M allocations: 808.046 MiB, 11.43% gc time)
+Validation loss: 20.871685
+Unlabeled attachment score: 63.86974328238937
+Labeled attachment score: 56.02836879432624
+INFO: Backing up
+
+Epoch 8
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.488352 seconds (14.46 M allocations: 2.067 GiB, 12.17% gc time)
+Training loss: 18.565228
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.641801 seconds (13.22 M allocations: 769.941 MiB, 11.15% gc time)
+Validation loss: 19.783228
+Unlabeled attachment score: 63.070622315453
+Labeled attachment score: 55.91848966137249
+INFO: Backing up
+
+Epoch 9
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.370810 seconds (14.46 M allocations: 2.068 GiB, 11.76% gc time)
+Training loss: 17.609617
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.634965 seconds (13.64 M allocations: 787.663 MiB, 10.87% gc time)
+Validation loss: 19.381266
+Unlabeled attachment score: 64.60893017680552
+Labeled attachment score: 57.53670961941864
+INFO: Backing up
+
+Epoch 10
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.341848 seconds (14.47 M allocations: 2.068 GiB, 11.53% gc time)
+Training loss: 17.01651
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.675905 seconds (13.55 M allocations: 784.163 MiB, 11.59% gc time)
+Validation loss: 19.79749
+Unlabeled attachment score: 64.38917191089801
+Labeled attachment score: 57.316951353511136
+INFO: Backing up
+
+Epoch 11
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.591196 seconds (14.46 M allocations: 2.067 GiB, 12.16% gc time)
+Training loss: 16.192524
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.744443 seconds (14.14 M allocations: 810.069 MiB, 11.58% gc time)
+Validation loss: 19.282211
+Unlabeled attachment score: 66.11727100189792
+Labeled attachment score: 58.99510538407751
+INFO: Backing up
+
+Epoch 12
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.508479 seconds (14.47 M allocations: 2.068 GiB, 11.44% gc time)
+Training loss: 15.824098
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.652265 seconds (13.22 M allocations: 769.537 MiB, 11.31% gc time)
+Validation loss: 19.621454
+Unlabeled attachment score: 63.829787234042556
+Labeled attachment score: 56.97732494256318
+INFO: Backing up
+
+Epoch 13
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.546984 seconds (14.48 M allocations: 2.068 GiB, 12.31% gc time)
+Training loss: 15.550743
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.578598 seconds (12.96 M allocations: 756.716 MiB, 11.21% gc time)
+Validation loss: 19.017036
+Unlabeled attachment score: 65.19828188992109
+Labeled attachment score: 58.625511936869444
+INFO: Backing up
+
+Epoch 14
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.539439 seconds (14.47 M allocations: 2.068 GiB, 11.54% gc time)
+Training loss: 14.957559
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.701497 seconds (13.85 M allocations: 795.664 MiB, 11.65% gc time)
+Validation loss: 19.402939
+Unlabeled attachment score: 67.09619418639497
+Labeled attachment score: 60.64329237838378
+INFO: Backing up
+
+Epoch 15
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.520434 seconds (14.47 M allocations: 2.068 GiB, 11.60% gc time)
+Training loss: 14.172355
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.625545 seconds (13.22 M allocations: 769.623 MiB, 11.18% gc time)
+Validation loss: 19.138186
+Unlabeled attachment score: 66.11727100189792
+Labeled attachment score: 59.85416042353411
+INFO: Backing up
+
+Epoch 16
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.287433 seconds (14.47 M allocations: 2.068 GiB, 11.46% gc time)
+Training loss: 13.758878
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.628992 seconds (13.40 M allocations: 776.274 MiB, 11.44% gc time)
+Validation loss: 19.633057
+Unlabeled attachment score: 66.40695235241235
+Labeled attachment score: 60.013984616921384
+INFO: Backing up
+
+Epoch 17
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.540290 seconds (14.47 M allocations: 2.068 GiB, 12.16% gc time)
+Training loss: 13.275993
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.645611 seconds (13.68 M allocations: 787.181 MiB, 11.33% gc time)
+Validation loss: 20.041187
+Unlabeled attachment score: 66.86644690840076
+Labeled attachment score: 60.593347317950254
+INFO: Backing up
+
+Epoch 18
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.550709 seconds (14.46 M allocations: 2.067 GiB, 11.13% gc time)
+Training loss: 12.78607
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.718870 seconds (13.70 M allocations: 787.655 MiB, 12.06% gc time)
+Validation loss: 20.912125
+Unlabeled attachment score: 67.15612825891519
+Labeled attachment score: 61.10278693437219
+INFO: Backing up
+
+Epoch 19
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.488528 seconds (14.48 M allocations: 2.068 GiB, 12.25% gc time)
+Training loss: 12.512191
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.617802 seconds (13.63 M allocations: 784.200 MiB, 11.15% gc time)
+Validation loss: 21.156027
+Unlabeled attachment score: 67.25601837978223
+Labeled attachment score: 61.27260013984617
+INFO: Backing up
+
+Epoch 20
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.401226 seconds (14.46 M allocations: 2.067 GiB, 11.45% gc time)
+Training loss: 12.098081
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.688411 seconds (13.51 M allocations: 780.065 MiB, 11.80% gc time)
+Validation loss: 21.20196
+Unlabeled attachment score: 66.98631505344122
+Labeled attachment score: 61.19268804315253
+INFO: Backing up
+
+Epoch 21
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.368961 seconds (14.47 M allocations: 2.068 GiB, 11.88% gc time)
+Training loss: 11.570106
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.651762 seconds (13.22 M allocations: 767.384 MiB, 11.40% gc time)
+Validation loss: 21.078892
+Unlabeled attachment score: 66.71661172710019
+Labeled attachment score: 60.85306163220457
+INFO: Backing up
+
+Epoch 22
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.327044 seconds (14.47 M allocations: 2.068 GiB, 11.22% gc time)
+Training loss: 11.2271
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.674042 seconds (13.86 M allocations: 794.288 MiB, 11.32% gc time)
+Validation loss: 21.36912
+Unlabeled attachment score: 68.65448007192089
+Labeled attachment score: 62.361402457296975
+INFO: Backing up
+
+Epoch 23
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.665061 seconds (14.47 M allocations: 2.068 GiB, 12.17% gc time)
+Training loss: 10.85868
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.664354 seconds (13.75 M allocations: 789.212 MiB, 11.24% gc time)
+Validation loss: 21.424955
+Unlabeled attachment score: 67.66556787533713
+Labeled attachment score: 61.76206173209469
+INFO: Backing up
+
+Epoch 24
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.507404 seconds (14.47 M allocations: 2.068 GiB, 12.20% gc time)
+Training loss: 10.6296425
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.693261 seconds (13.91 M allocations: 797.034 MiB, 11.18% gc time)
+Validation loss: 21.278824
+Unlabeled attachment score: 68.44471081810009
+Labeled attachment score: 62.4313255419039
+INFO: Backing up
+
+Epoch 25
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.385345 seconds (14.47 M allocations: 2.068 GiB, 11.30% gc time)
+Training loss: 10.099333
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.627798 seconds (13.56 M allocations: 781.846 MiB, 11.07% gc time)
+Validation loss: 22.074118
+Unlabeled attachment score: 67.70552392368394
+Labeled attachment score: 61.57227050244731
+INFO: Backing up
+
+Epoch 26
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.480656 seconds (14.47 M allocations: 2.068 GiB, 11.45% gc time)
+Training loss: 9.799652
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.683652 seconds (13.68 M allocations: 785.800 MiB, 11.57% gc time)
+Validation loss: 22.97255
+Unlabeled attachment score: 66.63669963040655
+Labeled attachment score: 60.77314953551094
+INFO: Backing up
+
+Epoch 27
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.436820 seconds (14.47 M allocations: 2.068 GiB, 11.39% gc time)
+Training loss: 9.610969
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.639782 seconds (13.88 M allocations: 795.477 MiB, 11.38% gc time)
+Validation loss: 23.534065
+Unlabeled attachment score: 67.43582059734292
+Labeled attachment score: 61.5522924782739
+INFO: Backing up
+
+Epoch 28
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.434111 seconds (14.47 M allocations: 2.068 GiB, 11.30% gc time)
+Training loss: 9.437298
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.664033 seconds (13.88 M allocations: 795.166 MiB, 11.42% gc time)
+Validation loss: 22.560923
+Unlabeled attachment score: 67.86534811707122
+Labeled attachment score: 62.01178703426231
+INFO: Backing up
+
+Epoch 29
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.583609 seconds (14.47 M allocations: 2.068 GiB, 12.26% gc time)
+Training loss: 9.4052515
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.728902 seconds (13.97 M allocations: 798.388 MiB, 11.21% gc time)
+Validation loss: 22.044264
+Unlabeled attachment score: 67.49575466986315
+Labeled attachment score: 61.782039756268105
+INFO: Backing up
+
+Epoch 30
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.526498 seconds (14.46 M allocations: 2.067 GiB, 12.16% gc time)
+Training loss: 8.805458
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.666074 seconds (13.72 M allocations: 787.927 MiB, 11.65% gc time)
+Validation loss: 23.772282
+Unlabeled attachment score: 67.54569973029668
+Labeled attachment score: 61.7720507441814
+INFO: Backing up
+
+Epoch 31
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.369107 seconds (14.47 M allocations: 2.068 GiB, 11.60% gc time)
+Training loss: 8.707639
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.754915 seconds (14.22 M allocations: 809.465 MiB, 11.58% gc time)
+Validation loss: 24.31847
+Unlabeled attachment score: 68.52462291479372
+Labeled attachment score: 62.641094795724705
+INFO: Backing up
+
+Epoch 32
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.450948 seconds (14.47 M allocations: 2.068 GiB, 11.42% gc time)
+Training loss: 8.345981
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.751788 seconds (14.29 M allocations: 812.773 MiB, 11.53% gc time)
+Validation loss: 25.155792
+Unlabeled attachment score: 68.97412845869543
+Labeled attachment score: 63.16052342423335
+INFO: Backing up
+
+Epoch 33
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.516150 seconds (14.47 M allocations: 2.068 GiB, 11.45% gc time)
+Training loss: 8.152008
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.644173 seconds (13.81 M allocations: 791.763 MiB, 11.43% gc time)
+Validation loss: 24.596588
+Unlabeled attachment score: 68.13505144341225
+Labeled attachment score: 62.40135850564379
+INFO: Backing up
+
+Epoch 34
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.597062 seconds (14.47 M allocations: 2.068 GiB, 12.01% gc time)
+Training loss: 8.112307
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.656945 seconds (13.99 M allocations: 799.611 MiB, 11.53% gc time)
+Validation loss: 26.221064
+Unlabeled attachment score: 68.52462291479372
+Labeled attachment score: 62.641094795724705
+INFO: Backing up
+
+Epoch 35
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.614518 seconds (14.47 M allocations: 2.068 GiB, 12.20% gc time)
+Training loss: 7.8766875
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.698979 seconds (13.84 M allocations: 792.942 MiB, 11.34% gc time)
+Validation loss: 26.828127
+Unlabeled attachment score: 68.2748976126261
+Labeled attachment score: 62.2115672759964
+INFO: Backing up
+
+Epoch 36
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.495430 seconds (14.46 M allocations: 2.067 GiB, 11.95% gc time)
+Training loss: 7.5299363
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.722013 seconds (13.71 M allocations: 786.557 MiB, 11.49% gc time)
+Validation loss: 27.209982
+Unlabeled attachment score: 67.68554589951054
+Labeled attachment score: 61.752072720007995
+INFO: Backing up
+
+Epoch 37
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.401125 seconds (14.47 M allocations: 2.068 GiB, 11.47% gc time)
+Training loss: 7.3006063
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.627260 seconds (13.77 M allocations: 789.462 MiB, 11.41% gc time)
+Validation loss: 26.698437
+Unlabeled attachment score: 68.10508440715213
+Labeled attachment score: 62.24153431225652
+INFO: Backing up
+
+Epoch 38
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.434760 seconds (14.47 M allocations: 2.068 GiB, 11.37% gc time)
+Training loss: 7.2235847
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.677166 seconds (13.73 M allocations: 787.725 MiB, 11.47% gc time)
+Validation loss: 27.23432
+Unlabeled attachment score: 67.77544700829088
+Labeled attachment score: 62.2115672759964
+INFO: Backing up
+
+Epoch 39
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.592223 seconds (14.47 M allocations: 2.068 GiB, 11.99% gc time)
+Training loss: 7.1251755
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.691780 seconds (14.24 M allocations: 809.867 MiB, 11.05% gc time)
+Validation loss: 27.531109
+Unlabeled attachment score: 68.32484267305963
+Labeled attachment score: 62.750973928678455
+INFO: Backing up
+
+Epoch 40
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.558513 seconds (14.47 M allocations: 2.068 GiB, 11.84% gc time)
+Training loss: 7.0354557
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.717195 seconds (14.01 M allocations: 799.837 MiB, 12.13% gc time)
+Validation loss: 27.331812
+Unlabeled attachment score: 68.6744580960943
+Labeled attachment score: 62.68105084407152
+INFO: Backing up
+
+Epoch 41
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.672643 seconds (14.47 M allocations: 2.068 GiB, 12.42% gc time)
+Training loss: 6.5728393
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.715442 seconds (13.80 M allocations: 790.430 MiB, 11.19% gc time)
+Validation loss: 28.189478
+Unlabeled attachment score: 67.805414044551
+Labeled attachment score: 61.971830985915496
+INFO: Backing up
+
+Epoch 42
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.521177 seconds (14.46 M allocations: 2.067 GiB, 11.45% gc time)
+Training loss: 6.7297773
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.724596 seconds (14.06 M allocations: 801.546 MiB, 11.10% gc time)
+Validation loss: 27.227606
+Unlabeled attachment score: 68.34482069723305
+Labeled attachment score: 62.68105084407152
+INFO: Backing up
+
+Epoch 43
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.505799 seconds (14.47 M allocations: 2.068 GiB, 11.62% gc time)
+Training loss: 6.3040137
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.732081 seconds (13.58 M allocations: 780.859 MiB, 11.69% gc time)
+Validation loss: 27.933935
+Unlabeled attachment score: 67.8353810808111
+Labeled attachment score: 62.391369493557086
+INFO: Backing up
+
+Epoch 44
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.519414 seconds (14.47 M allocations: 2.068 GiB, 11.91% gc time)
+Training loss: 6.17322
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.675374 seconds (13.63 M allocations: 783.130 MiB, 11.31% gc time)
+Validation loss: 29.303946
+Unlabeled attachment score: 68.14504045549896
+Labeled attachment score: 62.50124862651084
+INFO: Backing up
+
+Epoch 45
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.511569 seconds (14.47 M allocations: 2.068 GiB, 11.77% gc time)
+Training loss: 5.983307
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.671683 seconds (13.81 M allocations: 790.570 MiB, 11.59% gc time)
+Validation loss: 28.905117
+Unlabeled attachment score: 68.40475476975327
+Labeled attachment score: 62.581160723204476
+INFO: Backing up
+
+Epoch 46
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.723875 seconds (14.46 M allocations: 2.067 GiB, 12.32% gc time)
+Training loss: 6.179698
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.712094 seconds (14.10 M allocations: 804.351 MiB, 11.66% gc time)
+Validation loss: 29.35823
+Unlabeled attachment score: 68.30486464888622
+Labeled attachment score: 62.51123763859754
+INFO: Backing up
+
+Epoch 47
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.405723 seconds (14.47 M allocations: 2.068 GiB, 11.20% gc time)
+Training loss: 5.8467445
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.713327 seconds (14.10 M allocations: 804.658 MiB, 11.27% gc time)
+Validation loss: 28.776598
+Unlabeled attachment score: 68.92418339826192
+Labeled attachment score: 63.21046848466687
+INFO: Backing up
+
+Epoch 48
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.379052 seconds (14.47 M allocations: 2.068 GiB, 11.54% gc time)
+Training loss: 6.0302386
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.708035 seconds (14.05 M allocations: 802.202 MiB, 11.81% gc time)
+Validation loss: 28.25384
+Unlabeled attachment score: 68.21496354010588
+Labeled attachment score: 62.46129257816402
+INFO: Backing up
+
+Epoch 49
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.623510 seconds (14.47 M allocations: 2.068 GiB, 11.92% gc time)
+Training loss: 5.986696
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.753729 seconds (14.45 M allocations: 820.075 MiB, 11.15% gc time)
+Validation loss: 28.658108
+Unlabeled attachment score: 69.06402956747577
+Labeled attachment score: 63.16052342423335
+INFO: Backing up
+
+Epoch 50
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.508852 seconds (14.47 M allocations: 2.068 GiB, 11.48% gc time)
+Training loss: 5.724323
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.770285 seconds (14.26 M allocations: 811.631 MiB, 11.51% gc time)
+Validation loss: 30.01277
+Unlabeled attachment score: 69.49355708720408
+Labeled attachment score: 63.530116871441415
+INFO: Backing up
+
+Epoch 51
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.572676 seconds (14.47 M allocations: 2.068 GiB, 12.80% gc time)
+Training loss: 5.520047
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.809182 seconds (14.42 M allocations: 819.058 MiB, 11.64% gc time)
+Validation loss: 31.83382
+Unlabeled attachment score: 69.17390870042952
+Labeled attachment score: 63.2704025571871
+INFO: Backing up
+
+Epoch 52
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.398312 seconds (14.47 M allocations: 2.068 GiB, 11.36% gc time)
+Training loss: 5.266292
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.705531 seconds (14.03 M allocations: 801.077 MiB, 11.26% gc time)
+Validation loss: 30.469206
+Unlabeled attachment score: 68.84427130156827
+Labeled attachment score: 62.80091898911198
+INFO: Backing up
+
+Epoch 53
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.389942 seconds (14.47 M allocations: 2.068 GiB, 11.44% gc time)
+Training loss: 5.319048
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.791827 seconds (14.54 M allocations: 824.303 MiB, 12.07% gc time)
+Validation loss: 31.444687
+Unlabeled attachment score: 69.1039856158226
+Labeled attachment score: 63.21046848466687
+INFO: Backing up
+
+Epoch 54
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.558726 seconds (14.47 M allocations: 2.068 GiB, 12.21% gc time)
+Training loss: 4.9746366
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.769049 seconds (13.99 M allocations: 799.092 MiB, 11.35% gc time)
+Validation loss: 31.853958
+Unlabeled attachment score: 68.35480970931975
+Labeled attachment score: 62.55119368694436
+INFO: Backing up
+
+Epoch 55
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.483462 seconds (14.46 M allocations: 2.067 GiB, 11.25% gc time)
+Training loss: 4.993033
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.765349 seconds (14.39 M allocations: 817.703 MiB, 11.42% gc time)
+Validation loss: 31.574474
+Unlabeled attachment score: 69.05404055538907
+Labeled attachment score: 63.08061132753971
+INFO: Backing up
+
+Epoch 56
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.558027 seconds (14.47 M allocations: 2.068 GiB, 12.79% gc time)
+Training loss: 4.998813
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.715287 seconds (14.03 M allocations: 800.839 MiB, 11.59% gc time)
+Validation loss: 32.297024
+Unlabeled attachment score: 68.2649086005394
+Labeled attachment score: 62.4313255419039
+INFO: Backing up
+
+Epoch 57
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.355521 seconds (14.46 M allocations: 2.067 GiB, 11.47% gc time)
+Training loss: 4.8119197
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.780812 seconds (14.33 M allocations: 815.059 MiB, 11.78% gc time)
+Validation loss: 31.781366
+Unlabeled attachment score: 68.95415043452202
+Labeled attachment score: 62.99071021875937
+INFO: Backing up
+
+Epoch 58
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.441855 seconds (14.47 M allocations: 2.068 GiB, 11.40% gc time)
+Training loss: 4.8370924
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.783640 seconds (14.42 M allocations: 818.865 MiB, 11.41% gc time)
+Validation loss: 30.068987
+Unlabeled attachment score: 68.8942163620018
+Labeled attachment score: 63.10058935171312
+INFO: Backing up
+
+Epoch 59
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.515831 seconds (14.47 M allocations: 2.068 GiB, 11.48% gc time)
+Training loss: 4.7655306
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.774008 seconds (14.30 M allocations: 812.057 MiB, 11.86% gc time)
+Validation loss: 33.944885
+Unlabeled attachment score: 69.23384277294976
+Labeled attachment score: 63.560083907701525
+INFO: Backing up
+
+Epoch 60
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.527236 seconds (14.46 M allocations: 2.067 GiB, 12.08% gc time)
+Training loss: 4.522736
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.665180 seconds (14.13 M allocations: 805.370 MiB, 11.20% gc time)
+Validation loss: 34.60186
+Unlabeled attachment score: 68.4946558785336
+Labeled attachment score: 62.99071021875937
+INFO: Backing up
+
+Epoch 61
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.568151 seconds (14.47 M allocations: 2.068 GiB, 12.52% gc time)
+Training loss: 4.4533625
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.770956 seconds (14.39 M allocations: 816.534 MiB, 11.63% gc time)
+Validation loss: 33.07944
+Unlabeled attachment score: 69.03406253121567
+Labeled attachment score: 63.15053441214664
+INFO: Backing up
+
+Epoch 62
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.436992 seconds (14.47 M allocations: 2.068 GiB, 11.68% gc time)
+Training loss: 4.4564133
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.777841 seconds (14.33 M allocations: 813.543 MiB, 11.67% gc time)
+Validation loss: 33.102707
+Unlabeled attachment score: 68.57456797522725
+Labeled attachment score: 62.71101788033164
+INFO: Backing up
+
+Epoch 63
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.403559 seconds (14.47 M allocations: 2.068 GiB, 11.74% gc time)
+Training loss: 4.3987184
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.752026 seconds (14.31 M allocations: 814.550 MiB, 11.64% gc time)
+Validation loss: 34.262867
+Unlabeled attachment score: 68.99410648286884
+Labeled attachment score: 63.310358605533914
+INFO: Backing up
+
+Epoch 64
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.465732 seconds (14.48 M allocations: 2.068 GiB, 11.31% gc time)
+Training loss: 4.2475414
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.756030 seconds (14.15 M allocations: 805.902 MiB, 12.01% gc time)
+Validation loss: 34.285797
+Unlabeled attachment score: 68.53461192688043
+Labeled attachment score: 62.73099590450504
+INFO: Backing up
+
+Epoch 65
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.665200 seconds (14.47 M allocations: 2.068 GiB, 12.06% gc time)
+Training loss: 4.4503675
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.726249 seconds (14.38 M allocations: 817.419 MiB, 11.41% gc time)
+Validation loss: 34.27324
+Unlabeled attachment score: 69.17390870042952
+Labeled attachment score: 63.310358605533914
+INFO: Backing up
+
+Epoch 66
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.498464 seconds (14.47 M allocations: 2.068 GiB, 11.32% gc time)
+Training loss: 4.31558
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.748818 seconds (14.38 M allocations: 817.097 MiB, 11.59% gc time)
+Validation loss: 33.606686
+Unlabeled attachment score: 69.28378783338327
+Labeled attachment score: 63.57007291978823
+INFO: Backing up
+
+Epoch 67
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.546407 seconds (14.46 M allocations: 2.067 GiB, 12.15% gc time)
+Training loss: 4.09994
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.777831 seconds (14.40 M allocations: 817.400 MiB, 11.66% gc time)
+Validation loss: 34.240177
+Unlabeled attachment score: 69.04405154330237
+Labeled attachment score: 63.10058935171312
+INFO: Backing up
+
+Epoch 68
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.457549 seconds (14.47 M allocations: 2.068 GiB, 11.67% gc time)
+Training loss: 4.1535254
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.717770 seconds (14.25 M allocations: 811.301 MiB, 11.75% gc time)
+Validation loss: 35.59424
+Unlabeled attachment score: 68.8842273499151
+Labeled attachment score: 63.21046848466687
+INFO: Backing up
+
+Epoch 69
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.449665 seconds (14.47 M allocations: 2.068 GiB, 11.70% gc time)
+Training loss: 3.9510615
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.771661 seconds (14.60 M allocations: 826.737 MiB, 11.79% gc time)
+Validation loss: 34.74063
+Unlabeled attachment score: 69.3237438817301
+Labeled attachment score: 63.4901608230946
+INFO: Backing up
+
+Epoch 70
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.411908 seconds (14.47 M allocations: 2.068 GiB, 11.19% gc time)
+Training loss: 4.1272125
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.698432 seconds (14.32 M allocations: 813.850 MiB, 11.10% gc time)
+Validation loss: 33.196186
+Unlabeled attachment score: 69.05404055538907
+Labeled attachment score: 62.98072120667266
+INFO: Backing up
+
+Epoch 71
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.567911 seconds (14.46 M allocations: 2.067 GiB, 12.07% gc time)
+Training loss: 4.0013847
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.776850 seconds (14.27 M allocations: 811.704 MiB, 11.49% gc time)
+Validation loss: 35.878536
+Unlabeled attachment score: 68.93417241034862
+Labeled attachment score: 63.04065527919289
+INFO: Backing up
+
+Epoch 72
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.450209 seconds (14.47 M allocations: 2.068 GiB, 11.15% gc time)
+Training loss: 3.971822
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.760535 seconds (14.56 M allocations: 824.258 MiB, 11.63% gc time)
+Validation loss: 34.295338
+Unlabeled attachment score: 69.19388672460293
+Labeled attachment score: 63.470182798921186
+INFO: Backing up
+
+Epoch 73
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.583007 seconds (14.47 M allocations: 2.068 GiB, 12.44% gc time)
+Training loss: 3.844119
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.773194 seconds (14.46 M allocations: 820.472 MiB, 11.38% gc time)
+Validation loss: 36.341152
+Unlabeled attachment score: 68.69443612026771
+Labeled attachment score: 62.76096294076516
+INFO: Backing up
+
+Epoch 74
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.453209 seconds (14.47 M allocations: 2.068 GiB, 11.65% gc time)
+Training loss: 4.2910447
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.766718 seconds (14.38 M allocations: 816.608 MiB, 11.64% gc time)
+Validation loss: 34.54251
+Unlabeled attachment score: 68.94416142243531
+Labeled attachment score: 63.04065527919289
+INFO: Backing up
+
+Epoch 75
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.443086 seconds (14.47 M allocations: 2.068 GiB, 11.58% gc time)
+Training loss: 3.9961064
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.749961 seconds (14.29 M allocations: 812.210 MiB, 11.76% gc time)
+Validation loss: 37.44656
+Unlabeled attachment score: 68.81430426530817
+Labeled attachment score: 63.04065527919289
+INFO: Backing up
+
+Epoch 76
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.564297 seconds (14.48 M allocations: 2.068 GiB, 12.22% gc time)
+Training loss: 3.9912386
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.747400 seconds (14.34 M allocations: 814.531 MiB, 11.47% gc time)
+Validation loss: 35.406628
+Unlabeled attachment score: 68.4946558785336
+Labeled attachment score: 62.93077614623914
+INFO: Backing up
+
+Epoch 77
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.456790 seconds (14.46 M allocations: 2.067 GiB, 11.27% gc time)
+Training loss: 3.8098552
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.751676 seconds (14.42 M allocations: 818.255 MiB, 11.30% gc time)
+Validation loss: 34.822666
+Unlabeled attachment score: 69.02407351912896
+Labeled attachment score: 63.19049046049346
+INFO: Backing up
+
+Epoch 78
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.543889 seconds (14.47 M allocations: 2.068 GiB, 11.84% gc time)
+Training loss: 3.7332036
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.803796 seconds (14.40 M allocations: 817.659 MiB, 11.71% gc time)
+Validation loss: 37.38814
+Unlabeled attachment score: 69.1039856158226
+Labeled attachment score: 63.550094895614826
+INFO: Backing up
+
+Epoch 79
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.542876 seconds (14.47 M allocations: 2.068 GiB, 11.90% gc time)
+Training loss: 3.6722984
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.771557 seconds (14.33 M allocations: 814.732 MiB, 11.33% gc time)
+Validation loss: 36.79881
+Unlabeled attachment score: 69.01408450704226
+Labeled attachment score: 63.470182798921186
+INFO: Backing up
+
+Epoch 80
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.457713 seconds (14.47 M allocations: 2.068 GiB, 11.54% gc time)
+Training loss: 3.5733414
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.732382 seconds (14.24 M allocations: 808.645 MiB, 11.56% gc time)
+Validation loss: 38.07434
+Unlabeled attachment score: 68.96413944660873
+Labeled attachment score: 63.41024872640096
+INFO: Backing up
+
+Epoch 81
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.638821 seconds (14.47 M allocations: 2.068 GiB, 12.13% gc time)
+Training loss: 3.6544895
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.729725 seconds (14.38 M allocations: 815.700 MiB, 11.32% gc time)
+Validation loss: 36.178486
+Unlabeled attachment score: 69.05404055538907
+Labeled attachment score: 63.41024872640096
+INFO: Backing up
+
+Epoch 82
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.598182 seconds (14.47 M allocations: 2.068 GiB, 11.43% gc time)
+Training loss: 3.7400987
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.784537 seconds (14.48 M allocations: 821.627 MiB, 11.32% gc time)
+Validation loss: 36.565952
+Unlabeled attachment score: 69.60343622015783
+Labeled attachment score: 63.77984217360903
+INFO: Backing up
+
+Epoch 83
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.553526 seconds (14.46 M allocations: 2.068 GiB, 12.12% gc time)
+Training loss: 3.4313216
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.758368 seconds (14.22 M allocations: 809.302 MiB, 11.59% gc time)
+Validation loss: 36.97814
+Unlabeled attachment score: 68.76435920487464
+Labeled attachment score: 63.12056737588652
+INFO: Backing up
+
+Epoch 84
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.489507 seconds (14.48 M allocations: 2.068 GiB, 11.97% gc time)
+Training loss: 3.658071
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.766937 seconds (14.28 M allocations: 812.358 MiB, 11.60% gc time)
+Validation loss: 36.91646
+Unlabeled attachment score: 69.17390870042952
+Labeled attachment score: 63.64998501648187
+INFO: Backing up
+
+Epoch 85
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.394460 seconds (14.46 M allocations: 2.067 GiB, 11.31% gc time)
+Training loss: 3.4289882
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.754227 seconds (14.27 M allocations: 811.086 MiB, 12.18% gc time)
+Validation loss: 37.091984
+Unlabeled attachment score: 69.17390870042952
+Labeled attachment score: 63.839776246129254
+INFO: Backing up
+
+Epoch 86
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.573920 seconds (14.47 M allocations: 2.068 GiB, 12.19% gc time)
+Training loss: 3.4198153
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.707913 seconds (14.25 M allocations: 810.368 MiB, 11.54% gc time)
+Validation loss: 37.72408
+Unlabeled attachment score: 69.17390870042952
+Labeled attachment score: 63.719908101088805
+INFO: Backing up
+
+Epoch 87
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.553552 seconds (14.47 M allocations: 2.068 GiB, 11.18% gc time)
+Training loss: 3.2200913
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.739716 seconds (14.40 M allocations: 816.985 MiB, 11.25% gc time)
+Validation loss: 37.71103
+Unlabeled attachment score: 69.42363400259714
+Labeled attachment score: 63.79982019778244
+INFO: Backing up
+
+Epoch 88
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.609133 seconds (14.46 M allocations: 2.067 GiB, 11.73% gc time)
+Training loss: 3.2426324
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.766908 seconds (14.32 M allocations: 813.136 MiB, 11.75% gc time)
+Validation loss: 37.36344
+Unlabeled attachment score: 69.52352412346418
+Labeled attachment score: 63.749875137348916
+INFO: Backing up
+
+Epoch 89
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.557325 seconds (14.47 M allocations: 2.068 GiB, 12.23% gc time)
+Training loss: 3.2965934
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.788817 seconds (14.54 M allocations: 823.996 MiB, 11.50% gc time)
+Validation loss: 39.821217
+Unlabeled attachment score: 69.88312855858555
+Labeled attachment score: 64.00958945160323
+INFO: Backing up
+
+Epoch 90
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.434752 seconds (14.47 M allocations: 2.068 GiB, 11.47% gc time)
+Training loss: 3.2829742
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.798522 seconds (14.56 M allocations: 825.644 MiB, 11.91% gc time)
+Validation loss: 37.246975
+Unlabeled attachment score: 69.43362301468385
+Labeled attachment score: 63.719908101088805
+INFO: Backing up
+
+Epoch 91
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.534272 seconds (14.47 M allocations: 2.068 GiB, 12.28% gc time)
+Training loss: 3.4318712
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.738457 seconds (14.38 M allocations: 816.277 MiB, 11.62% gc time)
+Validation loss: 37.885292
+Unlabeled attachment score: 69.36369993007692
+Labeled attachment score: 63.48017181100789
+INFO: Backing up
+
+Epoch 92
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.496088 seconds (14.47 M allocations: 2.068 GiB, 11.16% gc time)
+Training loss: 3.4273057
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.771442 seconds (14.67 M allocations: 829.808 MiB, 11.33% gc time)
+Validation loss: 37.76995
+Unlabeled attachment score: 69.28378783338327
+Labeled attachment score: 63.48017181100789
+INFO: Backing up
+
+Epoch 93
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.527535 seconds (14.47 M allocations: 2.068 GiB, 11.26% gc time)
+Training loss: 3.209075
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.859417 seconds (14.68 M allocations: 830.130 MiB, 11.62% gc time)
+Validation loss: 38.36633
+Unlabeled attachment score: 69.9830186794526
+Labeled attachment score: 63.97962241534312
+INFO: Backing up
+
+Epoch 94
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.507494 seconds (14.47 M allocations: 2.068 GiB, 12.31% gc time)
+Training loss: 3.1435015
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.805316 seconds (14.27 M allocations: 810.598 MiB, 11.74% gc time)
+Validation loss: 39.097546
+Unlabeled attachment score: 68.91419438617521
+Labeled attachment score: 63.170512436320045
+INFO: Backing up
+
+Epoch 95
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.409233 seconds (14.46 M allocations: 2.067 GiB, 11.38% gc time)
+Training loss: 3.2026017
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.817268 seconds (14.43 M allocations: 818.397 MiB, 11.82% gc time)
+Validation loss: 39.518234
+Unlabeled attachment score: 69.20387573668964
+Labeled attachment score: 63.52012785935471
+INFO: Backing up
+
+Epoch 96
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.496633 seconds (14.48 M allocations: 2.068 GiB, 11.46% gc time)
+Training loss: 3.1361246
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.772818 seconds (14.58 M allocations: 825.165 MiB, 11.88% gc time)
+Validation loss: 37.935333
+Unlabeled attachment score: 69.3337328938168
+Labeled attachment score: 63.560083907701525
+INFO: Backing up
+
+Epoch 97
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.571747 seconds (14.46 M allocations: 2.067 GiB, 12.20% gc time)
+Training loss: 3.0324907
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.736179 seconds (14.37 M allocations: 816.027 MiB, 11.93% gc time)
+Validation loss: 38.64766
+Unlabeled attachment score: 69.21386474877634
+Labeled attachment score: 63.40025971431425
+INFO: Backing up
+
+Epoch 98
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.538013 seconds (14.46 M allocations: 2.067 GiB, 11.29% gc time)
+Training loss: 3.1751444
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.725841 seconds (13.95 M allocations: 796.592 MiB, 12.24% gc time)
+Validation loss: 38.889057
+Unlabeled attachment score: 69.03406253121567
+Labeled attachment score: 63.43022675057437
+INFO: Backing up
+
+Epoch 99
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.495835 seconds (14.47 M allocations: 2.068 GiB, 12.33% gc time)
+Training loss: 3.1985183
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.787378 seconds (14.41 M allocations: 817.885 MiB, 11.32% gc time)
+Validation loss: 36.735188
+Unlabeled attachment score: 69.31375486964339
+Labeled attachment score: 63.749875137348916
+INFO: Backing up
+
+Epoch 100
+10 / 55
+20 / 55
+30 / 55
+40 / 55
+50 / 55
+  8.512843 seconds (14.47 M allocations: 2.068 GiB, 11.58% gc time)
+Training loss: 3.0830228
+
+
+INFO: Computing validation performance
+10 / 49
+20 / 49
+30 / 49
+40 / 49
+  2.776652 seconds (14.34 M allocations: 814.415 MiB, 11.37% gc time)
+Validation loss: 38.84049
+Unlabeled attachment score: 69.49355708720408
+Labeled attachment score: 63.73988612526221
+INFO: Backing up
+INFO: Training is over.
+
+julia> exit()
+exit()
+bash-4.2$ 

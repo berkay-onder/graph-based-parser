@@ -62,7 +62,7 @@ end
 
 
 function (this::BiaffineDecoder2)(ctx, encodings; 
-                                  permute=false)
+                                  permute=false, parse=false, parser=edmonds)
     H, B, T = size(encodings)
     to3d(x) = reshape(x, (div(length(x), B*T), B, T))
 
@@ -83,7 +83,11 @@ function (this::BiaffineDecoder2)(ctx, encodings;
     s_arcs = permutedims(s_arcs, (2, 1, 3))
     s_arcs = s_arcs .+ reshape(reshape(barc * H_arc_head, (B, T))', (T, B, 1))
     s_arcs_val = Array(getval(s_arcs))
-    y_arcs = argmax(s_arcs_val) # BxT arc indice for each word
+    if !parse
+        y_arcs = argmax(s_arcs_val) # BxT arc indice for each word
+    else
+        y_arcs = parsed(this, parser, s_arcs_val)
+    end
 
     # Label score computation
     Wrel = val(ctx, this.Wrel)
@@ -106,11 +110,17 @@ function (this::BiaffineDecoder2)(ctx, encodings;
 end
 
 
+function parsed(this::BiaffineDecoder2, parser, s_arcs_val)
+    res, _ = parse_scores(this, s_arcs_val)
+    error("wip")
+end
+
+
 
 #Assumes arcs are in the time first order
 function softloss(dec::BiaffineDecoder2,
                   arc_scores, rel_scores,
-                  sents)
+                  sents; arc_weight=.0)
     arc_gold = [sent.head for sent in sents]
     rel_gold = [sent.deprel for sent in sents]
     
@@ -120,14 +130,15 @@ function softloss(dec::BiaffineDecoder2,
     rel_gold = Int.(collect(flatten(zip(rel_gold...))))
     # Reduce to 2D and remove root scores
     arc_pred, rel_pred = map(x->matify(cut_first(x)), (arc_scores, rel_scores))
-    
-    return (nll(arc_pred, arc_gold; average=false) + 
-            nll(rel_pred, rel_gold; average=false)) / B
+    arc_loss = nll(arc_pred, arc_gold; average=false) / B
+    rel_loss = nll(rel_pred, rel_gold; average=false) / B
+    #return arc_weight * arc_loss + (2 - arc_weight) * rel_loss
+    return arc_loss + rel_loss + arc_weight + arc_weight * (arc_loss - rel_loss)
 end
 
 
 "Prepares arcs for the parsing algorithm"
-function parse_scores(this::BiaffineDecoder2, parser, arc_scores, rel_scores)
+function parse_scores(this::BiaffineDecoder2, parser, arc_scores, rel_scores=nothing)
     
     postproc(scores) = let scores = Array(getval(scores))
         Any[scores[:,i,:] for i = 1:size(scores, 2)]
@@ -137,11 +148,13 @@ function parse_scores(this::BiaffineDecoder2, parser, arc_scores, rel_scores)
     rels = []
     for (arc, rel) in zip(arc_scores, rel_scores)
         push!(arcs, parser(arc))
-        _rels = Array{UInt8}(size(rel, 2))
-        for i = 1:length(_rels)
-           _rels[i] = indmax(rel[:, i])
+        if rel_scores != nothing
+            _rels = Array{UInt8}(size(rel, 2))
+            for i = 1:length(_rels)
+                _rels[i] = indmax(rel[:, i])
+            end
+            push!(rels, _rels[2:end])
         end
-        push!(rels, _rels[2:end])
     end
     return arcs, rels
 end
