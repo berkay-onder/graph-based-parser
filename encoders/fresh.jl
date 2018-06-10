@@ -14,6 +14,7 @@ function _BiRNN(input, hidden;
         forw = Cell(input, hidden)
         back = Cell(input, hidden)
         push!(rnns, (forw, back))
+        input = 2hidden
     end
     return _BiRNN(rnns, Dropout(dropout))
 end

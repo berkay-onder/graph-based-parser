@@ -154,7 +154,7 @@ function train(;model=nothing)
     dev = minibatch(dev_buckets, opt[:batchsize];
                     shuffle=false, remaining=true,
                     minlength=2, maxlength=Inf, use_tokens=use_tokens)
-    
+    las_history = []
     for epoch = 1:opt[:epochs]+1
         info("Computing validation performance")
         val_losses = []
@@ -179,10 +179,16 @@ function train(;model=nothing)
         println("Validation loss: ", val_loss)
         println("Unlabeled attachment score: ", uas)
         println("Labeled attachment score: ", las)
-        
+        push!(las_history, las)
         if epoch > 1
             info("Backing up")
-            JLD.save(joinpath(opt[:backupdir], string(now(), ".jld")), 
+            if las == maximum(las_history)
+                println("*** New Best Model ***")
+                filename = joinpath(opt[:backupdir], string(now(), "_$epoch", "_best.jld"))
+            else
+                filename = joinpath(opt[:backupdir], string(now(), "_$epoch.jld"))
+            end
+            JLD.save(filename,
                      "weights", weights,
                      "encoder", encoder,
                      "decoder", decoder,
@@ -219,6 +225,7 @@ function train(;model=nothing)
         println()
         println()
     end
+return maximum(las_history), indmax(las_history)
 end
 
 
@@ -234,27 +241,6 @@ function ncorrect(arc_preds, rel_preds, sents)
         correct_rels += sum(arc_cmp .* rel_cmp)
     end
     return correct_arcs, correct_rels
-end
-
-
-"Compare trees"
-function accuracy_bt(arc_preds, rel_preds, sents)
-    arc_acc = 0
-    arc_accs = []
-    arc_golds = map(x->x.head, sents)
-    rel_golds = map(x->x.deprel, sents)
-    
-    for (i, (pred, gold)) in enumerate(zip(arc_preds, arc_golds))
-        push!(arc_accs, mean(Int.(pred) .== Int.(gold)))
-        arc_acc = ((i-1) * arc_acc + arc_accs[end]) / i
-    end
-    
-    rel_acc = 0
-    for (i, (ares, pred, gold)) in enumerate(zip(arc_accs, rel_preds, rel_golds))
-        rel_acc = ((i-1) * rel_acc + mean(
-            ares .* (Int.(pred) .== Int.(gold)))) / i
-    end
-    return arc_acc, rel_acc
 end
 
  #=
