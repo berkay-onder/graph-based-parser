@@ -1,6 +1,8 @@
 using Knet, KnetModules
 
 
+const VERBOSE = false
+
 type BiaffineDecoder2 <: KnetModule
     mlp_units::Integer
     label_units::Integer
@@ -61,7 +63,8 @@ function KnetModules.convert_buffers!(this::BiaffineDecoder2, atype)
 end
 
 
-function (this::BiaffineDecoder2)(ctx, encodings; 
+
+function (this::BiaffineDecoder2)(ctx, encodings, weights=nothing; 
                                   permute=false, parse=false, parser=edmonds)
     H, B, T = size(encodings)
     to3d(x) = reshape(x, (div(length(x), B*T), B, T))
@@ -83,12 +86,15 @@ function (this::BiaffineDecoder2)(ctx, encodings;
     s_arcs = permutedims(s_arcs, (2, 1, 3))
     s_arcs = s_arcs .+ reshape(reshape(barc * H_arc_head, (B, T))', (T, B, 1))
     s_arcs_val = Array(getval(s_arcs))
-    if !parse
+    if weights != nothing
+        @assert size(weights)==(2, B)
+        y_arcs = (argmax(s_arcs_val), parsed(this, parser, s_arcs_val))
+    elseif !parse
         y_arcs = argmax(s_arcs_val) # BxT arc indice for each word
     else
         y_arcs = parsed(this, parser, s_arcs_val)
     end
-
+    
     # Label score computation
     Wrel = val(ctx, this.Wrel)
     brel = val(ctx, this.brel)
@@ -96,29 +102,62 @@ function (this::BiaffineDecoder2)(ctx, encodings;
 
     H_rel_head_mat = H_rel_head
     H_rel_head = to3d(H_rel_head)
-    H_rel_head_ys = hcat([H_rel_head[:, :, y_arcs[b,t]][:,b] for t=1:T for b=1:B]...)
-    s_rels = 
-        vcat([this.rel_summer * ((Urel * H_rel_dep) .* H_rel_head_ys) for Urel in Urels]...) .+ 
-        Wrel * vcat(H_rel_dep, H_rel_head_mat) .+ 
-        brel
-    s_rels = reshape(s_rels, (length(Urels), B, T)) # her batchin headinin labeli
-    if permute # replace batch and time (approx. 1.5 times slower when enabled)
-        s_arcs = permutedims(s_arcs, (1, 3, 2))
-        s_rels = permutedims(s_rels, (1, 3, 2))
+    
+    function compute_srels(y_arcs)
+        #println(B, " ", T, " ", summary(H_rel_head))
+        #println(y_arcs)
+        H_rel_head_ys = hcat([H_rel_head[:, :, y_arcs[b,t]][:,b] for t=1:T for b=1:B]...)
+        s_rels = 
+            vcat([this.rel_summer * ((Urel * H_rel_dep) .* H_rel_head_ys) for Urel in Urels]...) .+ 
+            Wrel * vcat(H_rel_dep, H_rel_head_mat) .+ 
+            brel
+        s_rels = reshape(s_rels, (length(Urels), B, T)) # her batchin headinin labeli
+        if permute # replace batch and time (approx. 1.5 times slower when enabled)
+            s_arcs = permutedims(s_arcs, (1, 3, 2))
+            s_rels = permutedims(s_rels, (1, 3, 2))
+        end
+        return s_rels
+    end
+    
+    if isa(y_arcs, Tuple)
+        #println(map(summary, y_arcs))
+        #println(summary(weights))
+        #println((H, B, T))
+        coefs = (reshape(weights[1, :], (1, B, 1)), 
+                 reshape(weights[2, :], (1, B, 1)))
+        s_rels = coefs[1] .* compute_srels(y_arcs[1]) + 
+            coefs[2] .* compute_srels(y_arcs[2])
+    else
+        s_rels = compute_srels(y_arcs)
     end
     return s_arcs, s_rels
 end
 
 
 function parsed(this::BiaffineDecoder2, parser, s_arcs_val)
-    res, _ = parse_scores(this, s_arcs_val)
-    error("wip")
+    _, B, T = size(s_arcs_val)
+    res = Array{Int, 2}(B, T)
+    for i = 1:size(s_arcs_val, 2)
+        sent = s_arcs_val[:, i, :]
+        inds = parser(sent) .+ 1
+        #if VERBOSE
+            for j = 1:length(inds)
+                if !(1 <= inds[j] <= T)
+                    VERBOSE && warn("Invalid arc ", inds[j], " not in 1..$T")
+                    inds[j] = rand(1:T)
+                end
+            end
+        #end
+        root = indmax(sent[:, 1])
+        res[i, :] = Int.([root, inds...])
+    end
+    return res
 end
 
 
 
 #Assumes arcs are in the time first order
-function softloss(dec::BiaffineDecoder2,
+function softloss(this::BiaffineDecoder2,
                   arc_scores, rel_scores,
                   sents; arc_weight=.0)
     arc_gold = [sent.head for sent in sents]
@@ -133,7 +172,7 @@ function softloss(dec::BiaffineDecoder2,
     arc_loss = nll(arc_pred, arc_gold; average=false) / B
     rel_loss = nll(rel_pred, rel_gold; average=false) / B
     #return arc_weight * arc_loss + (2 - arc_weight) * rel_loss
-    return arc_loss + rel_loss + arc_weight + arc_weight * (arc_loss - rel_loss)
+    return arc_loss + rel_loss + arc_weight * (arc_loss - rel_loss)
 end
 
 
@@ -148,6 +187,13 @@ function parse_scores(this::BiaffineDecoder2, parser, arc_scores, rel_scores=not
     rels = []
     for (arc, rel) in zip(arc_scores, rel_scores)
         push!(arcs, parser(arc))
+        for i = 1:length(arcs[end])
+            #println(size(arc_scores[1]))
+            if arcs[end][i] > size(arc_scores[1], 2)
+                VERBOSE && warn("Invalid arc val ", arcs[end][i], size(arc_scores[1], 2))
+                arcs[end][i] = rand(1:size(arc_scores[1], 2))
+            end
+        end
         if rel_scores != nothing
             _rels = Array{UInt8}(size(rel, 2))
             for i = 1:length(_rels)
@@ -156,6 +202,7 @@ function parse_scores(this::BiaffineDecoder2, parser, arc_scores, rel_scores=not
             push!(rels, _rels[2:end])
         end
     end
+    
     return arcs, rels
 end
 

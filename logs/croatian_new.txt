@@ -1,0 +1,4026 @@
+bash-4.2$ pwd
+/scratch/users/cgumeli/Nubik
+bash-4.2$ source ../.bashrc
+[cgumeli@login03 Nubik]$ 
+[cgumeli@login03 Nubik]$ pwd
+/scratch/users/cgumeli/Nubik
+[cgumeli@login03 Nubik]$ srg
+srun: job 145666 queued and waiting for resources
+srun: job 145666 has been allocated resources
+bash-4.2$ julia
+julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "?help" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.6.2 (2017-12-13 18:08 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-pc-linux-gnu
+
+WARNING: Terminal not fully functional
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+ncorrect (generic function with 1 method)
+
+julia> include("main2.jl")  C-c C-c^C
+julia> main("--datafiles $hrtrn $hrdev --lmfile $hrlm --upos 150 --feat 150  --xpos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner --proj false --proj_cat false --backupdir Backups/Croatian2")
+main("--datafiles $hrtrn $hrdev --lmfile $hrlm --upos 150 --feat 150  --xpos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner --proj false --proj_cat false --backupdir Backups/Croatian2")
+Tuple{Symbol,Any}[(:feat, 150), (:birnn, 3), (:birnndrop, 0.33), (:freqtop, 0), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/croatian_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 150), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 150), (:freqlim, 2), (:backupdir, "Backups/Croatian2"), (:beta1, 0.9), (:remb, 350), (:algo, "eisner"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, false), (:arcweight, 0.0), (:tokens, 500), (:proj_cat, false), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_Croatian-SET/hr_set-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Croatian-SET/hr_set-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+05:05:21 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/croatian_chmodel.jld 
+05:05:27 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Croatian-SET/hr_set-ud-train.conllu 
+05:05:28 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Croatian-SET/hr_set-ud-dev.conllu 
+05:06:50 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+ 35.113248 seconds (82.60 M allocations: 3.267 GiB, 5.41% gc time)
+Validation loss: 158.65466
+Unlabeled attachment score: 6.58547817632912
+Labeled attachment score: 0.31213222125569257
+
+Epoch 1
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 93.988592 seconds (66.60 M allocations: 5.143 GiB, 9.01% gc time)
+Training loss: 59.12139
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  7.672291 seconds (49.64 M allocations: 1.795 GiB, 9.00% gc time)
+Validation loss: 28.784557
+Unlabeled attachment score: 69.53896535844036
+Labeled attachment score: 63.47029626976411
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 2
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 68.889978 seconds (61.52 M allocations: 4.870 GiB, 13.69% gc time)
+Training loss: 30.206059
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  8.237159 seconds (53.08 M allocations: 1.935 GiB, 9.62% gc time)
+Validation loss: 22.66407
+Unlabeled attachment score: 77.42925855805147
+Labeled attachment score: 71.72900782889013
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 3
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 69.621114 seconds (61.49 M allocations: 4.869 GiB, 12.26% gc time)
+Training loss: 25.739882
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  8.826740 seconds (58.31 M allocations: 2.147 GiB, 10.36% gc time)
+Validation loss: 20.076096
+Unlabeled attachment score: 83.00158624571458
+Labeled attachment score: 77.72092309266745
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 4
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 67.009467 seconds (61.48 M allocations: 4.869 GiB, 8.87% gc time)
+Training loss: 23.174076
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  8.705335 seconds (58.89 M allocations: 2.172 GiB, 10.55% gc time)
+Validation loss: 18.69215
+Unlabeled attachment score: 83.67701990482526
+Labeled attachment score: 78.6522028347746
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 5
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 64.889630 seconds (61.54 M allocations: 4.870 GiB, 7.12% gc time)
+Training loss: 21.18735
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  8.712650 seconds (58.50 M allocations: 2.155 GiB, 10.34% gc time)
+Validation loss: 17.614468
+Unlabeled attachment score: 84.53154582203346
+Labeled attachment score: 79.783042521619
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 6
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 65.340626 seconds (61.57 M allocations: 4.871 GiB, 8.15% gc time)
+Training loss: 19.815603
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+ 14.308590 seconds (59.39 M allocations: 2.186 GiB, 14.28% gc time)
+Validation loss: 17.466164
+Unlabeled attachment score: 85.29908407102288
+Labeled attachment score: 80.65803612546692
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 7
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 60.824646 seconds (61.33 M allocations: 4.866 GiB, 9.35% gc time)
+Training loss: 18.695194
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+ 13.908639 seconds (61.32 M allocations: 2.268 GiB, 13.95% gc time)
+Validation loss: 16.71761
+Unlabeled attachment score: 86.75740674410275
+Labeled attachment score: 82.28521721332446
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 8
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 66.865119 seconds (61.60 M allocations: 4.872 GiB, 7.43% gc time)
+Training loss: 17.543901
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  8.750971 seconds (59.70 M allocations: 2.203 GiB, 10.28% gc time)
+Validation loss: 16.313139
+Unlabeled attachment score: 87.2383973801361
+Labeled attachment score: 82.51547868802129
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 9
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 66.191194 seconds (61.55 M allocations: 4.870 GiB, 9.24% gc time)
+Training loss: 16.719976
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  8.833465 seconds (61.40 M allocations: 2.272 GiB, 10.59% gc time)
+Validation loss: 16.359037
+Unlabeled attachment score: 87.63240034795068
+Labeled attachment score: 83.19602926879189
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 10
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 65.544747 seconds (61.53 M allocations: 4.869 GiB, 11.62% gc time)
+Training loss: 15.809079
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  8.738425 seconds (60.49 M allocations: 2.234 GiB, 10.85% gc time)
+Validation loss: 16.266197
+Unlabeled attachment score: 87.76544031110883
+Labeled attachment score: 83.32906923195006
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 11
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 66.440825 seconds (61.54 M allocations: 4.870 GiB, 7.54% gc time)
+Training loss: 15.065422
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  8.708220 seconds (60.04 M allocations: 2.216 GiB, 10.55% gc time)
+Validation loss: 16.40855
+Unlabeled attachment score: 87.76544031110883
+Labeled attachment score: 83.4416415084685
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 12
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 70.776806 seconds (61.48 M allocations: 4.868 GiB, 13.46% gc time)
+Training loss: 14.772343
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.075898 seconds (61.10 M allocations: 2.261 GiB, 10.68% gc time)
+Validation loss: 16.349543
+Unlabeled attachment score: 88.44599089187945
+Labeled attachment score: 84.06078902931996
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 13
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+
+
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 68.119526 seconds (61.51 M allocations: 4.869 GiB, 8.24% gc time)
+Training loss: 13.954735
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  8.900700 seconds (60.60 M allocations: 2.237 GiB, 10.81% gc time)
+Validation loss: 16.213865
+Unlabeled attachment score: 88.39482167528016
+Labeled attachment score: 83.98403520442102
+INFO: Backing up
+
+Epoch 14
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 66.567388 seconds (61.57 M allocations: 4.871 GiB, 8.04% gc time)
+Training loss: 13.435054
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.120281 seconds (61.64 M allocations: 2.283 GiB, 10.64% gc time)
+Validation loss: 16.63124
+Unlabeled attachment score: 88.80929232973443
+Labeled attachment score: 84.66970270685155
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 15
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 65.358292 seconds (61.54 M allocations: 4.870 GiB, 8.49% gc time)
+Training loss: 12.8933115
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.632059 seconds (60.83 M allocations: 2.248 GiB, 14.70% gc time)
+Validation loss: 17.029915
+Unlabeled attachment score: 88.74277234815536
+Labeled attachment score: 84.36780432891572
+INFO: Backing up
+
+Epoch 16
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 64.076383 seconds (61.56 M allocations: 4.871 GiB, 6.66% gc time)
+Training loss: 12.598358
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+ 13.979271 seconds (62.83 M allocations: 2.330 GiB, 14.69% gc time)
+Validation loss: 17.050835
+Unlabeled attachment score: 88.68648620989613
+Labeled attachment score: 84.53154582203346
+INFO: Backing up
+
+Epoch 17
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 66.912768 seconds (61.59 M allocations: 4.871 GiB, 10.19% gc time)
+Training loss: 12.17971
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  8.845100 seconds (61.29 M allocations: 2.268 GiB, 10.96% gc time)
+Validation loss: 17.58371
+Unlabeled attachment score: 88.53809548175818
+Labeled attachment score: 84.49061044875403
+INFO: Backing up
+
+Epoch 18
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 65.536676 seconds (61.60 M allocations: 4.872 GiB, 6.78% gc time)
+Training loss: 11.911299
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.116489 seconds (63.43 M allocations: 2.359 GiB, 10.87% gc time)
+Validation loss: 17.278303
+Unlabeled attachment score: 89.19306145422914
+Labeled attachment score: 85.14557642122499
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 19
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 65.654570 seconds (61.54 M allocations: 4.870 GiB, 8.11% gc time)
+Training loss: 11.42669
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.133989 seconds (62.22 M allocations: 2.307 GiB, 10.37% gc time)
+Validation loss: 17.283474
+Unlabeled attachment score: 89.28516604410787
+Labeled attachment score: 85.15581026454485
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 20
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 82.072378 seconds (61.55 M allocations: 4.870 GiB, 25.35% gc time)
+Training loss: 11.100422
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  8.808849 seconds (59.71 M allocations: 2.199 GiB, 10.24% gc time)
+Validation loss: 17.28521
+Unlabeled attachment score: 88.74788926981527
+Labeled attachment score: 84.77715806171007
+INFO: Backing up
+
+Epoch 21
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 68.137792 seconds (61.48 M allocations: 4.868 GiB, 10.83% gc time)
+Training loss: 10.780765
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.309631 seconds (61.39 M allocations: 2.271 GiB, 10.35% gc time)
+Validation loss: 17.17951
+Unlabeled attachment score: 89.36703679066673
+Labeled attachment score: 85.36048713094202
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 22
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 66.967221 seconds (61.49 M allocations: 4.869 GiB, 8.54% gc time)
+Training loss: 10.681884
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.141116 seconds (60.59 M allocations: 2.235 GiB, 10.69% gc time)
+Validation loss: 17.491283
+Unlabeled attachment score: 89.3261014173873
+Labeled attachment score: 85.2530317760835
+INFO: Backing up
+
+Epoch 23
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 66.459519 seconds (61.55 M allocations: 4.871 GiB, 7.20% gc time)
+Training loss: 10.4772
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.183523 seconds (61.99 M allocations: 2.296 GiB, 10.78% gc time)
+Validation loss: 18.590796
+Unlabeled attachment score: 89.36191986900681
+Labeled attachment score: 85.30931791434273
+INFO: Backing up
+
+Epoch 24
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 68.520188 seconds (61.54 M allocations: 4.870 GiB, 8.31% gc time)
+Training loss: 10.124712
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.090593 seconds (60.91 M allocations: 2.248 GiB, 10.33% gc time)
+Validation loss: 17.840246
+Unlabeled attachment score: 89.48472598884511
+Labeled attachment score: 85.46282556414062
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 25
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 67.608839 seconds (61.55 M allocations: 4.870 GiB, 8.86% gc time)
+Training loss: 9.985197
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+ 15.490863 seconds (62.59 M allocations: 2.317 GiB, 16.53% gc time)
+Validation loss: 18.414011
+Unlabeled attachment score: 89.7456889935015
+Labeled attachment score: 85.69820396049737
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 26
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 70.142187 seconds (61.61 M allocations: 4.872 GiB, 7.75% gc time)
+Training loss: 9.661757
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.285862 seconds (61.79 M allocations: 2.288 GiB, 10.28% gc time)
+Validation loss: 18.306892
+Unlabeled attachment score: 89.50519367548483
+Labeled attachment score: 85.46282556414062
+INFO: Backing up
+
+Epoch 27
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 67.579337 seconds (61.59 M allocations: 4.871 GiB, 9.80% gc time)
+Training loss: 9.596704
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.190302 seconds (61.74 M allocations: 2.284 GiB, 10.52% gc time)
+Validation loss: 18.434086
+Unlabeled attachment score: 89.65358440362279
+Labeled attachment score: 85.63168397891829
+INFO: Backing up
+
+Epoch 28
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 68.341512 seconds (61.55 M allocations: 4.870 GiB, 10.60% gc time)
+Training loss: 9.371471
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.146536 seconds (62.16 M allocations: 2.305 GiB, 10.67% gc time)
+Validation loss: 18.1977
+Unlabeled attachment score: 89.96059970321855
+Labeled attachment score: 85.96428388681369
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 29
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 68.143842 seconds (61.52 M allocations: 4.870 GiB, 8.65% gc time)
+Training loss: 9.199626
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.270526 seconds (62.72 M allocations: 2.327 GiB, 10.67% gc time)
+Validation loss: 18.034689
+Unlabeled attachment score: 89.98106738985827
+Labeled attachment score: 85.98986849511334
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 30
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 64.890326 seconds (61.51 M allocations: 4.869 GiB, 7.76% gc time)
+Training loss: 9.012046
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.302035 seconds (62.11 M allocations: 2.300 GiB, 10.50% gc time)
+Validation loss: 18.08347
+Unlabeled attachment score: 89.94013201657883
+Labeled attachment score: 85.97451773013356
+INFO: Backing up
+
+Epoch 31
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 65.958392 seconds (61.56 M allocations: 4.871 GiB, 8.58% gc time)
+Training loss: 8.921433
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+ 15.249765 seconds (62.79 M allocations: 2.324 GiB, 15.84% gc time)
+Validation loss: 18.856873
+Unlabeled attachment score: 89.85314434836003
+Labeled attachment score: 85.85171161029524
+INFO: Backing up
+
+Epoch 32
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 59.519904 seconds (61.35 M allocations: 4.867 GiB, 5.22% gc time)
+Training loss: 8.752425
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+ 15.181229 seconds (61.63 M allocations: 2.276 GiB, 15.14% gc time)
+Validation loss: 19.18296
+Unlabeled attachment score: 89.8480274267001
+Labeled attachment score: 85.87217929693496
+INFO: Backing up
+
+Epoch 33
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 69.260106 seconds (61.58 M allocations: 4.871 GiB, 9.40% gc time)
+Training loss: 8.711988
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.275797 seconds (63.25 M allocations: 2.352 GiB, 10.97% gc time)
+Validation loss: 19.467733
+Unlabeled attachment score: 89.88896279997954
+Labeled attachment score: 86.02057002507291
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 34
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 65.947092 seconds (61.60 M allocations: 4.872 GiB, 7.05% gc time)
+Training loss: 8.521603
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.079122 seconds (62.22 M allocations: 2.306 GiB, 10.75% gc time)
+Validation loss: 18.672714
+Unlabeled attachment score: 90.15504272629586
+Labeled attachment score: 86.3480530113084
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 35
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 67.403902 seconds (61.58 M allocations: 4.871 GiB, 10.59% gc time)
+Training loss: 8.458178
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.170418 seconds (62.25 M allocations: 2.309 GiB, 10.91% gc time)
+Validation loss: 19.281748
+Unlabeled attachment score: 89.73033822852172
+Labeled attachment score: 85.6879701171775
+INFO: Backing up
+
+Epoch 36
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 64.863916 seconds (61.54 M allocations: 4.870 GiB, 6.86% gc time)
+Training loss: 8.279508
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.178982 seconds (61.88 M allocations: 2.291 GiB, 10.57% gc time)
+Validation loss: 19.730423
+Unlabeled attachment score: 89.69451977690221
+Labeled attachment score: 85.74937317709666
+INFO: Backing up
+
+Epoch 37
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 68.073677 seconds (61.50 M allocations: 4.869 GiB, 12.27% gc time)
+Training loss: 8.088421
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.346892 seconds (62.68 M allocations: 2.326 GiB, 10.93% gc time)
+Validation loss: 20.143232
+Unlabeled attachment score: 90.23691347285472
+Labeled attachment score: 86.30200071636904
+INFO: Backing up
+
+Epoch 38
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 66.070609 seconds (61.52 M allocations: 4.870 GiB, 8.12% gc time)
+Training loss: 8.103538
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.270648 seconds (61.84 M allocations: 2.289 GiB, 10.78% gc time)
+Validation loss: 19.20714
+Unlabeled attachment score: 90.20109502123522
+Labeled attachment score: 86.21501304815023
+INFO: Backing up
+
+Epoch 39
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 70.545303 seconds (61.50 M allocations: 4.869 GiB, 11.45% gc time)
+Training loss: 7.950501
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.335001 seconds (62.80 M allocations: 2.332 GiB, 11.06% gc time)
+Validation loss: 18.77646
+Unlabeled attachment score: 90.26761500281431
+Labeled attachment score: 86.19454536151052
+INFO: Backing up
+
+Epoch 40
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+60 / 283
+70 / 283
+80 / 283
+90 / 283
+100 / 283
+110 / 283
+120 / 283
+130 / 283
+140 / 283
+150 / 283
+160 / 283
+170 / 283
+180 / 283
+190 / 283
+200 / 283
+210 / 283
+220 / 283
+230 / 283
+240 / 283
+250 / 283
+260 / 283
+270 / 283
+280 / 283
+ 67.035813 seconds (61.54 M allocations: 4.870 GiB, 7.98% gc time)
+Training loss: 7.7849245
+
+
+INFO: Computing validation performance
+10 / 74
+20 / 74
+30 / 74
+40 / 74
+50 / 74
+60 / 74
+70 / 74
+  9.197735 seconds (61.53 M allocations: 2.275 GiB, 10.73% gc time)
+Validation loss: 19.786942
+Unlabeled attachment score: 90.02200276313769
+Labeled attachment score: 86.12290845827151
+INFO: Backing up
+
+Epoch 41
+10 / 283
+20 / 283
+30 / 283
+40 / 283
+50 / 283
+  C-c C-c^CERROR: InterruptException:
+Stacktrace:
+ [1] update!(::Knet.KnetArray{Float32,3}, ::Knet.KnetArray{Float32,3}, ::Knet.Adam) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/update.jl:387
+ [2] update!(::Array{Any,1}, ::Array{Any,1}, ::Array{Knet.Adam,1}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/update.jl:441
+ [3] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:220 [inlined]
+ [4] macro expansion at ./util.jl:237 [inlined]
+ [5] #train#117(::Void, ::Function) at /scratch/users/cgumeli/Nubik/main2.jl:216
+ [6] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:87
+
+julia> exit()
+exit()
+bash-4.2$ julia
+julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "?help" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.6.2 (2017-12-13 18:08 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-pc-linux-gnu
+
+WARNING: Terminal not fully functional
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+ncorrect (generic function with 1 method)
+
+julia> main("--datafiles $ettrn $etdev --lmfile $etlm --upos 150 --feat 150  --xpos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner --proj false --proj_cat false --backupdir Backups/Croatian2")
+main("--datafiles $ettrn $etdev --lmfile $etlm --upos 150 --feat 150  --xpos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner --proj false --proj_cat false --backupdir Backups/Croatian2")
+Tuple{Symbol,Any}[(:feat, 150), (:birnn, 3), (:birnndrop, 0.33), (:freqtop, 0), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/estonian_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 150), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 150), (:freqlim, 2), (:backupdir, "Backups/Croatian2"), (:beta1, 0.9), (:remb, 350), (:algo, "eisner"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, false), (:arcweight, 0.0), (:tokens, 500), (:proj_cat, false), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_Estonian-EDT/et_edt-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Estonian-EDT/et_edt-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+06:01:39 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/estonian_chmodel.jld 
+06:01:45 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Estonian-EDT/et_edt-ud-train.conllu 
+06:01:47 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Estonian-EDT/et_edt-ud-dev.conllu 
+  C-c C-c^CERROR: InterruptException:
+Stacktrace:
+ [1] Knet.KnetPtr(::Int64) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/kptr.jl:84
+ [2] Type at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:104 [inlined]
+ [3] Knet.KnetArray(::Type{Float32}, ::Tuple{Int64,Int64}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/karray.jl:116
+ [4] broadcast#+(::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/broadcast.jl:76
+ [5] +(::AutoGrad.Broadcasted{Knet.KnetArray{Float32,2}}, ::AutoGrad.Broadcasted{Knet.KnetArray{Float32,2}}) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/unfuse.jl:49
+ [6] broadcast(::Function, ::Knet.KnetArray{Float32,2}, ::Knet.KnetArray{Float32,2}) at /scratch/users/cgumeli/.julia/v0.6/Knet/src/unfuse.jl:9
+ [7] #lmloss#12(::Array{Float64,1}, ::Function, ::Array{Knet.KnetArray{Float32,2},1}, ::Array{Array{Int64,1},1}, ::Array{Array{Float32,1},1}, ::Array{Any,1}, ::Array{Any,1}) at /scratch/users/cgumeli/Nubik/./ku-dependency-parser2/src/lm_utils.jl:229
+ [8] (::#kw##lmloss)(::Array{Any,1}, ::#lmloss, ::Array{Knet.KnetArray{Float32,2},1}, ::Array{Array{Int64,1},1}, ::Array{Array{Float32,1},1}, ::Array{Any,1}, ::Array{Any,1}) at ./<missing>:0
+ [9] #fillvecs!#16(::Int64, ::Function, ::Array{Knet.KnetArray{Float32,2},1}, ::Array{Any,1}, ::Vocab) at /scratch/users/cgumeli/Nubik/./ku-dependency-parser2/src/lm_utils.jl:325
+ [10] #depmain#46(::Bool, ::Function, ::String) at /scratch/users/cgumeli/Nubik/./ku-dependency-parser2/train.jl:55
+ [11] load_data(::SubString{String}, ::SubString{String}, ::SubString{String}) at /scratch/users/cgumeli/Nubik/./data.jl:43
+ [12] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:77
+
+julia> exit()
+exit()
+bash-4.2$ julia
+julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "?help" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.6.2 (2017-12-13 18:08 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-pc-linux-gnu
+
+WARNING: Terminal not fully functional
+julia> include("main2.jl")
+include("main2.jl")
+INFO: Checking dependencies
+INFO: All dependencies are installed
+ncorrect (generic function with 1 method)
+
+julia> main("--datafiles $ettrn $etdev --lmfile $etlm --upos 150 --feat 150  --xpos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner --proj false --proj_cat false --backupdir Backups/Estonian3")
+main("--datafiles $ettrn $etdev --lmfile $etlm --upos 150 --feat 150  --xpos 150 --birnnhidden 200 --lmdrop 0.33 --birnndrop 0.33 --decdrop 0.33 --tokens 500 --birnn 3 --algo eisner --proj false --proj_cat false --backupdir Backups/Estonian3")
+Tuple{Symbol,Any}[(:feat, 150), (:birnn, 3), (:birnndrop, 0.33), (:freqtop, 0), (:lmfile, "/scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/estonian_chmodel.jld"), (:min, 2), (:birnncell, "LSTM"), (:labelunits, 100), (:xpos, 150), (:batchsize, 8), (:max, 128), (:decdrop, 0.33), (:upos, 150), (:freqlim, 2), (:backupdir, "Backups/Estonian3"), (:beta1, 0.9), (:remb, 350), (:algo, "eisner"), (:beta2, 0.999), (:lmdrop, 0.33), (:proj, false), (:arcweight, 0.0), (:tokens, 500), (:proj_cat, false), (:epochs, 100), (:recover, ""), (:birnnhidden, 200), (:optim, "Adam"), (:lr, 0.001), (:datafiles, Any["/scratch/users/okirnap/ud-treebanks-v2.2/UD_Estonian-EDT/et_edt-ud-train.conllu", "/scratch/users/okirnap/ud-treebanks-v2.2/UD_Estonian-EDT/et_edt-ud-dev.conllu"]), (:arcunits, 400)]
+INFO: Loading data
+06:04:40 /scratch/users/okirnap/ud-treebanks-v2.2/chmodel_converted/estonian_chmodel.jld 
+06:04:46 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Estonian-EDT/et_edt-ud-train.conllu 
+06:04:48 /scratch/users/okirnap/ud-treebanks-v2.2/UD_Estonian-EDT/et_edt-ud-dev.conllu 
+06:11:25 Caching lm vectors... 
+INFO: Bucketing
+INFO: Initializing Model and Optimizers
+INFO: Transfering to gpu.
+INFO: Setting momentums
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 56.982850 seconds (96.36 M allocations: 4.530 GiB, 4.99% gc time)
+Validation loss: 92.275856
+Unlabeled attachment score: 8.081893656465784
+Labeled attachment score: 0.11553238937102017
+
+Epoch 1
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+137.363253 seconds (135.67 M allocations: 15.106 GiB, 9.57% gc time)
+Training loss: 26.408587
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 10.581259 seconds (55.38 M allocations: 2.625 GiB, 11.68% gc time)
+Validation loss: 14.3483715
+Unlabeled attachment score: 76.00150460786158
+Labeled attachment score: 70.81329428517692
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 2
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+138.109803 seconds (130.90 M allocations: 14.822 GiB, 23.95% gc time)
+Training loss: 14.253246
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 11.529360 seconds (59.60 M allocations: 2.788 GiB, 12.35% gc time)
+Validation loss: 11.607547
+Unlabeled attachment score: 81.6518444880303
+Labeled attachment score: 77.79628684274161
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 3
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+112.773051 seconds (130.87 M allocations: 14.821 GiB, 10.11% gc time)
+Training loss: 12.073988
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 18.302211 seconds (62.12 M allocations: 2.883 GiB, 18.83% gc time)
+Validation loss: 10.520453
+Unlabeled attachment score: 83.99473387248449
+Labeled attachment score: 80.54219619011795
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 4
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+121.326150 seconds (130.92 M allocations: 14.823 GiB, 12.47% gc time)
+Training loss: 10.700902
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 12.036216 seconds (63.05 M allocations: 2.930 GiB, 12.31% gc time)
+Validation loss: 9.734409
+Unlabeled attachment score: 85.42142454122894
+Labeled attachment score: 82.13278164378409
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 5
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+129.409736 seconds (130.88 M allocations: 14.821 GiB, 17.92% gc time)
+Training loss: 9.89382
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 12.169312 seconds (61.37 M allocations: 2.855 GiB, 12.07% gc time)
+Validation loss: 9.387501
+Unlabeled attachment score: 85.69816491576883
+Labeled attachment score: 82.6190923990435
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 6
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+121.046927 seconds (130.87 M allocations: 14.821 GiB, 13.98% gc time)
+Training loss: 9.218158
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 18.608054 seconds (64.47 M allocations: 2.980 GiB, 17.31% gc time)
+Validation loss: 9.075088
+Unlabeled attachment score: 87.11679518525484
+Labeled attachment score: 84.1263870603724
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 7
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+122.861105 seconds (130.91 M allocations: 14.822 GiB, 14.05% gc time)
+Training loss: 8.62961
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 11.519629 seconds (66.00 M allocations: 3.050 GiB, 12.18% gc time)
+Validation loss: 8.899568
+Unlabeled attachment score: 87.60579274026706
+Labeled attachment score: 84.58045621859803
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 8
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+122.890639 seconds (130.91 M allocations: 14.822 GiB, 15.46% gc time)
+Training loss: 8.14987
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 12.424593 seconds (65.53 M allocations: 3.029 GiB, 12.08% gc time)
+Validation loss: 8.86291
+Unlabeled attachment score: 88.25331148069534
+Labeled attachment score: 85.30589215185792
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 9
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+117.706350 seconds (130.88 M allocations: 14.821 GiB, 9.64% gc time)
+Training loss: 7.820536
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 12.547686 seconds (65.63 M allocations: 3.037 GiB, 12.25% gc time)
+Validation loss: 8.792277
+Unlabeled attachment score: 88.27749267847068
+Labeled attachment score: 85.30589215185792
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 10
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+115.723125 seconds (130.87 M allocations: 14.821 GiB, 11.25% gc time)
+Training loss: 7.455402
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 18.389178 seconds (65.39 M allocations: 3.017 GiB, 18.63% gc time)
+Validation loss: 8.783037
+Unlabeled attachment score: 88.3177946747629
+Labeled attachment score: 85.3945565437008
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 11
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+117.381141 seconds (130.90 M allocations: 14.821 GiB, 11.25% gc time)
+Training loss: 7.177478
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 11.279866 seconds (64.91 M allocations: 3.003 GiB, 11.75% gc time)
+Validation loss: 8.76074
+Unlabeled attachment score: 88.60796904806685
+Labeled attachment score: 85.81369730513985
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 12
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+125.126182 seconds (130.92 M allocations: 14.822 GiB, 15.07% gc time)
+Training loss: 6.8748317
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 12.109220 seconds (65.11 M allocations: 3.012 GiB, 12.31% gc time)
+Validation loss: 8.976733
+Unlabeled attachment score: 88.48437625943738
+Labeled attachment score: 85.81101050538703
+INFO: Backing up
+
+Epoch 13
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+120.578998 seconds (130.90 M allocations: 14.822 GiB, 11.06% gc time)
+Training loss: 6.62115
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 12.543247 seconds (65.25 M allocations: 3.017 GiB, 12.46% gc time)
+Validation loss: 9.150996
+Unlabeled attachment score: 88.70738063892098
+Labeled attachment score: 85.94535049302776
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 14
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+118.702037 seconds (130.87 M allocations: 14.820 GiB, 11.20% gc time)
+Training loss: 6.441537
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 19.942858 seconds (65.90 M allocations: 3.040 GiB, 18.63% gc time)
+Validation loss: 8.927739
+Unlabeled attachment score: 88.98143421370806
+Labeled attachment score: 86.22746446707328
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 15
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+116.739222 seconds (130.91 M allocations: 14.822 GiB, 9.47% gc time)
+Training loss: 6.2520113
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 12.085400 seconds (64.74 M allocations: 2.993 GiB, 12.28% gc time)
+Validation loss: 9.059514
+Unlabeled attachment score: 89.02979660925871
+Labeled attachment score: 86.25433246460142
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 16
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+117.769315 seconds (130.89 M allocations: 14.821 GiB, 12.26% gc time)
+Training loss: 6.08739
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 12.058994 seconds (65.76 M allocations: 3.039 GiB, 12.54% gc time)
+Validation loss: 9.316465
+Unlabeled attachment score: 89.04054380826997
+Labeled attachment score: 86.31612885891614
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 17
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+116.055759 seconds (130.84 M allocations: 14.820 GiB, 9.88% gc time)
+Training loss: 5.8988476
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 12.248816 seconds (65.75 M allocations: 3.036 GiB, 12.97% gc time)
+Validation loss: 9.035127
+Unlabeled attachment score: 89.19906499368602
+Labeled attachment score: 86.41016685026464
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 18
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+134.009878 seconds (131.19 M allocations: 14.827 GiB, 16.67% gc time)
+Training loss: 5.685706
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 11.213214 seconds (66.13 M allocations: 3.057 GiB, 12.17% gc time)
+Validation loss: 9.189536
+Unlabeled attachment score: 89.344152180338
+Labeled attachment score: 86.63317122974824
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 19
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+124.546972 seconds (130.93 M allocations: 14.822 GiB, 15.84% gc time)
+Training loss: 5.6195025
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 12.444560 seconds (66.32 M allocations: 3.065 GiB, 12.24% gc time)
+Validation loss: 9.324785
+Unlabeled attachment score: 89.36027297885488
+Labeled attachment score: 86.60361643246729
+INFO: Backing up
+
+Epoch 20
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+125.161532 seconds (130.88 M allocations: 14.821 GiB, 16.87% gc time)
+Training loss: 5.4999614
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 12.640279 seconds (66.52 M allocations: 3.074 GiB, 12.58% gc time)
+Validation loss: 9.251706
+Unlabeled attachment score: 89.28504258577608
+Labeled attachment score: 86.6412316290067
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 21
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+118.951041 seconds (130.87 M allocations: 14.821 GiB, 11.43% gc time)
+Training loss: 5.370903
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 19.579083 seconds (66.57 M allocations: 3.069 GiB, 17.77% gc time)
+Validation loss: 9.595967
+Unlabeled attachment score: 89.26354818775357
+Labeled attachment score: 86.54182003815255
+INFO: Backing up
+
+Epoch 22
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+118.757762 seconds (130.90 M allocations: 14.821 GiB, 11.96% gc time)
+Training loss: 5.2031317
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 11.356485 seconds (65.40 M allocations: 3.023 GiB, 11.57% gc time)
+Validation loss: 9.587122
+Unlabeled attachment score: 89.49192616674279
+Labeled attachment score: 86.83199441145652
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 23
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+125.880739 seconds (130.92 M allocations: 14.822 GiB, 15.28% gc time)
+Training loss: 5.1052976
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 12.299302 seconds (67.22 M allocations: 3.106 GiB, 12.44% gc time)
+Validation loss: 9.440095
+Unlabeled attachment score: 89.64776055240603
+Labeled attachment score: 86.9582739998388
+INFO: Backing up
+*** New Best Model ***
+
+Epoch 24
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+119.592962 seconds (130.89 M allocations: 14.821 GiB, 12.11% gc time)
+Training loss: 5.0302596
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 12.814626 seconds (66.44 M allocations: 3.070 GiB, 12.23% gc time)
+Validation loss: 9.624507
+Unlabeled attachment score: 89.16413659689944
+Labeled attachment score: 86.55256723716381
+INFO: Backing up
+
+Epoch 25
+10 / 556
+20 / 556
+30 / 556
+40 / 556
+50 / 556
+60 / 556
+70 / 556
+80 / 556
+90 / 556
+100 / 556
+110 / 556
+120 / 556
+130 / 556
+140 / 556
+150 / 556
+160 / 556
+170 / 556
+180 / 556
+190 / 556
+200 / 556
+210 / 556
+220 / 556
+230 / 556
+240 / 556
+250 / 556
+260 / 556
+270 / 556
+280 / 556
+290 / 556
+300 / 556
+310 / 556
+320 / 556
+330 / 556
+340 / 556
+350 / 556
+360 / 556
+370 / 556
+380 / 556
+390 / 556
+400 / 556
+410 / 556
+420 / 556
+430 / 556
+440 / 556
+450 / 556
+460 / 556
+470 / 556
+480 / 556
+490 / 556
+500 / 556
+510 / 556
+520 / 556
+530 / 556
+540 / 556
+550 / 556
+120.973032 seconds (130.87 M allocations: 14.821 GiB, 13.23% gc time)
+Training loss: 4.97164
+
+
+INFO: Computing validation performance
+10 / 106
+20 / 106
+30 / 106
+40 / 106
+50 / 106
+60 / 106
+70 / 106
+80 / 106
+90 / 106
+100 / 106
+ 19.637436 seconds (65.38 M allocations: 3.015 GiB, 20.62% gc time)
+Validation loss: 9.757872
+Unlabeled attachment score: 89.47043176872027
+Labeled attachment score: 86.88035680700717
+INFO: Backing up
+
+Epoch 26
+10 / 556
+20 / 556
+  C-c C-c^CERROR: InterruptException:
+Stacktrace:
+ [1] backward_pass(::AutoGrad.Rec{Array{Any,1}}, ::AutoGrad.Rec{Float32}, ::Array{AutoGrad.Node,1}) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:256
+ [2] (::AutoGrad.##gradfun#4#6{#loss,Int64})(::Array{Any,1}, ::Function, ::Array{Any,1}, ::Vararg{Any,N} where N) at /scratch/users/cgumeli/.julia/v0.6/AutoGrad/src/core.jl:62
+ [3] (::AutoGrad.#kw##gradfun#5)(::Array{Any,1}, ::AutoGrad.#gradfun#5, ::Array{Any,1}, ::Vararg{Any,N} where N) at ./<missing>:0
+ [4] macro expansion at /scratch/users/cgumeli/Nubik/main2.jl:218 [inlined]
+ [5] macro expansion at ./util.jl:237 [inlined]
+ [6] #train#117(::Void, ::Function) at /scratch/users/cgumeli/Nubik/main2.jl:216
+ [7] main(::String) at /scratch/users/cgumeli/Nubik/main2.jl:87
+
+julia> exit()
+exit()
+bash-4.2$ exit
+exit
+exit
+[cgumeli@login03 Nubik]$ 

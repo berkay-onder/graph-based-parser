@@ -9,14 +9,15 @@ include("./encoders/index.jl")
 
 
 
-function predict(weights, encoder, decoder, sents)
+function predict(weights, encoder, decoder, sents; parser=edmonds, parse=false)
     source = encoder(weights, sents)
-    return decoder(weights, source)
+    return decoder(weights, source; parser=parser, parse=parse)
 end
 
 # TODO: support other types of losses
-function loss(weights, encoder, decoder, sents; o...)
-    arc_scores, rel_scores = predict(weights, encoder, decoder, sents)
+function loss(weights, encoder, decoder, sents; parser=edmonds, parse=false, o...)
+    arc_scores, rel_scores = predict(weights, encoder, decoder, sents; 
+                                     parser=parser, parse=parse)
     return softloss(decoder, arc_scores, rel_scores, sents; o...)
 end
 
@@ -34,7 +35,7 @@ function main(args=ARGS)
     @add_arg_table s begin
         ("--datafiles"; nargs='+'; help="Input in conllu format. If provided, use the first for training, last for dev. If single file use both for train and dev.")
         ("--lmfile"; help="Language model file to load pretrained language model")
-        
+
         ("--remb"; arg_type=Int;  default=350; help="Root embedding size")
         ("--feat"; arg_type=Int;  default=0; help="Feat embedding size")
         ("--upos"; arg_type=Int;  default=0; help="Upos embedding size")
@@ -53,6 +54,8 @@ function main(args=ARGS)
         ("--arcunits"; arg_type=Int; default=400; help="Hidden size of src computing mlp")
         ("--labelunits"; arg_type=Int; default=100; help="Hidden size of label computing mlp")
         ("--arcweight"; arg_type=Float32; default=Float32(0); help="Multiple of arc in loss")
+        ("--smeta"; arg_type=Bool; default=false; help="Enable SMeta wrapper for the decoder")
+        ("--parse"; arg_type=Bool; default=false; help="Parse in decoder, ignored if smeta")
 
         ("--algo"; arg_type=String; default="edmonds")
         ("--batchsize"; arg_type=Int; default=8; help="Number of sequences to train on in parallel.")
@@ -127,6 +130,9 @@ function train(;model=nothing)
                                    arc_drop=opt[:decdrop],
                                    label_drop=opt[:decdrop],
                                    input_drop=opt[:decdrop])
+        if opt[:smeta]
+            decoder = SMeta(decoder; src_dim=src_dim)
+        end
 
         if gpu() >= 0
             info("Transfering to gpu.")
@@ -154,7 +160,7 @@ function train(;model=nothing)
     dev = minibatch(dev_buckets, opt[:batchsize];
                     shuffle=false, remaining=true,
                     minlength=2, maxlength=Inf, use_tokens=use_tokens)
-    
+    las_history = []
     for epoch = 1:opt[:epochs]+1
         info("Computing validation performance")
         val_losses = []
@@ -163,7 +169,8 @@ function train(;model=nothing)
         corrects = (0., 0.)
         @time for (iter, batch) in enumerate(dev)
             iter % 10 == 0 && println("$iter / ", length(dev))
-            arc_scores, rel_scores = predict(weights, encoder, decoder, batch)
+            arc_scores, rel_scores = predict(weights, encoder, decoder, batch; 
+                                             parser=parser, parse=opt[:parse])
             push!(val_losses, softloss(decoder, arc_scores, rel_scores, batch; 
                                        arc_weight=opt[:arcweight]))
             arcs, rels = parse_scores(decoder, parser, arc_scores, rel_scores)
@@ -179,10 +186,16 @@ function train(;model=nothing)
         println("Validation loss: ", val_loss)
         println("Unlabeled attachment score: ", uas)
         println("Labeled attachment score: ", las)
-        
+        push!(las_history, las)
         if epoch > 1
             info("Backing up")
-            JLD.save(joinpath(opt[:backupdir], string(now(), ".jld")), 
+            if las == maximum(las_history)
+                println("*** New Best Model ***")
+                filename = joinpath(opt[:backupdir], string(now(), "_$epoch", "_best.jld"))
+            else
+                filename = joinpath(opt[:backupdir], string(now(), "_$epoch.jld"))
+            end
+            JLD.save(filename,
                      "weights", weights,
                      "encoder", encoder,
                      "decoder", decoder,
@@ -210,7 +223,7 @@ function train(;model=nothing)
         @time for (iter, batch) in enumerate(batches)
             iter % 10 == 0 && println("$iter / ", length(batches))
             grads, loss = lossgrad(weights, encoder, decoder, batch; 
-                                   arc_weight=opt[:arcweight])
+                                   arc_weight=opt[:arcweight], parser=parser, parse=opt[:parse])
             update!(weights, grads, optims)
             push!(trn_losses, loss)
         end
@@ -219,6 +232,7 @@ function train(;model=nothing)
         println()
         println()
     end
+return maximum(las_history), indmax(las_history)
 end
 
 
@@ -234,27 +248,6 @@ function ncorrect(arc_preds, rel_preds, sents)
         correct_rels += sum(arc_cmp .* rel_cmp)
     end
     return correct_arcs, correct_rels
-end
-
-
-"Compare trees"
-function accuracy_bt(arc_preds, rel_preds, sents)
-    arc_acc = 0
-    arc_accs = []
-    arc_golds = map(x->x.head, sents)
-    rel_golds = map(x->x.deprel, sents)
-    
-    for (i, (pred, gold)) in enumerate(zip(arc_preds, arc_golds))
-        push!(arc_accs, mean(Int.(pred) .== Int.(gold)))
-        arc_acc = ((i-1) * arc_acc + arc_accs[end]) / i
-    end
-    
-    rel_acc = 0
-    for (i, (ares, pred, gold)) in enumerate(zip(arc_accs, rel_preds, rel_golds))
-        rel_acc = ((i-1) * rel_acc + mean(
-            ares .* (Int.(pred) .== Int.(gold)))) / i
-    end
-    return arc_acc, rel_acc
 end
 
  #=
