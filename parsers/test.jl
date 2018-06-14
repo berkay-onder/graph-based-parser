@@ -18,10 +18,12 @@ function read_conllfile(conllfile)
             #new_deprellist=[]
             while length(input_line)>0
                 conllfields=split(input_line,"\t")
-                push!(new_sentence,String(conllfields[2]))
-                #push!(new_postaglist,String(conllfields[4]))
-                push!(new_parentlist,parse(conllfields[7]))
-                #push!(new_deprellist,parse(conllfields[8]))
+                if isa(parse(conllfields[1]), Int) && parse(conllfields[1])>0
+                    push!(new_sentence,String(conllfields[2]))
+                    #push!(new_postaglist,String(conllfields[4]))
+                    push!(new_parentlist,parse(conllfields[7]))
+                    #push!(new_deprellist,parse(conllfields[8]))
+                end
                 input_line=readline(conll_input)
             end
             push!(sentences,new_sentence)
@@ -64,13 +66,17 @@ end
 
 path="/scratch/users/okirnap/ud-treebanks-v2.2/"
 
-for directory in readdir(path)
+#outfile = open("eisner.out","a")
+
+for directory in readdir(path)[52:end]
     if directory[1:3]=="UD_"
         subdirectory=readdir(string(path,directory))
         for file in subdirectory
             if file[end-6:end] == ".conllu"
                 println("Testing Eisner on: ",string(path,directory,"/",file))
+                #write(outfile,"Testing Eisner on: ",string(path,directory,"/",file),"\n")
                 println(test(string(path,directory,"/",file)))
+                #write(outfile,test(string(path,directory,"/",file)))
             end
         end
     end
