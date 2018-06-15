@@ -144,7 +144,7 @@ function parsed(this::BiaffineDecoder2, parser, s_arcs_val)
             for j = 1:length(inds)
                 if !(1 <= inds[j] <= T)
                     VERBOSE && warn("Invalid arc ", inds[j], " not in 1..$T")
-                    inds[j] = rand(1:T)
+                    inds[j] = 1#rand(1:T)
                 end
             end
         #end
@@ -191,7 +191,7 @@ function parse_scores(this::BiaffineDecoder2, parser, arc_scores, rel_scores=not
             #println(size(arc_scores[1]))
             if arcs[end][i] > size(arc_scores[1], 2)
                 VERBOSE && warn("Invalid arc val ", arcs[end][i], size(arc_scores[1], 2))
-                arcs[end][i] = rand(1:size(arc_scores[1], 2))
+                arcs[end][i] = 1#rand(1:size(arc_scores[1], 2))
             end
         end
         if rel_scores != nothing

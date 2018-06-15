@@ -1,4 +1,5 @@
 include("util.jl")
 include("biaffine2.jl")
 include("smeta.jl")
+include("smeta2.jl")
 include("allpairs.jl")

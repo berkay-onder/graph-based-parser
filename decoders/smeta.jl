@@ -18,10 +18,19 @@ end
 
 function (this::SMeta)(ctx, encodings; o...)
     H, B, T = size(encodings)
-    input   = reshape(mean(encodings, 3), (H, B))
-    weights = this.proj(ctx, input)
-    weights = exp.(logp(weights, 1))
-    return this.decoder(ctx, encodings, weights; o...)
+    cfg = this.cfg
+    ~haskey(cfg, :mean_first) && (cfg[:mean_first] = true)
+    mean_first = cfg[:mean_first]
+    mean_first ? (input = mean(encodings, 3)) : (input = encodings)
+    input = reshape(input, (H, length(input)÷H))
+    coefs = this.proj(ctx, input)
+    if ~mean_first 
+        coefs = reshape(coefs, (2, B, T))
+        coefs = mean(coefs, 3)
+        coefs = reshape(coefs, (2, B))
+    end
+    coefs = exp.(logp(coefs, 1))
+    return this.decoder(ctx, encodings, coefs; o...)
 end
 
 

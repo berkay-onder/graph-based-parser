@@ -24,6 +24,7 @@ end
 
 lossgrad = gradloss(loss)
 
+LOAD_ONLY=false
 
 function main(args=ARGS)
 
@@ -55,6 +56,7 @@ function main(args=ARGS)
         ("--labelunits"; arg_type=Int; default=100; help="Hidden size of label computing mlp")
         ("--arcweight"; arg_type=Float32; default=Float32(0); help="Multiple of arc in loss")
         ("--smeta"; arg_type=Bool; default=false; help="Enable SMeta wrapper for the decoder")
+        ("--smeta2"; arg_type=Bool; default=false; help="Enable double-projection SMeta wrapper")
         ("--parse"; arg_type=Bool; default=false; help="Parse in decoder, ignored if smeta")
 
         ("--algo"; arg_type=String; default="edmonds")
@@ -87,11 +89,11 @@ function main(args=ARGS)
     dev_buckets = bucketize(cdev)
     # TODO: length 1 sentences
     
-    train()
+    !LOAD_ONLY && train()
 end
 
 
-function train(;model=nothing)
+function train(;model=nothing, optim=nothing, start_epoch=1)
     global trn_buckets, dev_buckets, ev, opt, ctrn, cdev, optims, encoder, decoder
     
     
@@ -132,10 +134,12 @@ function train(;model=nothing)
                                    input_drop=opt[:decdrop])
         if opt[:smeta]
             decoder = SMeta(decoder; src_dim=src_dim)
+        elseif opt[:smeta2] # TODO: configurations
+            decoder = SMeta2(decoder; src_dim=src_dim)
         end
 
         if gpu() >= 0
-            info("Transfering to gpu.")
+            info("Transfering to gpu")
             gpu!(encoder)
             gpu!(decoder)
         end
@@ -144,12 +148,16 @@ function train(;model=nothing)
     ~isdir(opt[:backupdir]) && mkdir(opt[:backupdir])
 
     weights = active_ctx()
-    if opt[:optim] == "Adam"
-        info("Setting momentums")
-        optims = optimizers(weights, eval(parse(opt[:optim])); 
-                            lr=opt[:lr], beta1=opt[:beta1], beta2=opt[:beta2])
+    if optim == nothing
+        if opt[:optim] == "Adam"
+            info("Setting momentums")
+            optims = optimizers(weights, eval(parse(opt[:optim])); 
+                                lr=opt[:lr], beta1=opt[:beta1], beta2=opt[:beta2])
+        else
+            optims = optimizers(weights, eval(parse(opt[:optim])); lr=opt[:lr])
+        end
     else
-        optims = optimizers(weights, eval(parse(opt[:optim])); lr=opt[:lr])
+        optims = optim
     end
 
     parser = eval(parse(opt[:algo]))
@@ -161,7 +169,7 @@ function train(;model=nothing)
                     shuffle=false, remaining=true,
                     minlength=2, maxlength=Inf, use_tokens=use_tokens)
     las_history = []
-    for epoch = 1:opt[:epochs]+1
+    for epoch = start_epoch:opt[:epochs]+1
         info("Computing validation performance")
         val_losses = []
         map(testing!, (encoder, decoder))
@@ -188,23 +196,24 @@ function train(;model=nothing)
         println("Labeled attachment score: ", las)
         push!(las_history, las)
         if epoch > 1
-            info("Backing up")
             if las == maximum(las_history)
+                info("Backing up")
                 println("*** New Best Model ***")
                 filename = joinpath(opt[:backupdir], string(now(), "_$epoch", "_best.jld"))
-            else
+                JLD.save(filename,
+                         "weights", weights,
+                         "encoder", encoder,
+                         "decoder", decoder,
+                         "optims",  optims,
+                         "opt",     opt,
+                         "val_loss",val_loss,
+                         "las",     las,
+                         "uas",     uas,
+                         "vocab",   ev)
+                #=else
                 filename = joinpath(opt[:backupdir], string(now(), "_$epoch.jld"))
+                =#
             end
-            JLD.save(filename,
-                     "weights", weights,
-                     "encoder", encoder,
-                     "decoder", decoder,
-                     "optims",  optims,
-                     "opt",     opt,
-                     "val_loss",val_loss,
-                     "las",     las,
-                     "uas",     uas,
-                     "vocab",   ev)
         end
         
         if epoch == opt[:epochs]+1

@@ -1,4 +1,5 @@
 const uddir = "/scratch/users/okirnap/ud-treebanks-v2.2"
+const erenay = "/scratch/users/okirnap/ku-dependency-parser2/erenay"
 
 const engtrn = "$uddir/UD_English-EWT/en_ewt-ud-train.conllu"
 const engdev = "$uddir/UD_English-EWT/en_ewt-ud-dev.conllu"
@@ -6,10 +7,12 @@ const englm = "$lmdir/english_chmodel.jld"
 
 const trtrn = "$uddir/UD_Turkish-IMST/tr_imst-ud-train.conllu"
 const trdev = "$uddir/UD_Turkish-IMST/tr_imst-ud-dev.conllu"
+const trerenay = "$erenay/tr_imst-dev.erenay"
 const trlm  = "$lmdir/turkish_chmodel.jld"
 
 const arabtrn =  "$uddir/UD_Arabic-PADT/ar_padt-ud-train.conllu"
 const arabdev =  "$uddir/UD_Arabic-PADT/ar_padt-ud-dev.conllu"
+const araberenay = "$erenay/ar_padt-dev.erenay"
 const arablm = "$lmdir/arabic_chmodel.jld"
 
 const butrn =  "$uddir/UD_Bulgarian-BTB/bg_btb-ud-train.conllu"
@@ -18,6 +21,7 @@ const bulm = "$lmdir/bulgarian_chmodel.jld"
 
 const hutrn =  "$uddir/UD_Hungarian-Szeged/hu_szeged-ud-train.conllu"
 const hudev =  "$uddir/UD_Hungarian-Szeged/hu_szeged-ud-dev.conllu"
+const huerenay = "$erenay/hu_szeged_dev.erenay"
 const hulm  = "$lmdir/hungarian_chmodel.jld"
 
 const ettrn = "$uddir/UD_Estonian-EDT/et_edt-ud-train.conllu"
@@ -30,6 +34,7 @@ const hrlm  = "$lmdir/croatian_chmodel.jld"
 
 const eltrn = "$uddir/UD_Greek-GDT/el_gdt-ud-train.conllu"
 const eldev = "$uddir/UD_Greek-GDT/el_gdt-ud-dev.conllu"
+const elerenay = "$erenay/el_gdt-dev.erenay"
 const ellm  = "$lmdir/greek_chmodel.jld"
 
 const enltrn = "$uddir/UD_English-LinES/en_lines-ud-train.conllu"
