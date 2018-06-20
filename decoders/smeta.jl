@@ -38,5 +38,5 @@ softloss(this::SMeta, arc_scores, rel_scores, sents; o...) =
     softloss(this.decoder, arc_scores, rel_scores, sents; o...)
 
 
-parse_scores(this::SMeta, arc_scores, rel_scores, sents; o...) = 
-    parse_scores(this.decoder, arc_scores, rel_scores, sents; o...)
+parse_scores(this::SMeta, a...; o...) = 
+    parse_scores(this.decoder, a...; o...)

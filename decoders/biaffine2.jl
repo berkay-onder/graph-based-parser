@@ -65,7 +65,7 @@ end
 
 
 function (this::BiaffineDecoder2)(ctx, encodings, weights=nothing; 
-                                  permute=false, parse=false, parser=edmonds)
+                                  permute=false, parse=false, parser=edmonds, cache=nothing)
     H, B, T = size(encodings)
     to3d(x) = reshape(x, (div(length(x), B*T), B, T))
 
@@ -89,10 +89,12 @@ function (this::BiaffineDecoder2)(ctx, encodings, weights=nothing;
     if weights != nothing
         @assert size(weights)==(2, B)
         y_arcs = (argmax(s_arcs_val), parsed(this, parser, s_arcs_val))
+        cache != nothing && (cache[:parsed] = y_arcs[2])
     elseif !parse
         y_arcs = argmax(s_arcs_val) # BxT arc indice for each word
     else
         y_arcs = parsed(this, parser, s_arcs_val)
+        cache != nothing && (cache[:parsed] = y_arcs)
     end
     
     # Label score computation
@@ -141,12 +143,12 @@ function parsed(this::BiaffineDecoder2, parser, s_arcs_val)
         sent = s_arcs_val[:, i, :]
         inds = parser(sent) .+ 1
         #if VERBOSE
-            for j = 1:length(inds)
-                if !(1 <= inds[j] <= T)
-                    VERBOSE && warn("Invalid arc ", inds[j], " not in 1..$T")
-                    inds[j] = 1#rand(1:T)
-                end
+        for j = 1:length(inds)
+            if !(1 <= inds[j] <= T)
+                VERBOSE && warn("Invalid arc ", inds[j], " not in 1..$T")
+                inds[j] = 1#rand(1:T)
             end
+        end
         #end
         root = indmax(sent[:, 1])
         res[i, :] = Int.([root, inds...])
