@@ -13,7 +13,7 @@ function main(args=ARGS)
     s.exc_handler = ArgParse.debug_handler
     @add_arg_table s begin
         ("--baseline_dir"; arg_type=String; default="Backups/Baseline"; help="Backup destination")
-        ("--target_dir"; arg_type=String; default="TiraBaselines"; help="Target destination")
+        ("--target_dir"; arg_type=String; default="TiraBaselinesFinal"; help="Target destination")
     end
     isa(args, AbstractString) && (args=split(args))
     opt = parse_args(args, s; as_symbols=true)
@@ -35,7 +35,8 @@ function main(args=ARGS)
                  "encoder", encoder,
                  "decoder", decoder,
                  "weights", weights,
-                 "opt",     model["opt"])
+                 "opt",     model["opt"],
+                 "vocab",   model["vocab"])
     end
 end
 
