@@ -88,13 +88,13 @@ function (this::BiaffineDecoder2)(ctx, encodings, weights=nothing;
     s_arcs_val = Array(getval(s_arcs))
     if weights != nothing
         @assert size(weights)==(2, B)
-        y_arcs = (argmax(s_arcs_val), parsed(this, parser, s_arcs_val))
-        cache != nothing && (cache[:parsed] = y_arcs[2])
+        y_arcs = (argmax(s_arcs_val), parsed(this, parser, s_arcs_val, cache))
+        #cache != nothing && (cache[:parsed] = y_arcs[2])
     elseif !parse
         y_arcs = argmax(s_arcs_val) # BxT arc indice for each word
     else
-        y_arcs = parsed(this, parser, s_arcs_val)
-        cache != nothing && (cache[:parsed] = y_arcs)
+        y_arcs = parsed(this, parser, s_arcs_val, cache)
+        #cache != nothing && (cache[:parsed] = y_arcs)
     end
     
     # Label score computation
@@ -136,12 +136,14 @@ function (this::BiaffineDecoder2)(ctx, encodings, weights=nothing;
 end
 
 
-function parsed(this::BiaffineDecoder2, parser, s_arcs_val)
+function parsed(this::BiaffineDecoder2, parser, s_arcs_val, cache=nothing)
     _, B, T = size(s_arcs_val)
     res = Array{Int, 2}(B, T)
     for i = 1:size(s_arcs_val, 2)
         sent = s_arcs_val[:, i, :]
-        inds = parser(sent) .+ 1
+        inds = parser(sent)
+        cache!=nothing && push!(cache, inds)
+        inds = inds .+ 1
         #if VERBOSE
         for j = 1:length(inds)
             if !(1 <= inds[j] <= T)
@@ -179,7 +181,8 @@ end
 
 
 "Prepares arcs for the parsing algorithm"
-function parse_scores(this::BiaffineDecoder2, parser, arc_scores, rel_scores=nothing)
+function parse_scores(this::BiaffineDecoder2, parser, arc_scores, rel_scores=nothing;
+                      cache=nothing)
     
     postproc(scores) = let scores = Array(getval(scores))
         Any[scores[:,i,:] for i = 1:size(scores, 2)]
@@ -187,15 +190,20 @@ function parse_scores(this::BiaffineDecoder2, parser, arc_scores, rel_scores=not
     arc_scores, rel_scores = map(postproc, (arc_scores, rel_scores))
     arcs = []
     rels = []
-    for (arc, rel) in zip(arc_scores, rel_scores)
-        push!(arcs, parser(arc))
-        for i = 1:length(arcs[end])
-            #println(size(arc_scores[1]))
-            if arcs[end][i] > size(arc_scores[1], 2)
-                VERBOSE && warn("Invalid arc val ", arcs[end][i], size(arc_scores[1], 2))
-                arcs[end][i] = 1#rand(1:size(arc_scores[1], 2))
+    for (i, (arc, rel)) in enumerate(zip(arc_scores, rel_scores))
+        if cache == nothing
+            push!(arcs, parser(arc))
+            for i = 1:length(arcs[end])
+                #println(size(arc_scores[1]))
+                if arcs[end][i] > size(arc_scores[1], 2)
+                    VERBOSE && warn("Invalid arc val ", arcs[end][i], size(arc_scores[1], 2))
+                    arcs[end][i] = 1#rand(1:size(arc_scores[1], 2))
+                end
             end
+        else
+            push!(arcs, cache[i])
         end
+        
         if rel_scores != nothing
             _rels = Array{UInt8}(size(rel, 2))
             for i = 1:length(_rels)
@@ -207,6 +215,3 @@ function parse_scores(this::BiaffineDecoder2, parser, arc_scores, rel_scores=not
     
     return arcs, rels
 end
-
-
-

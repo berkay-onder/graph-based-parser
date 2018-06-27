@@ -126,7 +126,3 @@ function context_only(sentences)
     end
     return cat(3, wvecs...)
 end
-
-
-
-

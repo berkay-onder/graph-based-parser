@@ -1,3 +1,14 @@
+#=
+
+model = load_model("TiraBaselinesFinal/modelfile.jld")
+corpus = load_corpus(model, "file.er")
+load_lm!(model, "xxx_chmodel.jld", corpus)
+for i = 1:length(corpus)
+    arcs, labels = predict(model, corpus[i])
+end
+=#
+
+
 include("./install_deps.jl")
 using Knet, KnetModules, JLD
 
@@ -7,14 +18,26 @@ include("./decoders/index.jl")
 include("./encoders/index.jl")
 
 #=
-model = load_model("modelname.jld")
-arc_inds, rel_inds = predict(model, sentence)
+Returns array of (roots, labels) for each array
 =#
+function run_inference(modelfile, lmfile, erfile)
+    outputs = []
+    model = load_model(modelfile)
+    corpus = load_corpus(model, erfile)
+    load_lm!(model, lmfile, corpus)
+    ncorpus = length(corpus)
+    for i = 1:length(corpus)
+        i%10 == 0 && println("$i / $ncorpus")
+        push!(outputs,  predict(model, corpus[i]))
+    end
+    return outputs
+end
+
 
 function load_model(jldfile)
     model = JLD.load(jldfile)
     return (model["weights"], model["encoder"],
-            model["decoder"], model["opt"])
+            model["decoder"], model["opt"], model["vocab"])
 end
 
 
@@ -32,19 +55,34 @@ let dict = nothing
 end
 
 
+function load_corpus(model, erfile)
+    ev = model[end]
+    corpus = load_conllu(erfile, ev.vocab)
+    corpus = extend_corpus!(ev, corpus)
+end
+
+
+function load_lm!(model, lmfile, corpus)
+    lm = JLD.load(lmfile)
+    wmodel = makewmodel(lm)
+    fillvecs!(wmodel, corpus, model[end].vocab)
+end
+
+
 # Only suport length 1
-function predict(model, sentence)
-    if sentence == 1
+function predict(model, sentence; cache=[])
+    if length(sentence) == 1
         return zeros(Int, 1), ["root"]
     end
     ~isa(sentence, Array) && (sentence = Any[sentence])
-    weights, encoder, decoder, opt = model
-    parser, parse = opt[:algo], opt[:parse]
+    weights, encoder, decoder, opt, _ = model
+    parser, toparse = opt[:algo], opt[:parse]
+    parser = eval(parse(opt[:algo]))
     encoding = encoder(weights, sentence)
     #cache = Dict()
     arc_scores, rel_scores = decoder(weights, encoding; 
-                                     parser=parser, parse=parse)
-    arcs, rels = parse_scores(decoder, parser, arc_scores, rel_scores)
+                                     parser=parser, parse=toparse, cache=cache)
+    arcs, rels = parse_scores(decoder, parser, arc_scores, rel_scores; cache=cache)
     arcs = arcs[1]
     rels = rels[1]
     rels = map(deprel, rels)
@@ -52,44 +90,3 @@ function predict(model, sentence)
 end
 
 
-# Reads the conllu formatted file
-function load_er(file,ev::ExtendedVocab)
-    v = ev.vocab
-    corpus = Any[]
-    s = Sentence(v)
-    for line in eachline(file)
-        if line == ""
-            push!(corpus, s)
-            s = Sentence(v)
-        elseif (m = match(r"^\d+\t(.+?)\t.+?\t(.+?)\t.+?\t.+?\t(.+?)\t(.+?)(:.+)?\t", line)) != nothing # modify that to use different columns
-            #                id   word   lem  upos   xpos feat head   deprel
-            #println(m.match, summary(m.match))
-            #println()
-            match_str = split(String(m.match), "\t")
-            push!(s.xpostag, String(match_str[5]))
-            push!(s.feats, String(match_str[6]))
-            
-            word = m.captures[1]
-            push!(s.word, word)
-            postag = get(v.postags, m.captures[2], 0)
-            if postag==0
-                Base.warn_once("Unknown postags")
-            end
-            push!(s.postag, postag)
-            
-            head = tryparse(Position, m.captures[3])
-            head = isnull(head) ? -1 : head.value
-            if head==-1
-                Base.warn_once("Unknown heads")
-            end
-            push!(s.head, head)
-
-            deprel = get(v.deprels, m.captures[4], 0)
-            if deprel==0
-                Base.warn_once("Unknown deprels")
-            end
-            push!(s.deprel, deprel)
-        end
-    end
-    return corpus
-end
