@@ -25,7 +25,7 @@ function writeconllu(outputs, inputfile, outputfile)
     # We only replace the head and deprel fields of the input file
     out = open(outputfile,"w")
     
-    heads = deprels = p = nothing
+    heads = deprels = s = p = nothing
     ns = nw = nl = 0
     
     for line in eachline(inputfile)
