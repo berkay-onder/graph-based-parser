@@ -26,39 +26,33 @@ function writeconllu(outputs, inputfile, outputfile)
     out = open(outputfile,"w")
     
     heads = deprels = s = p = nothing
-    ns = nw = nl = 0
+    ns = nw = 0
     
     for line in eachline(inputfile)
-        nl += 1
         if ismatch(r"^\d+\t", line)
-            # info("$nl word")
-            if s == nothing
-                s = outputs[ns+1]
-                #p = s.parse
-                heads=s[1]
-                deprels=s[2]
-            end
+            s = outputs[ns+1]
+            heads=s[1]
+            deprels=s[2]
             f = split(line, '\t')
-            nw += 1
-            if f[1] != "$nw"; error(); end
-            #if f[2] != s.word[nw]; error(); end
-            f[7] = string(heads[nw])
-            f[8] = deprels[nw]
-            print(out, join(f, "\t"))
+            id=parse(f[1])
+            if nw < length(heads) && isa(id,Int)
+                nw += 1
+                f[7] = string(heads[nw])
+                f[8] = deprels[nw]
+                println(out, join(f, "\t"))
+            end
         else
             if line == "\n"
                 # info("$nl blank")
-                if s == nothing; error(); end
-                if nw != length(heads); error(); end
+                #if s == nothing; error(); end
+                #if nw != length(heads); error(); end
                 ns += 1; nw = 0
                 s = p = nothing
-            #else
-                # info("$nl non-word")
             end
-            print(out, line)
+            println(out, line)
         end
     end
-    if ns != length(sentences); error(); end
+    #if ns != length(sentences); error(); end
     close(out)
 end
 
