@@ -40,6 +40,29 @@ function load_conllu(file,v::Vocab)
 end
 
 
+function write_conllu(ofile, ifile, outputs)
+    oindex = 1
+    iindex = 1
+    of = open(ofile, "w")
+    for line in eachline(ifile)
+        if line == ""
+            iindex = 1
+            oindex += 1
+            write(of, "\n")
+        elseif (m = match(r"^\d+\t(.+?)\t.+?\t(.+?)\t.+?\t.+?\t(.+?)\t(.+?)(:.+)?\t", line)) != nothing
+            arcs, rels = outputs[oindex]
+            match_str = split(String(line), "\t")
+            new_ary = [match_str[1:6]...,  arcs[iindex], rels[iindex], match_str[9:end]...]
+            write(of, string(join(new_ary, "\t"), "\n"))
+            iindex += 1
+        else
+            write(of, string(line, "\n"))
+        end
+    end
+    close(of)
+end
+
+
 # To create vocabulary from pre-trained lstm model, modify that to use different cols
 function create_vocab(d)
     Vocab(d["char_vocab"],
