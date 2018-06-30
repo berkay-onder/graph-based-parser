@@ -1,5 +1,5 @@
 function CKY(n,lambda)
-    #n=length(V)
+    #n=length(V)e
     C=zeros(n+1,n+1,n+1)
     A=fill(Set(),(n+1,n+1,n+1))
     for l=1:n #subsentence length

@@ -2,7 +2,7 @@ using PyCall
 include("CKY.jl")
 include("Eisner.jl")
 
-unshift!(PyVector(pyimport("sys")["path"]), "", "parsers")
+unshift!(PyVector(pyimport("sys")["path"]), "", "/home/SParse/Nubik/parsers")
 @pyimport mst
 
 function eisner(lambda)
